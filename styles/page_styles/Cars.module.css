@@ -1,0 +1,309 @@
+/* Banner Style */
+
+section.banner {
+  padding: 0px;
+}
+
+.banner {
+  background-image: url('/imgs/gas_building_v2.jpg');
+  width: 100%;
+  /* height: 100%; */
+  max-height: max-content !important;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.thumb_img {
+  position: relative;
+}
+
+.thumb_img img {
+  position: relative;
+  z-index: 2;
+}
+
+.input_group-addon:last-child {
+  border: 1px solid rgba(0, 0, 0, .05);
+}
+
+.thumb_img:before,
+.banner:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .3);
+  z-index: 1;
+  border-radius: 5px;
+}
+
+.thumb_img:before {
+  z-index: 3;
+  background-color: rgba(0, 0, 0, .3);
+}
+
+.featured-item .thumb_img:before {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+
+.banner .container {
+  position: relative;
+  z-index: 2;
+}
+
+.banner .banner_caption {
+  padding: 200px 0px;
+}
+
+.banner-secondary .banner_caption {
+  padding: 90px 0px;
+}
+
+.banner .banner_caption .line_dec {
+  width: 80px;
+  height: 3px;
+  background-color: #4883ff;
+}
+
+.banner .banner_caption h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 42px;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.featured_places .featured_item .thumb {
+  position: relative;
+  z-index: 1;
+}
+
+.featured_places .featured_item .thumb img {
+  width: 100%;
+  overflow: hidden;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.featured_places .featured_item .thumb .overlay_content {
+  position: absolute;
+  z-index: 10;
+  top: 30px;
+  left: 30px;
+  color: var(--platinum-color);
+  font-weight: semibold;
+}
+
+.featured_places .featured_item .thumb .overlay_content li {
+  display: inline;
+  margin-right: 3px;
+}
+
+.featured_places .featured_item .thumb .date_content {
+  position: absolute;
+  z-index: 9;
+  top: 30px;
+  right: 30px;
+  color: #fff;
+  text-align: center;
+  width: 90px;
+  height: 90px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #4883ff;
+  border-radius: 50%;
+}
+
+.featured_places .featured_item .thum_contentb .date h6 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 18px;
+  margin-bottom: 5px;
+  letter-spacing: 0.5px;
+}
+
+.featured_places .featured_item .thum_contentb .date span {
+  font-size: 12px;
+  font-weight: 300;
+  text-transform: uppercase;
+  display: block;
+  letter-spacing: 0.5px;
+}
+
+.featured_places .featured_item .down_content {
+  background-color: #fff;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px 20px 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.featured_places .featured_item .down_content h4 {
+  margin-top: 0px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #232323;
+  margin-bottom: 5px;
+}
+
+.featured_places .featured_item .down_content span {
+  display: block;
+  font-size: 14px;
+  color: #4883ff;
+  margin-bottom: 15px;
+}
+
+.featured_places .featured_item .down_content span strong {
+  font-size: 22px;
+}
+
+.featured_places .featured_item .down_content p {
+  margin-bottom: 20px;
+  color: var(--rich-black);
+  font-weight: 600;
+  font-style: italic;
+
+}
+
+.featured_places .featured_item .down_content .col-md-6 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.featured_places .featured_item .down_content .text_button {
+  text-align: center;
+  height: 50px;
+  line-height: 50px;
+  border-top: 1px solid #ddd;
+  margin: 0px -20px;
+}
+
+.featured_places .featured_item .down_content .first_button {
+  border-right: 1px solid #ddd;
+}
+
+.featured_places .featured_item .down_content .text_button a {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: var(--secondary-color);
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  display: inline-block;
+  width: 100%;
+  transition: all 0.5s;
+}
+
+.featured_places .featured_item .down_content .text_button a:hover {
+  color: var(--main-color);
+}
+
+.load_more_btn {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.accordion li {
+  position: relative;
+}
+
+.accordion li .accordion-trigger {
+  border: 1px solid #ddd;
+}
+
+.accordion li:last-child .accordion-trigger {}
+
+.accordion-content {
+  display: none;
+}
+
+.accordion .accordion-trigger {
+  width: 100%;
+  display: block;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 17px;
+  letter-spacing: 0.5px;
+  color: #232323;
+  user-select: none;
+  padding: 15px 20px;
+  text-decoration: none;
+}
+
+.accordion .accordion-trigger:after {
+  width: 15px;
+  height: 15px;
+  background-color: #ddd;
+  border-radius: 50%;
+  position: absolute;
+  right: 20px;
+  content: " ";
+  top: 22.5px;
+  transform: rotate(-45deg);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.accordion-content {
+  margin: 0px;
+  padding: 20px;
+  border: 1px solid #ddd;
+}
+
+.accordion-trigger.active:after {
+  background-color: #4883ff;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+section#video-container {
+  /* background-image: url(/img/contact-image-1-1920x700.jpg); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.list-group-no-border {
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.list-group-no-border .list-group-item {
+  border-left: 0;
+  border-right: 0;
+}
+
+.list-group-no-border .list-group-item:last-child {
+  border-bottom: 0;
+}
+
+.list-group-no-border .list-group-item:first-child {
+  border-top: 0;
+}
+
+/* .listing_image {
+  border-radius:12px;
+  -webkit-box-shadow: 0px 8px 24px -1px rgba(0,0,0,0.47);
+  -moz-box-shadow: 0px 8px 24px -1px rgba(0,0,0,0.47);
+  box-shadow: 0px 8px 24px -1px rgba(0,0,0,0.47);
+} */
+.carousel-inner>.item>img {
+  /* width:400px;
+  height:400px; */
+}
+
+.carousel {
+  width: 600px;
+  height: 400px;
+}

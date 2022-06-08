@@ -1,16 +1,107 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
+@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap');
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--platinum-color) !important;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px !important;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--platinum-color) !important;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--gray-color) !important;
+  border-radius: 20px !important;
+  border: 3px solid var(--platinum-color) !important;
+}
+/* Color pallet variables */
+:root {
+  --main-color: #9C1C31;
+  --secondary-color: #DB7C26;
+  --rich-black: #070707;
+  --platinum-color: #E7E7E7;
+  --main-font: 'Bai Jamjuree', sans-serif;
+  --gray-color: #BEBBBB;
+
+}
+
+body {
+  background: var(--platinum-color) !important;
+  color: var(--rich-black) !important;
+  font-family: var(--main-font)!important;
+}
+a {
+  color: var(--rich-black);
+  text-decoration: none !important;
+}
+/* .content {
+ height: auto;
+} */
+nav {
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+}
+nav a {
+  margin-left: 12px;
+}
+nav a:hover {
+  color: var(--secondary-color);
+}
+nav .logo {
+  margin-right: auto;
+}
+
+nav ul {
+  text-align: center;
+  list-style: none;
+  display: flex;
+  margin: 0 auto;
+}
+
+nav ul li {
+  padding: 0 10px;
+}
+
+.logo img {
+  min-width: 150px;
+}
+
+.btn-outline-primary {
+  color: var(--main-color) !important;
+  border-color: var(--main-color) !important;
+}
+.btn-outline-primary:hover {
+  color: #fff !important;
+  background-color: var(--main-color) !important;
+  border-color: var(--main-color) !important;
+}
+.btn:focus,.btn:active {
+  /* outline: none !important; */
+  box-shadow: 0 0 0 0.25rem var(--secondary-color) !important;
+}
+
+.btn-primary {
+  color: #fff !important;
+  border-color: var(--secondary-color) !important;
+  background-color: var(--main-color) !important;
+}
+.btn-primary:hover {
+  color: #fff !important;
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
 }

@@ -1,0 +1,20 @@
+.not_found {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: var(--main-font);
+    margin: 2rem;
+}
+
+.not_found h1 {
+    font-weight: bold;
+    font-size: 150px;
+}
+
+.not_found h2 {
+    padding-bottom: 1rem;
+}
+
+.not_found p {
+    font-style: italic;
+}
