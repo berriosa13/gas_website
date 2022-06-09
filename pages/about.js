@@ -10,12 +10,12 @@ export default function About() {
         <title>GAS Automobile Sales | About</title>
         <meta name="keywords" content="cars" />
       </Head>
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between my-5">
         <h1>
           About Us
           <GradBar/>
         </h1>
-        <Breadcrumb>
+        <Breadcrumb className="fst-italic">
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item href="/contact">About</Breadcrumb.Item>
           <style jsx global>{`

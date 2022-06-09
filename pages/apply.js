@@ -9,9 +9,9 @@ export default function Apply() {
         <meta name="keywords" content="cars" />
       </Head>
       
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between my-5">
         <h1>Apply Online</h1>
-        <Breadcrumb>
+        <Breadcrumb className="fst-italic">
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item href="/contact">Apply</Breadcrumb.Item>
           <style jsx global>{`

@@ -15,7 +15,7 @@ const Footer = () => {
           </div>
           <Container>
             <Row>
-              <Col md={5}>
+              <Col md={4}>
                 <div className={styles.about_veno}>
                   <div className={styles.logo}>
                     <Image
@@ -55,14 +55,14 @@ const Footer = () => {
                   </ul>
                 </div>
               </Col>
-              <Col md="auto" className="mx-3">
+              <Col md={4}>
                 <div className={styles.useful_links}>
                   <div className={styles.footer_heading}>
                     <h4>Useful Links</h4>
                   </div>
                   <Row className="d-flex justify-content-center">
-                    <ul>
-                      <li>
+                    <ul className="">
+                      <li className="text-center">
                         <Link href="/">
                           <a>
                             <FaStop />
@@ -70,7 +70,7 @@ const Footer = () => {
                           </a>
                         </Link>
                       </li>
-                      <li>
+                      <li className="text-center">
                         <Link href="/about">
                           <a>
                             <FaStop />
@@ -78,7 +78,7 @@ const Footer = () => {
                           </a>
                         </Link>
                       </li>
-                      <li>
+                      <li className="text-center">
                         <Link href="/cars">
                           <a>
                             <FaStop />
@@ -86,7 +86,7 @@ const Footer = () => {
                           </a>
                         </Link>
                       </li>
-                      <li>
+                      <li className="text-center">
                         <Link href="/contact">
                           <a>
                             <FaStop />
@@ -94,7 +94,7 @@ const Footer = () => {
                           </a>
                         </Link>
                       </li>
-                      <li>
+                      <li className="text-center">
                         <Link href="/apply">
                           <a>
                             <FaStop />
@@ -114,7 +114,7 @@ const Footer = () => {
                   <ul>
                     <li>
                       <p>
-                        <FaMapMarkerAlt /> 212 Barrington Court New York, ABC
+                        <FaMapMarkerAlt /> 1033 Reeves St, Dunmore Pa, 18512
                       </p>
                     </li>
                     <li>

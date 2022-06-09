@@ -64,9 +64,9 @@ export default function carDetails() {
         <meta name="keywords" content="cars" />
       </Head>
 
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between my-5">
         <h1>Used {car.year} {car.make} {car.model} - ${car.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h1>
-        <Breadcrumb>
+          <Breadcrumb className="fst-italic">
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item href="/cars">Inventory</Breadcrumb.Item>
           <Breadcrumb.Item href="/cars">Details</Breadcrumb.Item>
@@ -89,7 +89,6 @@ export default function carDetails() {
 
           <div className="container mt-5">
             <div className="row">
-            
               <section id="photoArray">
               <div><Image layout="responsive" width="600" height="438" src={car.thumbnailImage}/></div>
                 {displayImages.map((displayImage) => {

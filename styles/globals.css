@@ -50,14 +50,15 @@ a {
  height: auto;
 } */
 nav {
-  padding: 10px 0;
+  /* padding: 10px 0; */
   display: flex;
   justify-content: center;
   align-items: center;
   border-bottom: 1px solid #ddd;
 }
 nav a {
-  margin-left: 12px;
+ padding:2rem;
+ margin:1rem;
 }
 nav a:hover {
   color: var(--secondary-color);

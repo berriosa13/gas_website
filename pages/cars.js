@@ -103,16 +103,15 @@ export default function Cars() {
         <meta name="keywords" content="cars" />
       </Head>
 
-      <div className="d-flex justify-content-between">
+      <div className="d-flex justify-content-between my-5">
         <h1>
-          Cars
+        Inventory
           <GradBar/>
         </h1>
         
-        <Breadcrumb>
+        <Breadcrumb className="fst-italic">
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item href="/cars">Inventory</Breadcrumb.Item>
-          <Breadcrumb.Item href="/cars">Details</Breadcrumb.Item>
           <style jsx global>{`
             a {
               color: var(--main-color) !important;
@@ -125,7 +124,7 @@ export default function Cars() {
 
       </div>
       <div>
-        <h1 className="text-center my-5">Inventory 🚗</h1>
+        <h1 className="text-center my-5"></h1>
       </div>
       
       {/* <section className={styles.featured_places}>
@@ -254,7 +253,7 @@ export default function Cars() {
 
                     <br />
 
-                    <p>190 hp / Petrol / {car.year} / Used vehicle</p>
+                    <p>190 hp / ⛽ / {car.year} / Used vehicle</p>
 
                     <p>
                       <span>
