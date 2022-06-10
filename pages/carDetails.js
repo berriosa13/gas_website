@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -23,13 +23,13 @@ export async function getServerSideProps(context) {
 
 export default function carDetails() {
   const [images, setImages] = useState([]);
+  // const [displayImages, setDisplayImages] = useState([]);
   const [imageModalOpen, setImageModalOpen] = useState(false);
   const router = useRouter();
-  const [car, setCar] = useState(router.query);
+  const car = router.query;
   const displayImages = images.slice(0, 4);
 
   console.log("Car passed in from useRouter: ", car);
-  console.log("CarId: ", car.id);
 
   useEffect(() => {
     if (car.id == null || car.id == undefined) {
@@ -37,23 +37,22 @@ export default function carDetails() {
     }
     const retrieveImages = async () => {
       const result = await utilMethods.getAllImages(car.id);
-      console.log(result);
+      console.log("result from utilMethod.getAllImages call: ", result);
       setImages(result);
     };
     retrieveImages();
   }, []);
-  console.log("current images: ", images);
-  console.log("displayImages: ", displayImages);
 
+  console.log("displayImages: ",displayImages);
+  
   const showModal = () => {
     setImageModalOpen(true);
   };
-
+  
   const hideModal = () => {
     setImageModalOpen(false);
   };
-
-
+  
   return (
     <>
       
@@ -90,7 +89,7 @@ export default function carDetails() {
           <div className="container mt-5">
             <div className="row">
               <section id="photoArray">
-              <div><Image layout="responsive" width="600" height="438" src={car.thumbnailImage}/></div>
+              <div><Image priority="true" layout="responsive" width="600" height="438" src={car.thumbnailImage}/></div>
                 {displayImages.map((displayImage) => {
                   return(
                     <div>
@@ -103,7 +102,6 @@ export default function carDetails() {
                       </div>
                     );
                   })}
-
                 <style jsx>{`
                   #photoArray {
                     display: grid;

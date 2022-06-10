@@ -28,13 +28,16 @@ const ImageModal = ({ handleClose, show, setImages, setCar }) => {
           </Modal.Footer>
         </Modal>
         <style jsx global>{`
-            .modal-body span img {
+            .modal-body img {
               -webkit-box-shadow: 5px 5px 15px 5px #333 !important; 
               box-shadow: 5px 5px 15px 5px #333 !important; 
             }
-            .modal-footer {
-              justify-content: center;
-            }  
+            .modal-body {
+              
+            }
+            .modal-title {
+              font-weight: bold;
+            }
             
         `}</style>
       </>

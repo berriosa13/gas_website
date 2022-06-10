@@ -1,12 +1,15 @@
 import styles from "../styles/comp_styles/Footer.module.css";
 import Image from 'next/image';
 import Link from "next/link";
+import Script from "next/script";
 import { FaFacebookSquare, FaTwitterSquare, FaLinkedin, FaMapMarkerAlt, FaStop, FaPhoneAlt  } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { Container, Row, Col } from "react-bootstrap";
 import GradBar from "./GradBar";
 
 const Footer = () => {
+  const current = new Date();
+  const date = `${current.getFullYear()}`;
     return (
       <>
         <footer className={styles.footer}>
@@ -137,14 +140,10 @@ const Footer = () => {
         </footer>
         <GradBar/>
         <div className={styles.sub_footer}>
-          <p>Copyright © 2022 Guardian Automobile Sales</p>
+          <p>&copy; Copyright <strong>Guardian Automobile Sales <span>{date}</span></strong>. All Rights Reserved</p>
         </div>
       </>
     );
   }
   
   export default Footer;
-
-  {/* <footer classNameName={styles.footer}>
-    Copyright 2021 Anthony Berrios
-  </footer> */}
