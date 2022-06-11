@@ -221,13 +221,17 @@ export default function Cars() {
                 <div className={styles.featured_item}>
                   <div className={styles.thumb}>
                     <div className={styles.thumb_img}>
-                      <Image
-                        src={car.thumbnailImage}
-                        layout="responsive"
-                        alt="thumbnail image"
-                        width={450}
-                        height={300}
+                      {car.thumbnailImage != null ? (
+                        <Image
+                          src={car.thumbnailImage}
+                          layout="responsive"
+                          alt="thumbnail image"
+                          width={450}
+                          height={300}
                       />
+                      ) : (
+                        <h2>Image Coming Soon...</h2>
+                      )}
                     </div>
                     <div className={styles.overlay_content}>
                       <strong>

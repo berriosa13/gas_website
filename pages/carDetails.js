@@ -82,7 +82,7 @@ export default function carDetails() {
           `}</style>
         </Breadcrumb>
       </div> 
-
+            
       <main>
         <section className={styles.featured_places}>
 
