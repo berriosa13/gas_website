@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Layout from '../components/Layout'
 import { Container, Row, Col, Button, Form, InputGroup, Breadcrumb } from "react-bootstrap";
 
 export default function Apply() {
@@ -26,4 +27,12 @@ export default function Apply() {
       </div>
     </>
   );
+}
+
+Apply.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  )
 }

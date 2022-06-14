@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from "react";
 import Head from "next/head";
 import Image from "next/image";
+import Layout from '../components/Layout'
 import { useRouter } from "next/router";
 import styles from "../styles/page_styles/Cars.module.css";
 import utilMethods from "../services/utils";
@@ -21,7 +22,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function carDetails() {
+export default function CarDetails() {
   const [images, setImages] = useState([]);
   // const [displayImages, setDisplayImages] = useState([]);
   const [imageModalOpen, setImageModalOpen] = useState(false);
@@ -354,4 +355,12 @@ export default function carDetails() {
       </main>
     </>
   );
+}
+
+CarDetails.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  )
 }

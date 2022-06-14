@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Layout from '../components/Layout'
 import { Breadcrumb, Row, Button, Col } from "react-bootstrap";
 import { FiSend } from "react-icons/fi";
 import styles from "../styles/page_styles/Contact.module.css";
@@ -125,4 +126,12 @@ export default function Contact() {
 
     </>
   );
+}
+
+Contact.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  )
 }

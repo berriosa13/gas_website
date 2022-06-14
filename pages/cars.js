@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import Layout from "../components/Layout"
 import { Container, Row, Col, Button, Form, InputGroup, Breadcrumb } from "react-bootstrap";
 import styles from "../styles/page_styles/Cars.module.css";
 import GradBar from "../components/GradBar";
@@ -308,4 +309,12 @@ export default function Cars() {
       </section>
     </>
   );
+}
+
+Cars.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  )
 }

@@ -6,6 +6,7 @@ import { FaFacebookSquare, FaTwitterSquare, FaLinkedin, FaMapMarkerAlt, FaStop, 
 import { MdEmail } from "react-icons/md";
 import { Container, Row, Col } from "react-bootstrap";
 import GradBar from "./GradBar";
+import SubFooter from "./subFooter"
 
 const Footer = () => {
   const current = new Date();
@@ -138,10 +139,7 @@ const Footer = () => {
             </Row>
           </Container>
         </footer>
-        <GradBar/>
-        <div className={styles.sub_footer}>
-          <p>&copy; Copyright <strong>Guardian Automobile Sales <span>{date}</span></strong>. All Rights Reserved</p>
-        </div>
+        <SubFooter/>
       </>
     );
   }

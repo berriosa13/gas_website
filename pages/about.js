@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Layout from "../components/Layout"
 import { Breadcrumb, Row, Button } from "react-bootstrap";
 import GradBar from "../components/GradBar";
 
@@ -30,4 +31,12 @@ export default function About() {
       </div> 
     </>
   );
+}
+
+About.getLayout = function getLayout(page) {
+  return (
+    <Layout>
+      {page}
+    </Layout>
+  )
 }
