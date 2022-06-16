@@ -4,9 +4,10 @@ import Link from "next/link";
 import Script from "next/script";
 import { FaFacebookSquare, FaTwitterSquare, FaLinkedin, FaMapMarkerAlt, FaStop, FaPhoneAlt  } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { ImLink } from "react-icons/im";
 import { Container, Row, Col } from "react-bootstrap";
 import GradBar from "./GradBar";
-import SubFooter from "./subFooter"
+import SubFooter from "./SubFooter"
 
 const Footer = () => {
   const current = new Date();
@@ -14,8 +15,8 @@ const Footer = () => {
     return (
       <>
         <footer className={styles.footer}>
-          <div className="my-5">
           <GradBar/>
+          <div className="my-5">
           </div>
           <Container>
             <Row>
@@ -34,29 +35,13 @@ const Footer = () => {
                     Suspendisse eu lorem massa. Integer sit amet posuere
                     tellustea dictumst.
                   </p>
-                  <ul className="social-icons">
-                    <li>
-                      <Link href="/">
-                        <a>
-                          <FaFacebookSquare />
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/">
-                        <a>
-                          <FaTwitterSquare />
-                        </a>
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/">
-                        <a>
-                          <FaLinkedin />
-                        </a>
-                      </Link>
-                    </li>
-                  </ul>
+                  <div className="d-flex align-items-center justify-content-start facebook-icon">
+                    <a href="https://www.facebook.com" target="blank" noreferrer>
+                     <FaFacebookSquare className="fs-5 ms-2"/> 
+                    </a>
+                  
+                  </div>
+                  
                 </div>
               </Col>
               <Col md={4}>
@@ -69,40 +54,35 @@ const Footer = () => {
                       <li className="text-center">
                         <Link href="/">
                           <a>
-                            <FaStop />
-                            Home
+                            <ImLink/> Home
                           </a>
                         </Link>
                       </li>
                       <li className="text-center">
                         <Link href="/about">
                           <a>
-                            <FaStop />
-                            About
+                          <ImLink/> About
                           </a>
                         </Link>
                       </li>
                       <li className="text-center">
                         <Link href="/cars">
                           <a>
-                            <FaStop />
-                            Cars
+                          <ImLink/> Inventory
                           </a>
                         </Link>
                       </li>
                       <li className="text-center">
                         <Link href="/contact">
                           <a>
-                            <FaStop />
-                            Contact
+                          <ImLink/> Contact
                           </a>
                         </Link>
                       </li>
                       <li className="text-center">
                         <Link href="/apply">
                           <a>
-                            <FaStop />
-                            Apply Online
+                          <ImLink/> Apply Online
                           </a>
                         </Link>
                       </li>

@@ -7,7 +7,7 @@ import CarsList from "../components/backend/CarList";
 import ImageModal from "../components/backend/ImageModal";
 import DeleteModal from "../components/backend/DeleteModal";
 
-function carDashboard() {
+function CarDashboard() {
 
     const { user, logout } = useAuth();
     const router = useRouter();
@@ -99,21 +99,4 @@ function carDashboard() {
   )
 }
 
-export default carDashboard; 
-
-
-// const carDashboard = () => {
-//     const { user, logout } = useAuth()
-//     const router = useRouter()
-//   return (
-//     <>
-//         <div>This route is protected</div>
-//         <Button onClick={() => {
-//             logout()
-//             router.push('/login')
-//         }}>Logout</Button>
-//     </>
-//   )
-// }
-
-// export default carDashboard
+export default CarDashboard; 

@@ -33,16 +33,13 @@ export default function CarDetails() {
   console.log("Car passed in from useRouter: ", car);
 
   useEffect(() => {
-    if (car.id == null || car.id == undefined) {
-      router.push("/cars");
-    }
     const retrieveImages = async () => {
       const result = await utilMethods.getAllImages(car.id);
       console.log("result from utilMethod.getAllImages call: ", result);
       setImages(result);
     };
     retrieveImages();
-  }, []);
+  }, [car.id]);
 
   console.log("displayImages: ",displayImages);
   
@@ -64,12 +61,11 @@ export default function CarDetails() {
         <meta name="keywords" content="cars" />
       </Head>
 
-      <div className="d-flex justify-content-between my-5">
-        <h1>Used {car.year} {car.make} {car.model} - ${car.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h1>
-          <Breadcrumb className="fst-italic">
+      <div className="d-flex my-5">
+        <h1>Used {car.year} {car.make} {car.model}</h1>
+          <Breadcrumb className="fst-italic mx-3">
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item href="/cars">Inventory</Breadcrumb.Item>
-          <Breadcrumb.Item href="/cars">Details</Breadcrumb.Item>
           <style jsx global>{`
             a {
               color: var(--main-color) !important;
@@ -90,15 +86,17 @@ export default function CarDetails() {
           <div className="container mt-5">
             <div className="row">
               <section id="photoArray">
-              <div><Image priority="true" layout="responsive" width="600" height="438" src={car.thumbnailImage}/></div>
+              <div><Image priority="true" layout="responsive" width="600" height="438" alt="thumbnailImage" src={car.thumbnailImage}/></div>
                 {displayImages.map((displayImage) => {
                   return(
-                    <div>
+                    <div key={displayImage.id}>
                       <Image
+                        priority="true"
                         src={displayImage.imageUrl}
                         layout="responsive"
                         width="300"
                         height="215"
+                        alt="displayImages"
                       />
                       </div>
                     );
@@ -118,7 +116,7 @@ export default function CarDetails() {
                   }
                   #photoArray > div:first-child {
                     grid-area: photoOne;
-                    height: 450px;
+                    height: auto;
                   }
                   #photoArray > img {
                     object-fit: cover;
@@ -129,12 +127,14 @@ export default function CarDetails() {
                     background-color: #333;
                     opacity: .7;
                   }
+
+                  }
                   
                   `}</style>
                   
               </section>
               <div className="row my-3 d-flex justify-content-center text-center">
-                <div className="col-md-6">
+                <div className="col-md-6 mt-3">
                   <Button onClick={showModal} variant="primary">View All Images</Button>
                 </div>
               </div>
@@ -242,37 +242,6 @@ export default function CarDetails() {
                 <div>
                   <Accordion>
                     <Accordion.Item eventKey="0">
-                      <Accordion.Header>Vehicle Extras</Accordion.Header>
-                      <Accordion.Body>
-                        <Row>
-                          <Col sm={6} xs={12}>
-                            <p>ABS</p>
-                          </Col>
-
-                          <Col sm={6} xs={12}>
-                            <p>Leather seats</p>
-                          </Col>
-
-                          <Col sm={6} xs={12}>
-                            <p>Power Assisted Steering</p>
-                          </Col>
-
-                          <Col sm={6} xs={12}>
-                            <p>Electric heated seats</p>
-                          </Col>
-
-                          <Col sm={6} xs={12}>
-                            <p>New HU and AU</p>
-                          </Col>
-
-                          <Col sm={6} xs={12}>
-                            <p>Xenon headlights</p>
-                          </Col>
-                        </Row>
-                      </Accordion.Body>
-                    </Accordion.Item>
-
-                    <Accordion.Item eventKey="1">
                       <Accordion.Header>Vehicle Description</Accordion.Header>
                       <Accordion.Body>
                         <p>
@@ -302,17 +271,9 @@ export default function CarDetails() {
                       </Accordion.Body>
                     </Accordion.Item>
 
-                    <Accordion.Item eventKey="2">
+                    <Accordion.Item eventKey="1">
                       <Accordion.Header> Contact Information</Accordion.Header>
                       <Accordion.Body>
-                        <p>
-                          <span>Name</span>
-
-                          <br />
-
-                          <strong>Carmelo Berrios</strong>
-                        </p>
-
                         <p>
                           <span>Phone</span>
 
@@ -324,23 +285,13 @@ export default function CarDetails() {
                         </p>
 
                         <p>
-                          <span>Mobile phone</span>
-
-                          <br />
-
-                          <strong>
-                            <a href="tel:456789123">456789123</a>
-                          </strong>
-                        </p>
-
-                        <p>
                           <span>Email</span>
 
                           <br />
 
                           <strong>
-                            <a href="mailto:cberrios@gasautomobilesales.com">
-                              cberrios@gasautomobilesales.com
+                            <a href="mailto:info@gasautomobilesales.com">
+                              info@gasautomobilesales.com
                             </a>
                           </strong>
                         </p>

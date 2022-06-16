@@ -5,8 +5,9 @@ import { FiSend } from "react-icons/fi";
 import styles from "../styles/page_styles/Contact.module.css";
 import GradBar from "../components/GradBar"
 import { BsAlarm, BsCalendar2Check, BsCalendarX  } from "react-icons/bs";
+import spinner from "../public/spinner.gif";
 
-export default function Contact() {
+export default function Contact( {map} ) {
   return (
     <>
       <Head>
@@ -83,7 +84,7 @@ export default function Contact() {
             
           </Col>
           <Col md={8}>
-            <iframe src="https://maps.google.com/maps?q=1033%20reeves%20street%20dunmore&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>
+            <iframe src="https://maps.google.com/maps?q=1033%20reeves%20street%20dunmore&t=&z=15&ie=UTF8&iwloc=&output=embed" width="100%" height="100%" frameBorder="0" allowFullScreen></iframe>
           </Col>
         </Row>
         <Row className="mt-5"> 
@@ -93,7 +94,7 @@ export default function Contact() {
         </Row>
         <Row>
               <div className="form contact-form mt-5">
-                <form action="" method="POST" role="form" className="messageForm">
+                <form action="https://formspree.io/f/xayvkkgn" method="POST" role="form" className="messageForm">
                   <div className="form-group">
                     <input type="text" name="name" className="form-control" id="name" placeholder="Your Name" required/>
                   </div>
@@ -106,7 +107,7 @@ export default function Contact() {
                   <div className="form-group mt-3">
                     <textarea className="form-control" name="message" rows="5" placeholder="Message" required></textarea>
                   </div>
-                  <div className="text-center mt-5"><Button size="lg" variant="primary">Send <FiSend/></Button>{' '}</div>
+                  <div className="text-center mt-5"><Button type="submit" size="lg" variant="primary">Send <FiSend/></Button>{' '}</div>
                 </form>
                 <style jsx>{`
                 .form-control:focus {

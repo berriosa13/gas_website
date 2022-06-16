@@ -7,7 +7,7 @@ const SubFooter = () => {
     const date = `${current.getFullYear()}`;
   return (
     <>
-       <GradBar/>
+       {/* <GradBar/> */}
         <div className={styles.sub_footer}>
           <p>&copy; Copyright <strong>Guardian Automobile Sales <span>{date}</span></strong>. All Rights Reserved</p>
         </div> 
