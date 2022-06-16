@@ -54,7 +54,7 @@ import Image from 'next/image';
           }}
         >
           <Modal.Header className="" closeButton>
-            <Image className="m-4" src="/imgs/GAS-Icon-Only-2-Color.png" width={123} height={77}/>
+            <Image className="m-4" src="/imgs/GAS-Icon-Only-2-Color.png" width={123} height={77} alt="GasLogoIcon"/>
             <Modal.Title className="m-5"> Delete Listing Confirmation <FiTrash2/></Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -86,7 +86,7 @@ import Image from 'next/image';
               </div>
             </div>
           </Modal.Body>
-          <Modal.Footer className="d-flex justify-content-center"><Image className="m-4" src="/imgs/GAS-Text-Only-2-Color.png" width={210} height={48}/></Modal.Footer>
+          <Modal.Footer className="d-flex justify-content-center"><Image className="m-4" src="/imgs/GAS-Text-Only-2-Color.png" alt="GasLogoTextOnly" width={210} height={48}/></Modal.Footer>
           <style jsx>{`
             .modal-title {
               font-weight: bold;

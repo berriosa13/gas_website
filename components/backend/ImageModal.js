@@ -91,7 +91,7 @@ const ImageModal = ({ setOpenModal, setIdForImages, carData }) => {
         }}
       >
         <Modal.Header closeButton>
-          <Modal.Title> <Image src="/imgs/GAS-Icon-Only-2-Color.png" height={93} width={148}/>Images for {carData.make} {carData.model} {carData.year}</Modal.Title>
+          <Modal.Title> <Image src="/imgs/GAS-Icon-Only-2-Color.png" height={93} width={148} alt="GasLogo"/>Images for {carData.make} {carData.model} {carData.year}</Modal.Title>
         </Modal.Header>
         <Modal.Body className="show-grid">
           <Container>
@@ -157,7 +157,7 @@ const ImageModal = ({ setOpenModal, setIdForImages, carData }) => {
             </Row>
           </Container>
         </Modal.Body>
-        <Modal.Footer className="d-flex justify-content-center"><Image className="" src="/imgs/GAS-Text-Only-2-Color.png" height={56} width={216}/></Modal.Footer>
+        <Modal.Footer className="d-flex justify-content-center"><Image className="" src="/imgs/GAS-Text-Only-2-Color.png" height={56} width={216} alt="GasLogoTextOnly"/></Modal.Footer>
       </Modal>
     </>
   );

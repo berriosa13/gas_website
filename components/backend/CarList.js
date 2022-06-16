@@ -29,10 +29,10 @@ const CarsList = ({
       (snapShot) => {
         let list = [];
         snapShot.docs.forEach((doc) => {
+          console.log("data: ", doc.data())
           list.push({
             ...doc.data(),
             id: doc.id,
-            createdAt: doc.data().createdAt.toDate().getTime(),
           });
         });
         setCars(list);
@@ -81,7 +81,7 @@ const CarsList = ({
       </>
      
 
-        <Table variant="dark" responsive bordered hover size="sm">
+        <Table variant="dark" responsive bordered hover size="sm" className="text-center">
           <thead>
             <tr>
               <th>#</th>
@@ -100,7 +100,7 @@ const CarsList = ({
           <tbody>
             {newCars.map((doc, index) => {
               return (
-                <tr key={doc.id}>
+                <tr key={doc.id} className="text-center">
                   <td>{index + 1}</td>
                   <td>
                     <div className="d-flex justify-content-center align-items-center">
@@ -129,6 +129,7 @@ const CarsList = ({
                         className="mb-3"
                         width="100"
                         height="100"
+                        alt="thumbnailImage"
                       />
                     ) : (
                       <p>Thumbnail not set</p>
@@ -136,7 +137,7 @@ const CarsList = ({
                   </td>
                   <td>
                     <Button
-                      variant="outline-secondary"
+                      variant="primary"
                       className="m-1"
                       size="lg"
                       onClick={() => {
@@ -149,13 +150,13 @@ const CarsList = ({
                     <Button
                       size="lg"
                       className="m-1"
-                      variant="outline-primary"
+                      variant="primary"
                       onClick={(e) => getCarId(doc.id)}
                     >
                       <AiOutlineEdit />
                     </Button>
                     <Button
-                      variant="outline-danger"
+                      variant="primary"
                       size="lg"
                       className="m-1"
                       onClick={() => {
