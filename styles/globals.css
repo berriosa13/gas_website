@@ -106,9 +106,11 @@ nav ul li {
   color: #fff !important;
   border-color: var(--secondary-color) !important;
   background-color: var(--main-color) !important;
+  border-radius: 5px !important;
 }
 .btn-primary:hover {
   color: #fff !important;
   background-color: var(--secondary-color) !important;
   border-color: var(--secondary-color) !important;
 }
+
