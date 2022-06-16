@@ -1,101 +1,64 @@
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/Layout"
-import { Container, Row, Col, Button, Form, InputGroup, Breadcrumb } from "react-bootstrap";
+import { Row, Col, Button, Breadcrumb } from "react-bootstrap";
 import styles from "../styles/page_styles/Cars.module.css";
 import GradBar from "../components/GradBar";
-import spinner from "../public/spinner.gif";
 import { GoDashboard } from "react-icons/go";
-import { GiCube, GiCog } from "react-icons/gI";
+import { GiCog } from "react-icons/gI";
 import { db } from "../firebaseConfig";
-import { collection, getDocs, query, orderBy, startAfter, limit  } from "firebase/firestore";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { TbSteeringWheel } from "react-icons/tb";
 
-export default function Cars() {
-
-  const [listOfCars, setListOfCars] = useState([]);
-  const [lastCarDoc, setLastCarDoc] = useState([]);
-  const [carId, setCarId] = useState("");
-  const [loading, setLoading] = useState(true);
+export async function getStaticProps() {
   const carCollectionRef = collection(db, "Cars");
+  const cars = [];
 
-  useEffect(() => {
-    const cars = [];
-    const getFirstBatch = async () => {
-      const firstQuery = query(
-        carCollectionRef,
-        orderBy("createdAt"),
-        limit(6)
-      );
-      const querySnapshot = await getDocs(firstQuery);
-      const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-      setLastCarDoc(lastVisible);
+  try {
 
-      querySnapshot.forEach(
-        (doc) => {
-          cars.push({
-            ...doc.data(),
-            id: doc.id,
-            createdAt: doc.data().createdAt.toDate().getTime(),
-          });
-        },
-        (error) => {
-          console.log(
-            "Error getting snapshot data for Car collection: ",
-            error
-          );
-        }
-      );
-      setLoading(false);
-      setListOfCars(cars);
-      console.log("Last visible: ", lastVisible);
-      console.log("cars: ", listOfCars);
-    };
-    getFirstBatch();
-  }, []);
+    const getAllCarsQuery = query(
+      carCollectionRef,
+      orderBy("createdAt"),
+    );
+    const querySnapshot = await getDocs(getAllCarsQuery);
+    querySnapshot.forEach(
+      (doc) => {
+        cars.push({
+          ...doc.data(),
+          id: doc.id,
+          createdAt: doc.data().createdAt.toDate().getTime(),
+        });
+      },
+    );
+  } catch(err) {
+    console.log("Error getting static props in cars.js: ", err);
+  }
   
-    // Check to see if cars data is still loading
-    // if (loading) {
-    //   return <Image src={spinner} width={300} height={200}/>;
-    // }
+  return {
+    props: {
+      cars 
+    },
+  }
+}
+
+export default function Cars({ cars }) {
+
+  const [carIndex, setCarIndex] = useState(3);
+  const carsToRender = cars.slice(0, carIndex);
+
 
   async function loadMoreCars() {
-    const newCars = []; 
-    const carCollectionRef = collection(db, "Cars");
-
-    if(lastCarDoc == null || lastCarDoc.length == 0 || lastCarDoc == undefined) {
+    if(carsToRender.length === cars.length) {
+      // all cars have been rendered out, hide load button
       const loadBtn = document.getElementById('loadBtn');
       loadBtn.style.display = 'none';
       return;
     }
-
-    const q = query(carCollectionRef, 
-      orderBy('createdAt'), 
-      startAfter(lastCarDoc), 
-      limit(6)
-      );
-      const querySnapshot = await getDocs(q);
-      const lastVisible = querySnapshot.docs[querySnapshot.docs.length - 1];
-      setLastCarDoc(lastVisible);
-      
-      if(querySnapshot.empty) {
-        return;
-    }
-    querySnapshot.forEach(
-      (doc) => {
-        console.log("adding newCar doc: ", doc.data());
-        newCars.push({ ...doc.data(), id: doc.id, createdAt: doc.data().createdAt.toDate().getTime()});
-      },
-      (error) => {
-        console.log("Error getting snapshot data for Car collection: ", error);
-      }
-    );
-    setListOfCars((prevState) => [...prevState, ...newCars]);
+    setCarIndex(carIndex + 3);
   }
-
-  console.log("current cars: ",listOfCars);
 
   return (
     <>
@@ -216,14 +179,15 @@ export default function Cars() {
 
       <section className={styles.featured_places}>
         <Row>
-          {listOfCars.map((car) => {
+          {carsToRender.map((car) => {
             return (
-              <Col key={car.id} md={4} sm={6} xs={12}>
+              <Col className="mb-3" key={car.id} md={4} sm={6} xs={12}>
                 <div className={styles.featured_item}>
                   <div className={styles.thumb}>
                     <div className={styles.thumb_img}>
                       {car.thumbnailImage != null ? (
                         <Image
+                          priority="true"
                           src={car.thumbnailImage}
                           layout="responsive"
                           alt="thumbnail image"
@@ -243,28 +207,23 @@ export default function Cars() {
                       </strong>
                       &nbsp;&nbsp;&nbsp;&nbsp;
                       <strong>
-                        <GiCube /> 1800 cc
+                        <TbSteeringWheel/> {car.drivetrain}
                       </strong>
                       &nbsp;&nbsp;&nbsp;&nbsp;
                       <strong>
-                        <GiCog /> Manual
+                        <GiCog /> {car.transmission}
                       </strong>
                     </div>
                   </div>
                   <div className={styles.down_content}>
                     <h4>
-                      {car.make} {car.model}
+                      Used {car.year} {car.make} {car.model}
                     </h4>
 
                     <br />
 
-                    <p>190 hp / ⛽ / {car.year} / Used vehicle</p>
-
                     <p>
                       <span>
-                        {/* <del>
-                          <sup>$</sup>11999.00{" "}
-                        </del>{" "} */}
                         <strong>
                           <sup>$</sup>
                           {car.price
