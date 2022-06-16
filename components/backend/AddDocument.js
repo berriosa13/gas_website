@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Form, InputGroup, Button, Row, Col } from "react-bootstrap";
 import Select from "react-select";
+import CreatableSelect from "react-select/creatable";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import CurrencyInput from "react-currency-input-field";
@@ -44,7 +45,9 @@ const AddDocument = ({ carId, setCarId }) => {
     },
   };
 
-  const carMakeOptions = SelectOptionsService.getCarMakeOptions();
+  const [carMakeOptions, setCarMakeOptions] = useState(SelectOptionsService.getCarMakeOptions)
+  const [carMakeValue, setCarMakeValue] = useState("");
+  // const carMakeOptions = SelectOptionsService.getCarMakeOptions();
   const carYearOptions = SelectOptionsService.getCarYearOptions();
   const carDrivetrainOptions = SelectOptionsService.getCarDrivetrainOptions();
   const carTransmissionOptions = SelectOptionsService.getCarTransmissionOptions();
@@ -52,9 +55,19 @@ const AddDocument = ({ carId, setCarId }) => {
   const carDoorOptions = SelectOptionsService.getCarDoorOptions();
   const carColorsOptions = SelectOptionsService.getCarColorOptions();
 
+  const handleCarMakeChange = useCallback((inputValue) => setCarMakeValue(inputValue), []);
+
+  const handleCarMakeCreate = useCallback(
+    (inputValue) => {
+      const newCarMakeOption = { value: inputValue.toLowerCase(), label: inputValue };
+      setCarMakeOptions([...carMakeOptions, newCarMakeOption]);
+      setCarMakeValue(newCarMakeOption);
+    },
+    [carMakeOptions]
+  )
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    imageInputRef.current.value = "";
 
     if (
       make === "" ||
@@ -62,9 +75,19 @@ const AddDocument = ({ carId, setCarId }) => {
       mileage === "" ||
       price === "" ||
       vin === "" ||
-      year === ""
+      year === "" ||
+      drivetrain === "" ||
+      transmission === "" ||
+      engine === "" ||
+      doors === "" ||
+      interiorColor === "" ||
+      exteriorColor === ""
     ) {
-      toast.error("All field must be filled out!");
+      toast.error("All fields must be filled out!");
+      return;
+    }
+    if(images === "") {
+      toast.error("Select an image(s) for this listing");
       return;
     }
 
@@ -122,6 +145,7 @@ const AddDocument = ({ carId, setCarId }) => {
     setImages("");
     setImageUrls("");
     setImages("");
+    imageInputRef.current.value = "";
   };
 
   const sendImageDocToCollection = async (carDocId, newImage) => {
@@ -245,6 +269,16 @@ const AddDocument = ({ carId, setCarId }) => {
                     </span>
                     Make
                   </InputGroup.Text>
+                  {/* <CreatableSelect
+                    className="w-100"
+                    value={carMakeValue}
+                    options={carMakeOptions}
+                    onChange={handleCarMakeChange}
+                    onCreateOption={handleCarMakeCreate}
+                  
+                  >
+                    
+                  </CreatableSelect> */}
                   <Select
                     className="w-100"
                     value={{ value: make, label: make }}
@@ -494,7 +528,7 @@ const AddDocument = ({ carId, setCarId }) => {
                   ref={imageInputRef}
                 />
               </Form.Group>
-              <div className="d-grid gap-2">
+              <div className="d-grid gap-2 mt-5">
                 <Button variant="primary" type="Submit">
                   Add / Update
                 </Button>
