@@ -36,21 +36,21 @@ const NavBar = () => {
           <ReactBootStrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <ReactBootStrap.Navbar.Collapse id="responsive-navbar-nav">
             <ReactBootStrap.Nav navbarScroll className="mr-auto">
-              <Link href="/">
-                <a>Home</a>
+              <Link href="/" passhref>
+                <ReactBootStrap.Nav.Link as="a" href="/">Home</ReactBootStrap.Nav.Link>
               </Link>
-              <Link href="/about">
-                <a>About</a>
+              <Link href="/about" passhref>
+                <ReactBootStrap.Nav.Link as="a" href="/about">About</ReactBootStrap.Nav.Link>
               </Link>
-              <Link href="/cars">
-                <a>Inventory</a>
+              <Link href="/cars" passhref>
+                <ReactBootStrap.Nav.Link as="a" href="/cars">Inventory</ReactBootStrap.Nav.Link>
               </Link>
-              <Link href="/contact">
-                <a>Contact</a>
+              <Link href="/contact" passhref>
+                <ReactBootStrap.Nav.Link as="a" href="/contact">Contact</ReactBootStrap.Nav.Link>
               </Link>
               
-              <Link href="/apply">
-                  <a>Apply Now</a>
+              <Link href="/apply" passhref>
+                <ReactBootStrap.Nav.Link as="a" href="/apply">Apply Now</ReactBootStrap.Nav.Link>
               </Link>
             </ReactBootStrap.Nav>
           </ReactBootStrap.Navbar.Collapse>
