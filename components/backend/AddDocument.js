@@ -47,7 +47,6 @@ const AddDocument = ({ carId, setCarId }) => {
 
   const [carMakeOptions, setCarMakeOptions] = useState(SelectOptionsService.getCarMakeOptions)
   const [carMakeValue, setCarMakeValue] = useState("");
-  // const carMakeOptions = SelectOptionsService.getCarMakeOptions();
   const carYearOptions = SelectOptionsService.getCarYearOptions();
   const carDrivetrainOptions = SelectOptionsService.getCarDrivetrainOptions();
   const carTransmissionOptions = SelectOptionsService.getCarTransmissionOptions();
@@ -86,10 +85,6 @@ const AddDocument = ({ carId, setCarId }) => {
       toast.error("All fields must be filled out!");
       return;
     }
-    if(images === "") {
-      toast.error("Select an image(s) for this listing");
-      return;
-    }
 
     const newCar = {
       make,
@@ -110,6 +105,7 @@ const AddDocument = ({ carId, setCarId }) => {
 
     try {
       if (carId !== undefined && carId !== "") {
+
         const carDocRef = await CarDataService.updateCar(carId, newCar);
 
         // if imageUrl is NOT null, user attempted to update listing with more images
@@ -119,6 +115,10 @@ const AddDocument = ({ carId, setCarId }) => {
         toast.success("Updated successfully!");
         setCarId("");
       } else {
+        if(images === "") {
+          toast.error("Select an image(s) for this listing");
+          return;
+        }
         const carDocRef = await CarDataService.addCars(newCar);
         const carId = carDocRef.id;
         // add newImage to Image collection
