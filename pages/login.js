@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import Link from "next/link"
 import React, { useState } from 'react'
-import { Button, Form } from 'react-bootstrap'
+import { Button, Form, FloatingLabel } from 'react-bootstrap'
 import { useAuth } from '../contexts/AuthContext'
 import GradBar from "../components/GradBar"
 import { toast, ToastContainer, Zoom } from "react-toastify";
@@ -47,35 +47,45 @@ export default function Login() {
         <div className="text-center mb-3"><Link href="/"><a>Back to Home</a></Link></div>
         <Form onSubmit={handleLogin}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              onChange={(e) => {
-                setData({
-                  ...data,
-                  email: e.target.value,
-                })
-              }}
-              value={data.email}
-              required
-              type="email"
-              placeholder="Enter email"
-            />
+            <FloatingLabel
+              controlId="floatingInput"
+              label="Email address"
+              className="mb-3"
+            >
+              <Form.Control
+                onChange={(e) => {
+                  setData({
+                    ...data,
+                    email: e.target.value,
+                  })
+                }}
+                value={data.email}
+                required
+                type="email"
+                placeholder="Enter email"
+              />
+            </FloatingLabel>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              onChange={(e) => {
-                setData({
-                  ...data,
-                  password: e.target.value,
-                })
-              }}
-              value={data.password}
-              required
-              type="password"
-              placeholder="Password"
-            />
+            <FloatingLabel
+                controlId="floatingInput"
+                label="Password"
+                className="mb-3"
+              >
+              <Form.Control
+                onChange={(e) => {
+                  setData({
+                    ...data,
+                    password: e.target.value,
+                  })
+                }}
+                value={data.password}
+                required
+                type="password"
+                placeholder="Password"
+              />
+          </FloatingLabel>
           </Form.Group>
           <div className="d-flex justify-content-center">
             <Button className="mt-3" variant="primary" type="submit">
