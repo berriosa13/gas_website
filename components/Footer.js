@@ -1,21 +1,29 @@
 import styles from "../styles/comp_styles/Footer.module.css";
-import Image from 'next/image';
+import Image from "next/image";
 import Link from "next/link";
 import Script from "next/script";
-import { FaFacebookSquare, FaTwitterSquare, FaLinkedin, FaMapMarkerAlt, FaStop, FaPhoneAlt  } from "react-icons/fa";
+import {
+  FaFacebookSquare,
+  FaTwitterSquare,
+  FaLinkedin,
+  FaMapMarkerAlt,
+  FaStop,
+  FaPhoneAlt,
+} from "react-icons/fa";
+import { HiLink } from "react-icons/hi";
 import { MdEmail } from "react-icons/md";
 import { ImLink } from "react-icons/im";
 import { Container, Row, Col } from "react-bootstrap";
 import GradBar from "./GradBar";
-import SubFooter from "./SubFooter"
+import SubFooter from "./SubFooter";
 
 const Footer = () => {
   const current = new Date();
   const date = `${current.getFullYear()}`;
-    return (
-      <>
-        <footer className={styles.footer}>
-          <GradBar/>
+  return (
+    <>
+       <footer className={styles.footer}>
+       <GradBar/>
           <div className="my-5">
           </div>
           <Container>
@@ -31,17 +39,31 @@ const Footer = () => {
                     />
                   </div>
                   <p>
-                    Mauris sit amet quam congue, pulvinar urna et, congue diam.
-                    Suspendisse eu lorem massa. Integer sit amet posuere
-                    tellustea dictumst.
+                    Find your next used car at Guardian Automobile Sales, located on Reeves Street in Dunmore.
                   </p>
-                  <div className="d-flex align-items-center justify-content-start facebook-icon">
-                    <a href="https://www.facebook.com" target="blank" noreferrer>
-                     <FaFacebookSquare className="fs-5 ms-2"/> 
-                    </a>
-                  
-                  </div>
-                  
+                  <ul className="social-icons">
+                    <li>
+                      <Link href="https://www.facebook.com/Guardian-Automobile-Sales-104122725674174/">
+                        <a target="_blank" rel="noopener noreferrer">
+                          <FaFacebookSquare />
+                        </a>
+                      </Link>
+                    </li>
+                    {/* <li>
+                      <Link href="/">
+                        <a>
+                          <FaTwitterSquare />
+                        </a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/">
+                        <a>
+                          <FaLinkedin />
+                        </a>
+                      </Link>
+                    </li> */}
+                  </ul>
                 </div>
               </Col>
               <Col md={4}>
@@ -49,40 +71,40 @@ const Footer = () => {
                   <div className={styles.footer_heading}>
                     <h4>Useful Links</h4>
                   </div>
-                  <Row className="d-flex justify-content-center">
+                  <Row className="mx-5 px-5">
                     <ul className="">
-                      <li className="text-center">
+                      <li className="">
                         <Link href="/">
                           <a>
-                            <ImLink/> Home
+                            <HiLink /> Home
                           </a>
                         </Link>
                       </li>
-                      <li className="text-center">
+                      <li className="">
                         <Link href="/about">
                           <a>
-                          <ImLink/> About
+                            <HiLink /> About
                           </a>
                         </Link>
                       </li>
-                      <li className="text-center">
+                      <li className="">
                         <Link href="/cars">
                           <a>
-                          <ImLink/> Inventory
+                            <HiLink /> Cars
                           </a>
                         </Link>
                       </li>
-                      <li className="text-center">
+                      <li className="">
                         <Link href="/contact">
                           <a>
-                          <ImLink/> Contact
+                            <HiLink /> Contact
                           </a>
                         </Link>
                       </li>
-                      <li className="text-center">
+                      <li className="">
                         <Link href="/apply">
                           <a>
-                          <ImLink/> Apply Online
+                            <HiLink /> Apply Online
                           </a>
                         </Link>
                       </li>
@@ -119,9 +141,11 @@ const Footer = () => {
             </Row>
           </Container>
         </footer>
-        <SubFooter/>
-      </>
-    );
-  }
-  
-  export default Footer;
+        <div className={styles.sub_footer}>
+          <p>&copy; Copyright <strong>Guardian Automobile Sales <span>{date}</span></strong>. All Rights Reserved</p>
+        </div>
+    </>
+  );
+};
+
+export default Footer;

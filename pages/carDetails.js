@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import styles from "../styles/page_styles/Cars.module.css";
 import utilMethods from "../services/utils";
 import ImageModal  from "../components/ImageModal";
+import { BsDashLg } from "react-icons/bs";
+
 import {
   Container,
   Row,
@@ -245,28 +247,8 @@ export default function CarDetails() {
                       <Accordion.Header>Vehicle Description</Accordion.Header>
                       <Accordion.Body>
                         <p>
-                          - Color coded bumpers
-                          <br />- Tinted glass
-                          <br />- Immobiliser
-                          <br />- Central locking - remote
-                          <br />- Passenger airbag
-                          <br />- Electric windows
-                          <br />- Rear head rests
-                          <br />- Radio
-                          <br />- CD player
-                          <br />- Ideal first car
-                          <br />- Warranty
-                          <br />- High level brake light
-                          <br />
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
-                          nostrud exercitation ullamco laboris nisi ut aliquip
-                          ex ea commodo consequat. Duis aute irure dolor in
-                          reprehenderit in voluptate velit esse cillum dolore eu
-                          fugiat nulla pariatur. Excepteur sint occaecat
-                          cupidatat non proident, sunt in culpa qui officia
-                          deserunt mollit anim id est laborum.
+                          <BsDashLg/> {car.description}
+                          
                         </p>
                       </Accordion.Body>
                     </Accordion.Item>
@@ -280,7 +262,7 @@ export default function CarDetails() {
                           <br />
 
                           <strong>
-                            <a href="tel:123-456-789">123-456-789</a>
+                            <a href="tel:570-800-1208">(570)-800-1208</a>
                           </strong>
                         </p>
 

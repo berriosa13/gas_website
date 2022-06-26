@@ -238,6 +238,7 @@ class SelectOptionsService {
     return [
       { value: "2-Cylinder", label: "2-Cylinder" },
       { value: "3-Cylinder", label: "3-Cylinder" },
+      { value: "4-Cylinder", label: "4-Cylinder" },
       { value: "5-Cylinder", label: "5-Cylinder" },
       { value: "6-Cylinder", label: "6-Cylinder" },
       { value: "8-Cylinder", label: "8-Cylinder" },

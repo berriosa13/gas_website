@@ -18,7 +18,6 @@ export async function getStaticProps() {
   const cars = [];
 
   try {
-
     const getAllCarsQuery = query(
       carCollectionRef,
       orderBy("createdAt"),
@@ -45,8 +44,8 @@ export async function getStaticProps() {
 }
 
 export default function Cars({ cars }) {
-
-  const [carIndex, setCarIndex] = useState(3);
+  const initialNumberOfCars = 6; 
+  const [carIndex, setCarIndex] = useState(initialNumberOfCars);
   const carsToRender = cars.slice(0, carIndex);
 
 

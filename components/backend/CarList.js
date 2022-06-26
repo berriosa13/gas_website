@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Image from 'next/image';
 import { AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
 import { FaRegImages } from "react-icons/fa";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BsArrowRightShort } from "react-icons/bs";
+
 
 import {
   collection,
@@ -29,7 +31,6 @@ const CarsList = ({
       (snapShot) => {
         let list = [];
         snapShot.docs.forEach((doc) => {
-          console.log("data: ", doc.data())
           list.push({
             ...doc.data(),
             id: doc.id,
@@ -71,7 +72,8 @@ const CarsList = ({
     exteriorColor: car.exteriorColor,
     interiorColor: car.interiorColor,
     transmission: car.transmission,
-    thumbnail: car.thumbnailImage,
+    thumbnailImage: car.thumbnailImage,
+    description: car.description,
   }));
 
   return (
@@ -81,7 +83,7 @@ const CarsList = ({
       </>
      
 
-        <Table variant="dark" responsive bordered hover size="sm" className="text-center">
+        <Table variant="dark" responsive="lg" bordered hover size="sm" className="text-center">
           <thead>
             <tr>
               <th>#</th>
@@ -93,6 +95,7 @@ const CarsList = ({
               <th>Misc</th>
               <th>Color</th>
               <th>Date Added</th>
+              <th>Description</th>
               <th>Thumbnail</th>
               <th>View/Edit/Delete</th>
             </tr>
@@ -112,20 +115,20 @@ const CarsList = ({
                   <td>#{doc.vin}</td>
                   <td>{doc.year}</td>
                   <td>
-                    Drivetrain: {doc.drivetrain} <br />
-                    Transmission: {doc.transmission} <br />
-                    Engine: {doc.engine} <br />
-                    Doors: {doc.doors}
+                    Drivetrain <BsArrowRightShort/> {doc.drivetrain} <br />
+                    Transmission <BsArrowRightShort/> {doc.transmission} <br />
+                    Engine <BsArrowRightShort/> {doc.engine} <br />
+                    Doors <BsArrowRightShort/> {doc.doors}
                   </td>
                   <td>
-                    Interior: {doc.interiorColor} <br /> Exterior:{" "}
-                    {doc.exteriorColor}
+                    Interior <BsArrowRightShort/> {doc.interiorColor} <br /> Exterior <BsArrowRightShort/> {doc.exteriorColor}
                   </td>
                   <td>{doc.createdAt}</td>
+                  <td>{doc.description}</td>
                   <td>
-                    {doc.thumbnail != null ? (
+                    {doc.thumbnailImage != null ? (
                       <Image
-                        src={doc.thumbnail}
+                        src={doc.thumbnailImage}
                         className="mb-3"
                         width="100"
                         height="100"
@@ -136,7 +139,17 @@ const CarsList = ({
                     )}
                   </td>
                   <td>
-                    <Button
+                  {['Display'].map((placement) => (
+                      <OverlayTrigger
+                        key={placement}
+                        placement='top'
+                        overlay={
+                          <Tooltip id={`tooltip-${placement}`}>
+                            <strong>{placement}</strong> all images.
+                          </Tooltip>
+                        }
+                      >
+                        <Button
                       variant="primary"
                       className="m-1"
                       size="lg"
@@ -147,25 +160,54 @@ const CarsList = ({
                     >
                       <FaRegImages />
                     </Button>
-                    <Button
-                      size="lg"
-                      className="m-1"
-                      variant="primary"
-                      onClick={(e) => getCarId(doc.id)}
-                    >
-                      <AiOutlineEdit />
-                    </Button>
-                    <Button
-                      variant="primary"
-                      size="lg"
-                      className="m-1"
-                      onClick={() => {
-                        getIsDeleteModalOpen(true);
-                        getIdForDeletion(doc.id);
-                      }}
-                    >
-                      <AiOutlineDelete />
-                    </Button>
+                      </OverlayTrigger>
+                  ))}
+
+                  {['Edit'].map((placement) => (
+                      <OverlayTrigger
+                        key={placement}
+                        placement='top'
+                        overlay={
+                          <Tooltip id={`tooltip-${placement}`}>
+                            <strong>{placement}</strong> this listing.
+                          </Tooltip>
+                        }
+                      >
+                        <Button
+                          size="lg"
+                          className="m-1"
+                          variant="primary"
+                          onClick={(e) => getCarId(doc.id)}
+                        >
+                          <AiOutlineEdit />
+                        </Button> 
+                      </OverlayTrigger>
+                  ))}
+
+                  {['Delete'].map((placement) => (
+                      <OverlayTrigger
+                        key={placement}
+                        placement='top'
+                        overlay={
+                          <Tooltip id={`tooltip-${placement}`}>
+                            <strong>{placement}</strong> this listing.
+                          </Tooltip>
+                        }
+                      >
+                        <Button
+                          variant="primary"
+                          size="lg"
+                          className="m-1"
+                          onClick={() => {
+                            getIsDeleteModalOpen(true);
+                            getIdForDeletion(doc.id);
+                          }}
+                        >
+                          <AiOutlineDelete />
+                        </Button>
+                      </OverlayTrigger>
+                  ))}
+                    
                   </td>
                 </tr>
               );

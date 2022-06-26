@@ -51,37 +51,37 @@ function CarDashboard() {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" className="header">
-        <Container>
-          <Navbar.Brand href="/carDashboard">
-            <Image
-              className="mr-3"
-              src="/imgs/GAS-Full-Logo-2-Color.png"
-              alt="Gas-Logo" 
-              width={421} 
-              height={93}
-            />
-          </Navbar.Brand>
-          <Button onClick={() => {
-              logout()
-              router.push('/login')
-            }}
-            size="lg"
-            >
-          Logout
-         </Button>
-        </Container>
-      </Navbar>
+        <Navbar expand="md" bg="dark" variant="dark" className="header d-flex justify-content-center">
+            <Navbar.Brand href="/carDashboard">
+              <Image
+                className="mr-3"
+                src="/imgs/GAS-Full-Logo-2-Color.png"
+                alt="Gas-Logo" 
+                width={421} 
+                height={93}
+              />
+            </Navbar.Brand>
+            <Button onClick={() => {
+                logout()
+                router.push('/login')
+              }}
+              size="lg"
+              >
+            Logout
+          </Button>
+        </Navbar>
+    
 
         {modalOpen && <ImageModal setOpenModal={setModalOpen} setIdForImages={setCarIdForImages} carData={carIdForImages}/>}
 
         {deleteModalOpen && <DeleteModal setOpenDeleteModal={setDeleteModalOpen} getDeleteId={deleteId} />}
-
-        <Container fluid className="w-75">
-          <Row className="justify-content-center mx-5">
+        <Container className="w-80">
+          <Row className="justify-content-center mx-3">
               <AddDocument carId={carId} setCarId={setCarId}/>
           </Row>
-          <Row className="justify-content-center mx-5">
+        </Container>
+        <Container fluid>
+          <Row className="justify-content-center mx-3">
             <Col>
               <CarsList 
               getCarId={getCarIdHandler} 

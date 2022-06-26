@@ -36,8 +36,8 @@ export default function About() {
             />
           </Col>
           <Col md={6}>
-            <p>Shopping for your next vehicle shouldn't be a hassle.
-                You don't need to drive for hours or make deals over the phone to get a good deal on a great used vehicle. Located right here in Dunmore PA, Guardian Automobile Sales is dedicated to bringing a great selection of high-quality, well-maintained, like-new vehicles into our local area. We invite you to stop by and look over our inventory of vehicles</p>
+            <p>Shopping for your next vehicle should not be a hassle.
+                You do not need to drive for hours or make deals over the phone to get a good deal on a great used vehicle. Located right here in Dunmore PA, Guardian Automobile Sales is dedicated to bringing a great selection of high-quality, well-maintained, like-new vehicles into our local area. We invite you to stop by and look over our inventory of vehicles</p>
           </Col>   
           <style jsx>{`
             img {

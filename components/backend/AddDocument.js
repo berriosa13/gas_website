@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Form, InputGroup, Button, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { Form, InputGroup, Button, Row, Col, FloatingLabel } from "react-bootstrap";
 import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { ToastContainer, toast, Zoom } from "react-toastify";
@@ -28,14 +28,18 @@ const AddDocument = ({ carId, setCarId }) => {
   const [transmission, setTransmission] = useState("");
   const [engine, setEngine] = useState("");
   const [doors, setDoors] = useState("");
-  const [interiorColor, setInteriorColor] = useState("");
+  const [interiorColor, setInteriorColor] = useState(null);
   const [exteriorColor, setExteriorColor] = useState("");
   const [year, setYear] = useState("");
+  const [description, setDescription] = useState("");
   const [images, setImages] = useState("");
   const [imageUrl, setImageUrls] = useState("");
   const imageInputRef = React.useRef();
+  const descriptionInputRef = React.useRef();
   const [imageForeignId, setImageForeignId] = useState("");
   const [imageStorageName, setImageStorageName] = useState([]);
+  // const imageStorageName = [];
+  const [uploading, setUploading] = useState(false);
   const storage = getStorage();
 
   const styles = {
@@ -54,16 +58,16 @@ const AddDocument = ({ carId, setCarId }) => {
   const carDoorOptions = SelectOptionsService.getCarDoorOptions();
   const carColorsOptions = SelectOptionsService.getCarColorOptions();
 
-  const handleCarMakeChange = useCallback((inputValue) => setCarMakeValue(inputValue), []);
+  // const handleCarMakeChange = useCallback((inputValue) => setCarMakeValue(inputValue), []);
 
-  const handleCarMakeCreate = useCallback(
-    (inputValue) => {
-      const newCarMakeOption = { value: inputValue.toLowerCase(), label: inputValue };
-      setCarMakeOptions([...carMakeOptions, newCarMakeOption]);
-      setCarMakeValue(newCarMakeOption);
-    },
-    [carMakeOptions]
-  )
+  // const handleCarMakeCreate = useCallback(
+  //   (inputValue) => {
+  //     const newCarMakeOption = { value: inputValue.toLowerCase(), label: inputValue };
+  //     setCarMakeOptions([...carMakeOptions, newCarMakeOption]);
+  //     setCarMakeValue(newCarMakeOption);
+  //   },
+  //   [carMakeOptions]
+  // )
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -80,7 +84,8 @@ const AddDocument = ({ carId, setCarId }) => {
       engine === "" ||
       doors === "" ||
       interiorColor === "" ||
-      exteriorColor === ""
+      exteriorColor === "" ||
+      description === ""
     ) {
       toast.error("All fields must be filled out!");
       return;
@@ -99,6 +104,7 @@ const AddDocument = ({ carId, setCarId }) => {
       doors,
       interiorColor,
       exteriorColor,
+      description,
     };
 
     const newImage = { imageForeignId, imageStorageName, imageUrl };
@@ -142,21 +148,29 @@ const AddDocument = ({ carId, setCarId }) => {
     setDoors("");
     setInteriorColor("");
     setExteriorColor("");
+    setDescription("");
     setImages("");
     setImageUrls("");
     setImages("");
+    setImageForeignId("");
+    setImageStorageName("")
     imageInputRef.current.value = "";
+    descriptionInputRef.current.value = "";
   };
 
   const sendImageDocToCollection = async (carDocId, newImage) => {
-    console.log("carDocId for update: ", carDocId);
     await Promise.all(
       imageUrl.map(async (urls) => {
-        console.log("sending images to collection for new image: ", newImage);
         newImage.imageUrl = urls;
-        newImage.imageStorageName = imageStorageName.pop();
+        newImage.imageStorageName = newImage.imageUrl.replace(
+          'https://firebasestorage.googleapis.com/v0/b/gas-auto-sales-dev.appspot.com/o/images%2F', '')
+          .split('?')[0];
         const imageDocRef = await ImageDataService.addImages(newImage);
-        await ImageDataService.updateImageForeignId(carDocId, imageDocRef);
+        try {
+          await ImageDataService.updateImageForeignId(carDocId, imageDocRef);
+        } catch(err) {
+          console.log("Error setting imageForeignId ", err);
+        }
       })
     );
   };
@@ -164,54 +178,51 @@ const AddDocument = ({ carId, setCarId }) => {
   const handleImageFileChange = (e) => {
     for (let i = 0; i < e.target.files.length; i++) {
       const newImage = e.target.files[i];
-      console.log("new image to be added: ", newImage);
       setImages((prevState) => [...prevState, newImage]);
     }
   };
 
+
+
   useEffect(() => {
     const handleUpload = () => {
       images.map((image) => {
-        const name =  v4() + "_" + image.name;
-        // const name = new Date().getTime() + image.name;
+        setUploading(true);
+        const name = new Date().getTime() + image.name;
         const storageRef = ref(storage, `images/${name}`);
-        setImageStorageName((prevState) => [...prevState, name]);
         const uploadTask = uploadBytesResumable(storageRef, image);
-
+        
         uploadTask.on(
           "state_changed",
           (snapshot) => {
             const progress =
               (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            switch (snapshot.state) {
-              case "paused":
-                console.log("Upload is paused");
-                toast.info("Image upload paused");
-                break;
-              case "running":
-                console.log("Upload is running");
-                break;
-            }
-          },
-          (error) => {
-            toast("Image uploadTask error", error, {
-              className: "error-toast",
-              draggable: true,
-              position: toast.POSITION.TOP_CENTER,
-            });
-          },
-          () => {
-            // Get urls and set them after each successful upload
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              setImageUrls((prevState) => [...prevState, downloadURL]);
-              console.log("current imageUrl(s): ", imageUrl);
-              toast.info("Upload Finished for " + name +"");
+              switch (snapshot.state) {
+                case "paused":
+                  console.log("Upload is paused");
+                  toast.info("Image upload paused");
+                  break;
+                  case "running":
+                    console.log("Upload is running");
+                    break;
+                  }
+                },
+                (error) => {
+                  toast.error("Error uploading image");
+                  console.log("Error uploading image ", error);
+                },
+                () => {
+                  // Get urls and set them after each successful upload
+                  getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                    setImageUrls((prevState) => [...prevState, downloadURL]);
+                    toast.info("Upload Finished for " + name +"");
             });
           }
         );
       });
-      console.log("image file(s): ", images);
+      setUploading(false);
     };
+
     images && handleUpload();
   }, [images]);
 
@@ -231,6 +242,8 @@ const AddDocument = ({ carId, setCarId }) => {
       setDoors(carDocSnap.data().doors);
       setInteriorColor(carDocSnap.data().interiorColor);
       setExteriorColor(carDocSnap.data().exteriorColor);
+      setDescription(carDocSnap.data().description);
+      descriptionInputRef.current.value = carDocSnap.data().description;
       toast.info(
         "To edit listing, change any of the fields and click 'Add/Update'"
       );
@@ -246,6 +259,7 @@ const AddDocument = ({ carId, setCarId }) => {
     }
   }, [carId]);
 
+    console.log(interiorColor)
 
   return (
     <>
@@ -260,25 +274,9 @@ const AddDocument = ({ carId, setCarId }) => {
         <h1 className="text-center mt-3">GAS Admin Dashboard</h1>
         <Form onSubmit={handleSubmit} className="mt-5">
           <Row>
-            <Col>
+            <Col md={4}>
               <Form.Group className="mb-3" controlId="formCarMake">
-                <InputGroup className="flex-nowrap">
-                  <InputGroup.Text id="formCarMake">
-                    <span role="img" aria-label="car emoji">
-                      🚗
-                    </span>
-                    Make
-                  </InputGroup.Text>
-                  {/* <CreatableSelect
-                    className="w-100"
-                    value={carMakeValue}
-                    options={carMakeOptions}
-                    onChange={handleCarMakeChange}
-                    onCreateOption={handleCarMakeCreate}
-                  
-                  >
-                    
-                  </CreatableSelect> */}
+                <Form.Label><strong>Make:</strong></Form.Label>
                   <Select
                     className="w-100"
                     value={{ value: make, label: make }}
@@ -287,62 +285,43 @@ const AddDocument = ({ carId, setCarId }) => {
                       setMake(e.value);
                     }}
                   ></Select>
-                </InputGroup>
               </Form.Group>
             </Col>
-            <Col>
+            <Col md={4}>
               <Form.Group className="mb-3" controlId="fromCarModel">
-                <InputGroup>
-                  <InputGroup.Text id="fromCarModel">
-                    <span role="img" aria-label="car emoji">
-                      🚗
-                    </span>
-                    Model
-                  </InputGroup.Text>
+              <Form.Label><strong>Model:</strong></Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Ex. Pontiac, Traverse..."
                     value={model}
                     onChange={(e) => setModel(e.target.value)}
                   />
-                </InputGroup>
               </Form.Group>
             </Col>
-            <Col>
+            <Col md={4}>
               <Form.Group className="mb-3" controlId="formCarMileage">
-                <InputGroup>
-                  <InputGroup.Text id="formCarMileage">
-                    <span role="img" aria-label="car emoji">
-                      🚗
-                    </span>
-                    Mileage
-                  </InputGroup.Text>
+                <Form.Label><strong>Mileage:</strong></Form.Label>
                   <Form.Control
                     type="number"
-                    placeholder="Car Mileage"
+                    placeholder="Enter mileage #"
                     value={mileage}
                     onChange={(e) => setMileage(e.target.value)}
                   />
-                </InputGroup>
               </Form.Group>
             </Col>
-            <Col>
+          </Row>
+          <Row>
+            <Col md={4}>
               <Form.Group className="mb-3" controlId="formCarPrice">
-                <InputGroup>
-                  <InputGroup.Text id="formCarPrice">
-                    <span role="img" aria-label="car emoji">
-                      🚗
-                    </span>
-                    Price
-                  </InputGroup.Text>
+                <Form.Label><strong>Price:</strong></Form.Label>
                   {/* <CurrencyInput
-                className="form-control"
-                placeholder="Please enter a number"
-                defaultValue={price}
-                decimalsLimit={2}
-                prefix="$"
-                onValueChange={(value, name) => setPrice(value)}
-              />             */}
+                  className="form-control"
+                  placeholder="Please enter a number"
+                  defaultValue={price}
+                  decimalsLimit={2}
+                  prefix="$"
+                  onValueChange={(value, name) => setPrice(value)}
+                />             */}
                   <Form.Control
                     type="number"
                     placeholder="Enter a dollar amount"
@@ -350,39 +329,23 @@ const AddDocument = ({ carId, setCarId }) => {
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
                   />
-                </InputGroup>
               </Form.Group>
             </Col>
-          </Row>
-          <Row>
-            <Col>
+            <Col md={4}>
               <Form.Group className="mb-3" controlId="formCarVin">
-                <InputGroup>
-                  <InputGroup.Text id="formCarVin">
-                    <span role="img" aria-label="car emoji">
-                      🚗
-                    </span>
-                    Vin#
-                  </InputGroup.Text>
+                <Form.Label><strong>Vin #:</strong></Form.Label>
                   <Form.Control
                     type="text"
                     placeholder="Vehicles unique ID"
                     value={vin}
                     onChange={(e) => setVin(e.target.value)}
                   />
-                </InputGroup>
-              </Form.Group>
+                </Form.Group>
             </Col>
 
-            <Col>
+            <Col md={4}>
               <Form.Group className="mb-3" controlId="formCarYear">
-                <InputGroup className="flex-nowrap">
-                  <InputGroup.Text id="formCarYear">
-                    <span role="img" aria-label="car emoji">
-                      🚗
-                    </span>
-                    Year
-                  </InputGroup.Text>
+              <Form.Label><strong>Year:</strong></Form.Label>
                   <Select
                     className="w-100"
                     value={{ value: year, label: year }}
@@ -390,39 +353,32 @@ const AddDocument = ({ carId, setCarId }) => {
                     onChange={(e) => {
                       setYear(e.value);
                     }}
+                    defaultValue='Hi'
                   ></Select>
-                </InputGroup>
               </Form.Group>
             </Col>
-            <Col>
+          </Row>
+          <Row className="">
+            <Col md={4}>
               <Form.Group className="mb-3" controlId="formCarDrivetrain">
-                <InputGroup className="flex-nowrap">
-                  <InputGroup.Text id="formCarDrivetrain">
-                    <span role="img" aria-label="car emoji">
-                      🚗
-                    </span>
-                    Drivetrain
-                  </InputGroup.Text>
-                  <Select
-                    className="w-100"
-                    value={{ value: drivetrain, label: drivetrain }}
-                    options={carDrivetrainOptions}
-                    onChange={(e) => {
-                      setDrivetrain(e.value);
-                    }}
-                  ></Select>
-                </InputGroup>
+              <Form.Label><strong>Drivetrain:</strong></Form.Label>
+                    <Select
+                      className="w-100"
+
+                      value={{ value: drivetrain, label: drivetrain }}
+                      options={carDrivetrainOptions}
+                      onChange={(e) => {
+                        setDrivetrain(e.value);
+                      }}
+                      >
+                    </Select>
               </Form.Group>
+                
+        
             </Col>
-            <Col>
+            <Col md={4}>
               <Form.Group className="mb-3" controlId="formCarTransmission">
-                <InputGroup className="flex-nowrap">
-                  <InputGroup.Text id="formCarTransmission">
-                    <span role="img" aria-label="car emoji">
-                      🚗
-                    </span>
-                    Transmission
-                  </InputGroup.Text>
+                <Form.Label><strong>Transmission:</strong></Form.Label>
                   <Select
                     className="w-100"
                     value={{ value: transmission, label: transmission }}
@@ -431,20 +387,11 @@ const AddDocument = ({ carId, setCarId }) => {
                       setTransmission(e.value);
                     }}
                   ></Select>
-                </InputGroup>
               </Form.Group>
             </Col>
-          </Row>
-          <Row>
-            <Col>
+            <Col md={4}>
               <Form.Group className="mb-3" controlId="formCarEngine">
-                <InputGroup className="flex-nowrap">
-                  <InputGroup.Text id="formCarEngine">
-                    <span role="img" aria-label="car emoji">
-                      🚗
-                    </span>
-                    Engine
-                  </InputGroup.Text>
+              <Form.Label><strong>Engine:</strong></Form.Label>
                   <Select
                     className="w-100"
                     value={{ value: engine, label: engine }}
@@ -453,18 +400,13 @@ const AddDocument = ({ carId, setCarId }) => {
                       setEngine(e.value);
                     }}
                   ></Select>
-                </InputGroup>
               </Form.Group>
             </Col>
-            <Col>
+          </Row>
+          <Row>
+            <Col md={4}>
               <Form.Group className="mb-3" controlId="formCarDoors">
-                <InputGroup className="flex-nowrap">
-                  <InputGroup.Text id="formCarDoors">
-                    <span role="img" aria-label="car emoji">
-                      🚗
-                    </span>
-                    Doors
-                  </InputGroup.Text>
+                <Form.Label><strong># of Doors:</strong></Form.Label>
                   <Select
                     className="w-100"
                     value={{ value: doors, label: doors }}
@@ -473,54 +415,63 @@ const AddDocument = ({ carId, setCarId }) => {
                       setDoors(e.value);
                     }}
                   ></Select>
-                </InputGroup>
               </Form.Group>
             </Col>
-            <Col>
+            <Col md={4}>
               <Form.Group className="mb-3" controlId="formCarInteriorColor">
-                <InputGroup className="flex-nowrap"> 
-                  <InputGroup.Text id="formCarInteriorColor">
-                    <span role="img" aria-label="car emoji">
-                      🚗
-                    </span>
-                    Interior Color
-                  </InputGroup.Text>
+                <Form.Label><strong>Interior Color:</strong></Form.Label>
                   <Select
                     className="w-100"
                     value={{ value: interiorColor, label: interiorColor }}
+                    placeholder="Select Color"
+                    // // value={interiorColor.color}
+                    // value={{value: interiorColor.color, label: interiorColor.color}}
+                    // defaultValue={interiorColor.color}
+                    type="text"
                     options={carColorsOptions}
                     onChange={(e) => {
                       setInteriorColor(e.value);
                     }}
                   ></Select>
-                </InputGroup>
               </Form.Group>
             </Col>
-            <Col>
-              <Form.Group className="mb-3" controlId="formCarExteriorColor">
-                <InputGroup className="flex-nowrap">
-                  <InputGroup.Text id="formCarExteriorColor">
-                    <span role="img" aria-label="car emoji">
-                      🚗
-                    </span>
-                    Exterior Color
-                  </InputGroup.Text>
+            <Col md={4}>
+              <Form.Group className="mb-3" controlId="formCarExteriorColor">            
+                <Form.Label><strong>Exterior Color:</strong></Form.Label>
                   <Select
                     className="w-100"
                     value={{ value: exteriorColor, label: exteriorColor }}
                     options={carColorsOptions}
+                    
                     onChange={(e) => {
                       setExteriorColor(e.value);
                     }}
                   ></Select>
-                </InputGroup>
               </Form.Group>
             </Col>
+          </Row>
+          <Row>
+            <Form.Group className="mb-3" controlId="formCarDescription">
+              <FloatingLabel
+                controlId="description"
+                label="Vehicle Description"
+              >
+                <Form.Control
+                  as="textarea"
+                  placeholder="Vehicle Description"
+                  style={{ height: "300px" }}
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
+                  ref={descriptionInputRef}
+                />
+              </FloatingLabel>
+            </Form.Group>
           </Row>
           <Row className="d-flex justify-content-center">
             <Col md={5}>
               <Form.Group controlId="formFileMultiple" className="mb-3">
-                <Form.Label>Upload Image(s)</Form.Label>
+                <Form.Label><strong>Upload Image(s)</strong></Form.Label>
                 <Form.Control
                   type="file"
                   multiple
@@ -529,13 +480,17 @@ const AddDocument = ({ carId, setCarId }) => {
                 />
               </Form.Group>
               <div className="d-grid gap-2 mt-5">
-                <Button variant="primary" type="Submit">
+                <Button variant="primary" type="Submit" disabled={uploading}>
                   Add / Update
                 </Button>
               </div>
             </Col>
           </Row>
         </Form>
+        <style jsx >{`
+
+                  
+      `}</style>
       </div>
     </>
   );

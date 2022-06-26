@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import GasLogo from '../../public/imgs/GAS-Icon-Only-2-Color.png';
-// import GasTextLogo from "../../public/imgs/GAS-Text-Only-2-Color.png";
 import Image from 'next/image';
 import {
   Button,
@@ -9,7 +7,6 @@ import {
   Row,
   Container,
 } from "react-bootstrap";
-// import "./ImageModal.css";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineDelete, AiOutlineStar, AiOutlineFileImage } from "react-icons/ai";
@@ -19,6 +16,8 @@ import {
   onSnapshot,
   where,
   query,
+  getDoc,
+  doc,
 } from "firebase/firestore";
 import { db } from "../../firebaseConfig";
 
@@ -28,6 +27,7 @@ import CarDataService from "../../services/cars.services";
 
 const ImageModal = ({ setOpenModal, setIdForImages, carData }) => {
   const [images, setImages] = useState([]);
+  const [currentCar, setCurrentCar] = useState([]);
   const storage = getStorage();
   const carId = carData.id;
 
@@ -51,29 +51,59 @@ const ImageModal = ({ setOpenModal, setIdForImages, carData }) => {
     };
   }, [carId]);
 
-  const deleteImage = (imageId, imageStorageName) => {
-    console.log("Deleting imageDoc for ID: ", imageId);
-    const storageRef = ref(storage, `images/${imageStorageName}`);
+  useEffect(() => {
+    // Listen for this doc's changes
+    console.log("carId being passed into doc listener: ", carId);
+    const carDocRef = doc(db, "Cars", carId);
+    const list = [];
+    const unsubscribe = async () => {
+      const carDocSnap = await getDoc(carDocRef);
+      list.push({ id: carDocSnap.id, ...carDocSnap.data() });
+      setCurrentCar(list);
+    };
+    return () => {
+      unsubscribe();
+    };
+  }, [carId]);
+
+  const deleteImage = async (imageId, imageStorageName, imageUrl) => {
+    const storageRef = ref(storage, `images/${imageStorageName}`);  
+    // Check if imageUrl matches thumbnailImage url
+      if(currentCar[0].thumbnailImage === imageUrl) {
+        // Delete thumbnailImage from carDoc
+        try {
+          await CarDataService.deleteThumbnailImageField(carData.id);
+        } catch(err) {
+          console.log("Error removing thumbnailImage from carDoc ", err);
+          toast.error("Error removing thumbnailImage from carDoc");
+        }
+      }
     // Delete the file
     deleteObject(storageRef)
-      .then(() => {
-        // Image file successfully deleted from storage, now delete from image collection
-        console.log(
-          "Image successfully deleted from firebase storage, now deleting from collection"
+    .then( async () => {
+      // Image file successfully deleted from storage, now delete from image collection
+      console.log(
+        "Image successfully deleted from firebase storage, now deleting from collection"
         );
-        ImageDataService.deleteImage(imageId);
+        await ImageDataService.deleteImage(imageId);
       })
       .catch((error) => {
         console.log("Error deleting image in deleteImage method ", error);
+        toast.error("Error deleting image from database");
       });
     toast.success("Image deleted successfully");
   };
 
-  const setFavoriteImage = async (imageUrl, carId) => {
-    console.log("Setting new favorite image with a url of: ", imageUrl);
-    console.log("Passing in carId: ", carId);
-    await CarDataService.setFavoriteImage(carId, imageUrl);
-    toast.success("Favorite image set. Image is now being used as a thumbnail");
+  const setThumbnailImage = async (imageUrl, carId) => {
+    // close modal
+    setOpenModal(false);
+    try {
+      await CarDataService.setThumbnailImage(carId, imageUrl);
+    } catch(err) {
+      console.log("Error setting new thumbnailImage ", err);
+      toast.error("Error setting new thumbnailImage");
+    }
+    toast.success("Image is now being used as a thumbnail");
   };
 
   return (
@@ -115,19 +145,20 @@ const ImageModal = ({ setOpenModal, setIdForImages, carData }) => {
                       </Button>
 
                       <Button
+                        className="ms-3"
                         variant="outline-warning"
                         onClick={(e) => {
-                          setFavoriteImage(image.imageUrl, carId);
+                          setThumbnailImage(image.imageUrl, carId);
                         }}
                       >
                         Set thumbnail <AiOutlineStar/>
                       </Button>
 
                       <Button
+                        className="ms-3"
                         variant="outline-danger"
-                        className="delete"
                         onClick={(e) =>
-                          deleteImage(image.id, image.imageStorageName)
+                          deleteImage(image.id, image.imageStorageName, image.imageUrl)
                         }
                       >
                         Delete Image <AiOutlineDelete/>

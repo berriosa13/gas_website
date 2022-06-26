@@ -8,7 +8,8 @@ import {
     updateDoc,
     deleteDoc,
     doc,
-    serverTimestamp 
+    serverTimestamp, 
+    deleteField,
   } from "firebase/firestore";
 
 const carCollectionRef = collection(db, "Cars")
@@ -46,11 +47,23 @@ class CarDataService {
         return getDoc(carDoc)
     };
 
-    setFavoriteImage = (carId, imageUrl) => {
+    setThumbnailImage = (carId, imageUrl) => {
         const carDoc = doc(carCollectionRef, carId);
         return updateDoc(carDoc, {
             thumbnailImage: imageUrl,
         })
+    }
+
+    deleteThumbnailImageField = (carId) => {
+        try {
+            const docRef = doc(carCollectionRef, carId);
+            updateDoc(docRef, { 
+                thumbnailImage: deleteField()
+            });
+
+        } catch(err) {
+            console.error("Error deleting thumbnail image ", err);
+        }
     }
 }
 

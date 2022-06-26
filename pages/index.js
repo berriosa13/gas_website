@@ -21,7 +21,7 @@ export default function Home() {
               <h2 className="text-left mt-5 mb-3 fw-bold ">Find your next used car with</h2>
               <Image src="/imgs/GAS-Text-Only-2-Color.png" alt="" width="420" height="96"/>
               <h3 className="text-left mt-3">
-                "The <strong>#1 place</strong> for used cars in NEPA".</h3>
+                The <strong>#1 place</strong> for used cars in NEPA.</h3>
                   <Button className="mt-3" href="/cars" variant="primary" >
                     View Inventory
                   </Button>
@@ -46,6 +46,7 @@ export default function Home() {
         <h2>Some of the brands we sell ...</h2>
         <div className="row">
           <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+          {/* <Image layout='fixed' className="img-fluid" src="/imgs/carLogos/ford_logo.png" alt="carBrandLogo" width="120" height="60"  /> */}
             <img src="/imgs/carLogos/ford_logo.png" className="img-fluid" alt=""/>
           </div>
 
