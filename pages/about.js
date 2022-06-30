@@ -38,16 +38,16 @@ export default function About() {
         </Figure>
         </Col>
         <Col md={6}>
-          <p>
-            "Shopping for your next vehicle should not be a hassle. You do not
+          <h5>
+            Shopping for your next vehicle should not be a hassle. You do not
             need to drive for hours or make deals over the phone to get a good
             deal on a great used vehicle. Located right here in Dunmore PA,
             Guardian Automobile Sales is dedicated to bringing a great selection
             of high-quality, well-maintained, like-new vehicles into our local
             area. We invite you to stop by and look over our inventory of
-            vehicles."
-          </p>
-          <p className="fst-italic"> - Guardian Automobile Sales</p>
+            vehicles.
+          </h5>
+          <h5 className="fst-italic"> - Guardian Automobile Sales</h5>
         </Col>
         <style jsx global>{`
           .figure-img {
