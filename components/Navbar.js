@@ -16,7 +16,7 @@ const NavBar = () => {
     <Container>
 
         <ReactBootStrap.Navbar
-          className="d-flex justify-content-center align-items-center fs-3"
+          className="d-flex justify-content-center align-items-center fs-4"
           collapseOnSelect
           expand="md"
           variant="light"
