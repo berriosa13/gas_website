@@ -67,49 +67,58 @@ const Footer = () => {
                 </div>
               </Col>
               <Col md={4}>
-                <div className={styles.useful_links}>
+                <div>
                   <div className={styles.footer_heading}>
                     <h4>Useful Links</h4>
                   </div>
-                  <Row className="mx-5 px-5">
-                    <ul className="">
-                      <li className="">
+                  <div className="d-flex justify-content-center align-items-center">
+                    <ul>
+                      <li className="mb-2">
                         <Link href="/">
                           <a>
                             <HiLink /> Home
                           </a>
                         </Link>
                       </li>
-                      <li className="">
+                      <li className="mb-2">
                         <Link href="/about">
                           <a>
                             <HiLink /> About
                           </a>
                         </Link>
                       </li>
-                      <li className="">
+                      <li className="mb-2">
                         <Link href="/cars">
                           <a>
                             <HiLink /> Cars
                           </a>
                         </Link>
-                      </li>
-                      <li className="">
+                      </li>   
+                    </ul>
+                    <ul>
+                    <li className="mb-2">
                         <Link href="/contact">
                           <a>
                             <HiLink /> Contact
                           </a>
                         </Link>
                       </li>
-                      <li className="">
+                      <li className="mb-2">
                         <Link href="/apply">
                           <a>
                             <HiLink /> Apply Online
                           </a>
                         </Link>
                       </li>
+                      <li className="mb-2">
+                        <Link href="privacy_policy.html">
+                          <a target="_blank" noreferrer>
+                            <HiLink /> Privacy Policy
+                          </a>
+                        </Link>
+                      </li>
                     </ul>
-                  </Row>
+                    </div>
                 </div>
               </Col>
               <Col md={4}>
