@@ -6,6 +6,9 @@ import { FaRegImages } from "react-icons/fa";
 import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BsArrowRightShort } from "react-icons/bs";
+import { TbFileDescription } from "react-icons/tb";
+
+
 
 
 import {
@@ -17,10 +20,11 @@ import { db } from "../../firebaseConfig";
 
 const CarsList = ({
   getCarId,
-  getIsModalOpen,
+  getIsImageModalOpen,
   getIndividualCarData,
   getIsDeleteModalOpen,
   getIdForDeletion,
+  getIsDescriptionModalOpen,
 }) => {
   const [cars, setCars] = useState([]);
 
@@ -74,6 +78,7 @@ const CarsList = ({
     transmission: car.transmission,
     thumbnailImage: car.thumbnailImage,
     description: car.description,
+    featuredListing: car.featuredListing,
   }));
 
   return (
@@ -95,6 +100,7 @@ const CarsList = ({
               <th>Misc</th>
               <th>Color</th>
               <th>Date Added</th>
+              <th>Featured Listing?</th>
               <th>Description</th>
               <th>Thumbnail</th>
               <th>View/Edit/Delete</th>
@@ -124,7 +130,33 @@ const CarsList = ({
                     Interior <BsArrowRightShort/> {doc.interiorColor} <br /> Exterior <BsArrowRightShort/> {doc.exteriorColor}
                   </td>
                   <td>{doc.createdAt}</td>
-                  <td>{doc.description}</td>
+                  <td>{doc.featuredListing}</td>
+                  <td>
+                  {['View'].map((placement) => (
+                      <OverlayTrigger
+                        key={placement}
+                        placement='top'
+                        overlay={
+                          <Tooltip id={`tooltip-${placement}`}>
+                            <strong>{placement}</strong> description.
+                          </Tooltip>
+                        }
+                      >
+                        <Button
+                      variant="primary"
+                      className="m-1"
+                      size="lg"
+                      onClick={() => {
+                        getIsDescriptionModalOpen(true);
+                        getIndividualCarData(doc);
+                      }}
+                    >
+                      <TbFileDescription />
+                    </Button>
+                      </OverlayTrigger>
+                  ))} 
+
+                  </td>
                   <td>
                     {doc.thumbnailImage != null ? (
                       <Image
@@ -154,7 +186,7 @@ const CarsList = ({
                       className="m-1"
                       size="lg"
                       onClick={() => {
-                        getIsModalOpen(true);
+                        getIsImageModalOpen(true);
                         getIndividualCarData(doc);
                       }}
                     >
