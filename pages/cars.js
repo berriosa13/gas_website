@@ -13,7 +13,7 @@ import { db } from "../firebaseConfig";
 import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { TbSteeringWheel } from "react-icons/tb";
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
   const carCollectionRef = collection(db, "Cars");
   const cars = [];
 

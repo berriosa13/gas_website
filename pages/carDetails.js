@@ -5,7 +5,10 @@ import Layout from '../components/Layout'
 import { useRouter } from "next/router";
 import styles from "../styles/page_styles/Cars.module.css";
 import utilMethods from "../services/utils";
-import ImageModal  from "../components/ImageModal";
+import ImageModal  from "../components/modals/ImageModal";
+import QuoteModal from "../components/modals/QuoteModal"
+import AvailabilityModal from "../components/modals/AvailabilityModal"
+import TestDriveModal from "../components/modals/TestDriveModal"
 import { BsDashLg } from "react-icons/bs";
 
 import {
@@ -26,8 +29,10 @@ export async function getServerSideProps(context) {
 
 export default function CarDetails() {
   const [images, setImages] = useState([]);
-  // const [displayImages, setDisplayImages] = useState([]);
   const [imageModalOpen, setImageModalOpen] = useState(false);
+  const [quoteModalOpen, setQuoteModalOpen] = useState(false);
+  const [availabilityModalOpen, setAvailabilityModalOpen] = useState(false);
+  const [testDriveModalOpen, setTestDriveModalOpen] = useState(false);
   const router = useRouter();
   const car = router.query;
   const displayImages = images.slice(0, 4);
@@ -45,25 +50,53 @@ export default function CarDetails() {
 
   console.log("displayImages: ",displayImages);
   
-  const showModal = () => {
+  const showImageModal = () => {
     setImageModalOpen(true);
   };
   
-  const hideModal = () => {
+  const hideImageModal = () => {
     setImageModalOpen(false);
   };
+
+  const showQuoteModal = () => {
+    setQuoteModalOpen(true);
+  };
+  
+  const hideQuoteModal = () => {
+    setQuoteModalOpen(false);
+  };
+
+  const showAvailabilityModal = () => {
+    setAvailabilityModalOpen(true);
+  };
+  
+  const hideAvailabilityModal = () => {
+    setAvailabilityModalOpen(false);
+  };
+
+  const showTestDriveModal = () => {
+    setTestDriveModalOpen(true);
+  };
+  
+  const hideTestDriveModal = () => {
+    setTestDriveModalOpen(false);
+  };
+  
   
   return (
     <>
       
-      <ImageModal show={imageModalOpen} handleClose={hideModal} setImages={images} setCar={car} />
+      <ImageModal show={imageModalOpen} handleClose={hideImageModal} setImages={images} setCar={car} />
+      <QuoteModal show={quoteModalOpen} handleClose={hideQuoteModal} setCar={car} />
+      <AvailabilityModal show={availabilityModalOpen} handleClose={hideAvailabilityModal} setCar={car} />
+      <TestDriveModal show={testDriveModalOpen} handleClose={hideTestDriveModal} setCar={car} />
          
       <Head>
         <title>GAS Automobile Sales | Car Details</title>
         <meta name="keywords" content="cars" />
       </Head>
 
-      <div className="d-flex my-5">
+      <div className="d-flex my-5 justify-content-between">
         <h1>Used {car.year} {car.make} {car.model}</h1>
           <Breadcrumb className="fst-italic mx-3">
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
@@ -113,8 +146,9 @@ export default function CarDetails() {
                     grid-template-columns: 1fr .5fr .5fr;
                   }
                   #photoArray > div {
-                    -webkit-box-shadow: 5px 5px 15px 5px #333; 
-                    box-shadow: 5px 5px 15px 5px #333; 
+                    box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.75);
+                    -webkit-box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.75);
+                    -moz-box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.75); 
                   }
                   #photoArray > div:first-child {
                     grid-area: photoOne;
@@ -137,16 +171,26 @@ export default function CarDetails() {
               </section>
               <div className="row my-3 d-flex justify-content-center text-center">
                 <div className="col-md-6 mt-3">
-                  <Button onClick={showModal} variant="primary">View All Images</Button>
+                  <Button onClick={(e) => { setImageModalOpen(true)}} variant="primary">View All Images</Button>
                 </div>
               </div>
               
               <div className="col">
                 <h2>
-                  <strong className="text-primary">
-                    $
-                    {car.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                  </strong>
+                 {car.price ? 
+                  (
+                      <strong className="text-primary">
+                      $
+                      {car.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 
+                    </strong>
+                  )
+                  :
+                  (
+                    <strong className="text-primary">
+                        Unavailable
+                      </strong>
+                  )
+                }
                 </h2>
 
                 <br />
@@ -189,9 +233,20 @@ export default function CarDetails() {
                   </ListGroup.Item>
 
                   <ListGroup.Item className="w-50 d-flex justify-content-end">
-                    {car.mileage
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    {car.mileage ? 
+                      (
+                          <strong>
+                          $
+                          {car.mileage.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 
+                        </strong>
+                      )
+                      :
+                      (
+                        <strong>
+                            Unavailable
+                          </strong>
+                      )
+                    }
                   </ListGroup.Item>
                 </ListGroup>
                 <ListGroup horizontal>
@@ -237,8 +292,9 @@ export default function CarDetails() {
                     font-weight: bold !important;
                   }
                   .text-primary {
-                    color: var(--main-color) !important;
+                    color: var(--secondary-color) !important;
                   }
+                 
                 `}</style>
 
                 <div>
@@ -284,6 +340,39 @@ export default function CarDetails() {
               </div>
             </div>
           </div>
+          
+          <Row className="m-5">
+            <Col className="d-flex justify-content-between flex-wrap">
+              <Button 
+              className="mb-3"
+              onClick={showQuoteModal}
+              
+              >
+                Request A Quote
+              </Button>
+
+              <Button
+              className="mb-3"
+              onClick={showAvailabilityModal}
+              >
+                Confirm Availability
+              </Button>
+
+              <Button 
+              className="mb-3"
+              onClick={showTestDriveModal}
+              >
+                Schedule Test Drive
+              </Button>
+
+              <Button 
+              className="mb-3"
+              href="/apply">
+                Apply Online
+              </Button>
+            </Col>
+          </Row>
+
         </section>
       </main>
     </>

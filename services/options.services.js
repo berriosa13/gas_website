@@ -227,9 +227,7 @@ class SelectOptionsService {
       { value: "8-speed automatic", label: "8-speed automatic" },
       { value: "10-speed automatic", label: "10-speed automatic" },
       { value: "Continously Variable", label: "Continously Variable" },
-      {
-        value: "Semi Automatic/Dual Clutch",
-        label: "Semi Automatic/Dual Clutch",
+      { value: "Semi Automatic/Dual Clutch", label: "Semi Automatic/Dual Clutch",
       },
     ];
   };
@@ -273,6 +271,7 @@ class SelectOptionsService {
       { value: "Aqua", label: "Aqua" },
     ];
   };
+
 }
 
 export default new SelectOptionsService();
