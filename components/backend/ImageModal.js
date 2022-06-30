@@ -171,8 +171,9 @@ const ImageModal = ({ setOpenModal, setIdForImages, carData }) => {
                           align-items: center;
                         }
                         .card-img-top {
-                          -webkit-box-shadow: 5px 5px 15px 5px #333 !important; 
-                          box-shadow: 5px 5px 15px 5px #333 !important; 
+                          box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.75);
+                          -webkit-box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.75);
+                          -moz-box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.75); 
                         }
                         .modal-title {
                           font-weight: bold;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Table, Button, Card, Modal } from "react-bootstrap";
 import Image from "next/image";
+import GradBar from "../GradBar"
 
 const ImageModal = ({ handleClose, show, setImages, setCar }) => {
 
@@ -10,6 +11,7 @@ const ImageModal = ({ handleClose, show, setImages, setCar }) => {
           <Modal.Header closeButton>
             <Modal.Title>Used {setCar.year} {setCar.make} {setCar.model} - ${setCar.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Modal.Title>
           </Modal.Header>
+            <GradBar/>
           <Modal.Body>
             {setImages.map((image) => {
               return (
@@ -24,13 +26,14 @@ const ImageModal = ({ handleClose, show, setImages, setCar }) => {
               );
             })}
           </Modal.Body>
-          <Modal.Footer>
-          </Modal.Footer>
+          <GradBar/>
+          <Modal.Footer className="d-flex justify-content-center"><Image className="" src="/imgs/GAS-Text-Only-2-Color.png" height={56} width={216} alt="GasLogoTextOnly"/></Modal.Footer>
         </Modal>
         <style jsx global>{`
             .modal-body img {
-              -webkit-box-shadow: 5px 5px 15px 5px #333 !important; 
-              box-shadow: 5px 5px 15px 5px #333 !important; 
+              box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.75);
+              -webkit-box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.75);
+              -moz-box-shadow: 0px 0px 5px 3px rgba(0,0,0,0.75); 
             }
             .modal-body {
               
