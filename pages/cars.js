@@ -9,32 +9,12 @@ import styles from "../styles/page_styles/Cars.module.css";
 import GradBar from "../components/GradBar";
 import { GoDashboard } from "react-icons/go";
 import { GiCog } from "react-icons/gI";
-import { db } from "../firebaseConfig";
-import { collection, getDocs, query, orderBy } from "firebase/firestore";
 import { TbSteeringWheel } from "react-icons/tb";
+import CarDataService from "../services/cars.services"
 
 export async function getStaticProps(context) {
-  const carCollectionRef = collection(db, "Cars");
-  const cars = [];
-
-  try {
-    const getAllCarsQuery = query(
-      carCollectionRef,
-      orderBy("createdAt"),
-    );
-    const querySnapshot = await getDocs(getAllCarsQuery);
-    querySnapshot.forEach(
-      (doc) => {
-        cars.push({
-          ...doc.data(),
-          id: doc.id,
-          createdAt: doc.data().createdAt.toDate().getTime(),
-        });
-      },
-    );
-  } catch(err) {
-    console.log("Error getting static props in cars.js: ", err);
-  }
+  
+  const cars = await CarDataService.getAllListings();
   
   return {
     props: {

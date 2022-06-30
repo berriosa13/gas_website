@@ -10,6 +10,9 @@ import {
     doc,
     serverTimestamp, 
     deleteField,
+    query,
+    where,
+    orderBy
   } from "firebase/firestore";
 
 const carCollectionRef = collection(db, "Cars")
@@ -64,6 +67,54 @@ class CarDataService {
         } catch(err) {
             console.error("Error deleting thumbnail image ", err);
         }
+    }
+
+    getAllFeaturedListings = async () => {
+        const cars = [];
+      
+        try {
+          const getAllFeaturedListingsQuery = query(
+            carCollectionRef,
+            where('featuredListing', '==', 'Yes'),
+          );
+          const querySnapshot = await getDocs(getAllFeaturedListingsQuery);
+          querySnapshot.forEach(
+            (doc) => {
+              cars.push({
+                ...doc.data(),
+                id: doc.id,
+                createdAt: doc.data().createdAt.toDate().getTime(),
+              });
+            },
+          );
+        } catch(err) {
+          console.log("Error getting static props in cars.js: ", err);
+        }
+        return cars;
+    }
+
+    getAllListings = async () => {
+        const cars = [];
+      
+        try {
+          const getAllListingsQuery = query(
+            carCollectionRef,
+            orderBy("createdAt"),
+          );
+          const querySnapshot = await getDocs(getAllListingsQuery);
+          querySnapshot.forEach(
+            (doc) => {
+              cars.push({
+                ...doc.data(),
+                id: doc.id,
+                createdAt: doc.data().createdAt.toDate().getTime(),
+              });
+            },
+          );
+        } catch(err) {
+          console.log("Error getting static props in cars.js: ", err);
+        }
+        return cars;
     }
 }
 

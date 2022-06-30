@@ -47,8 +47,6 @@ export default function CarDetails() {
     };
     retrieveImages();
   }, [car.id]);
-
-  console.log("displayImages: ",displayImages);
   
   const showImageModal = () => {
     setImageModalOpen(true);
