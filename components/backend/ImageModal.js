@@ -10,6 +10,7 @@ import {
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AiOutlineDelete, AiOutlineStar, AiOutlineFileImage } from "react-icons/ai";
+import GradBar from "../GradBar"
 
 import {
   collection,
@@ -25,7 +26,7 @@ import { getStorage, ref, deleteObject } from "firebase/storage";
 import ImageDataService from "../../services/images.services";
 import CarDataService from "../../services/cars.services";
 
-const ImageModal = ({ setOpenModal, setIdForImages, carData }) => {
+const ImageModal = ({ setOpenImageModal, setIdForImages, carData }) => {
   const [images, setImages] = useState([]);
   const [currentCar, setCurrentCar] = useState([]);
   const storage = getStorage();
@@ -96,7 +97,7 @@ const ImageModal = ({ setOpenModal, setIdForImages, carData }) => {
 
   const setThumbnailImage = async (imageUrl, carId) => {
     // close modal
-    setOpenModal(false);
+    setOpenImageModal(false);
     try {
       await CarDataService.setThumbnailImage(carId, imageUrl);
     } catch(err) {
@@ -114,15 +115,16 @@ const ImageModal = ({ setOpenModal, setIdForImages, carData }) => {
         centered
         scrollable
         size="lg"
-        show={setOpenModal}
+        show={setOpenImageModal}
         onHide={() => {
-          setOpenModal(false);
+          setOpenImageModal(false);
           setIdForImages("");
         }}
       >
         <Modal.Header closeButton>
           <Modal.Title> <Image src="/imgs/GAS-Icon-Only-2-Color.png" height={93} width={148} alt="GasLogo"/>Images for {carData.make} {carData.model} {carData.year}</Modal.Title>
         </Modal.Header>
+        <GradBar/>
         <Modal.Body className="show-grid">
           <Container>
             <Row>
@@ -189,6 +191,7 @@ const ImageModal = ({ setOpenModal, setIdForImages, carData }) => {
             </Row>
           </Container>
         </Modal.Body>
+        <GradBar/>
         <Modal.Footer className="d-flex justify-content-center"><Image className="" src="/imgs/GAS-Text-Only-2-Color.png" height={56} width={216} alt="GasLogoTextOnly"/></Modal.Footer>
       </Modal>
     </>

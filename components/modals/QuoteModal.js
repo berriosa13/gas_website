@@ -23,8 +23,8 @@ const QuoteModal = ({ handleClose, show, setCar }) => {
         <GradBar />
         <Modal.Body className="d-flex justify-content-center flex-column align-items-center">
           <Row className="mb-3">
-            <Col>
-              <Card style={{ width: '18rem' }}>
+            <Col className="">
+              <Card style={{ width: '16rem' }}>
                
                   <Card.Title><h5 className="text-center my-2">Interested Vehicle</h5></Card.Title>
              

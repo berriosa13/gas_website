@@ -6,14 +6,16 @@ import AddDocument from "../components/backend/AddDocument";
 import CarsList from "../components/backend/CarList";
 import ImageModal from "../components/backend/ImageModal";
 import DeleteModal from "../components/backend/DeleteModal";
+import DescriptionModal from "../components/backend/DescriptionModal";
 
 function CarDashboard() {
 
     const { user, logout } = useAuth();
     const router = useRouter();
     const [carId, setCarId] = useState("");
-    const [modalOpen, setModalOpen] = useState(false);
+    const [imageModalOpen, setImageModalOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [descriptionModalOpen, setDescriptionModalOpen] = useState(false);
     const [carIdForImages, setCarIdForImages] = useState("");
     const [deleteId, setDeleteId] = useState("");
     
@@ -27,17 +29,20 @@ function CarDashboard() {
     // setImageId(id);
   };
 
-  const getModalOpenHandler = (isModalOpen) => {
-    console.log("Modal is set to :", isModalOpen);
-    // console.log("carId is set to :", id);
-    setModalOpen(isModalOpen);
+  const getImageModalOpenHandler = (isImageModalOpen) => {
+    console.log("Image Modal is set to :", isImageModalOpen);
+    setImageModalOpen(isImageModalOpen);
   };
 
   const getDeleteModalOpenHandler = (isDeleteModalOpen) => {
     console.log("Delete Modal is set to :", isDeleteModalOpen);
-    // console.log("carId is set to :", id);
     setDeleteModalOpen(isDeleteModalOpen);
   };
+
+  const getDescriptionModalOpenHandler = (IsDescriptionModalOpen) => {
+    console.log("Description Modal is set to :", IsDescriptionModalOpen);
+    setDescriptionModalOpen(IsDescriptionModalOpen);
+  }
 
   const getIndividualCarDataHandler = (carData) => {
     console.log("carData for image modal is :", carData);
@@ -72,9 +77,11 @@ function CarDashboard() {
         </Navbar>
     
 
-        {modalOpen && <ImageModal setOpenModal={setModalOpen} setIdForImages={setCarIdForImages} carData={carIdForImages}/>}
-
+        {imageModalOpen && <ImageModal setOpenImageModal={setImageModalOpen} setIdForImages={setCarIdForImages} carData={carIdForImages}/>}
         {deleteModalOpen && <DeleteModal setOpenDeleteModal={setDeleteModalOpen} getDeleteId={deleteId} />}
+        {descriptionModalOpen && <DescriptionModal setOpenDescriptionModal={setDescriptionModalOpen} setCarData={carIdForImages} />}{deleteModalOpen && <DeleteModal setOpenDeleteModal={setDeleteModalOpen} getDeleteId={deleteId} />}
+
+
         <Container className="w-80">
           <Row className="justify-content-center mx-3">
               <AddDocument carId={carId} setCarId={setCarId}/>
@@ -86,10 +93,11 @@ function CarDashboard() {
               <CarsList 
               getCarId={getCarIdHandler} 
               getImageId={getImageIdHandler}
-              getIsModalOpen={getModalOpenHandler}
+              getIsImageModalOpen={getImageModalOpenHandler}
               getIndividualCarData={getIndividualCarDataHandler}
               getIsDeleteModalOpen={getDeleteModalOpenHandler}
               getIdForDeletion={getIdForDeletionHandler}
+              getIsDescriptionModalOpen={getDescriptionModalOpenHandler}
               />
             </Col>
           </Row>

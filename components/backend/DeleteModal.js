@@ -6,6 +6,7 @@ import ImageDataService from "../../services/images.services";
 import CarDataService from "../../services/cars.services";
 import { FiTrash2 } from "react-icons/fi"; 
 import Image from 'next/image';
+import GradBar from "../GradBar"
 
     const DeleteModal = ({ setOpenDeleteModal, getDeleteId }) => {
 
@@ -64,6 +65,7 @@ import Image from 'next/image';
               Delete Listing Confirmation <FiTrash2 />
             </Modal.Title>
           </Modal.Header>
+            <GradBar/>
           <Modal.Body>
             <div className="d-flex justify-content-center align-items-center flex-column">
               <h1>Are you sure?</h1>
@@ -91,6 +93,7 @@ import Image from 'next/image';
               </div>
             </div>
           </Modal.Body>
+          <GradBar/>
           <Modal.Footer className="d-flex justify-content-center">
             <Image
               className=""
