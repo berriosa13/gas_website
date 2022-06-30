@@ -234,13 +234,13 @@ class SelectOptionsService {
 
   getCarEngineOptions = () => {
     return [
-      { value: "2-Cylinder", label: "2-Cylinder" },
-      { value: "3-Cylinder", label: "3-Cylinder" },
-      { value: "4-Cylinder", label: "4-Cylinder" },
-      { value: "5-Cylinder", label: "5-Cylinder" },
-      { value: "6-Cylinder", label: "6-Cylinder" },
-      { value: "8-Cylinder", label: "8-Cylinder" },
-      { value: "12-Cylinder", label: "12-Cylinder" },
+      { value: "2-Cyl", label: "2-Cyl" },
+      { value: "3-Cyl", label: "3-Cyl" },
+      { value: "4-Cyl", label: "4-Cyl" },
+      { value: "5-Cyl", label: "5-Cyl" },
+      { value: "6-Cyl", label: "6-Cyl" },
+      { value: "8-Cyl", label: "8-Cyl" },
+      { value: "12-Cyl", label: "12-Cyl" },
     ];
   };
 
@@ -269,6 +269,13 @@ class SelectOptionsService {
       { value: "Blue", label: "Blue" },
       { value: "Teal", label: "Teal" },
       { value: "Aqua", label: "Aqua" },
+    ];
+  };
+
+  getFeaturedListingOptions = () => {
+    return [
+      { value: "Yes", label: "Yes"},
+      { value: "No", label: "No"},
     ];
   };
 
