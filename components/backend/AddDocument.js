@@ -4,7 +4,7 @@ import Select from "react-select";
 import CreatableSelect from "react-select/creatable";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import CurrencyInput from "react-currency-input-field";
+import CurrencyInput from "react-currency-input-field";
 import CarDataService from "../../services/cars.services";
 import ImageDataService from "../../services/images.services";
 import SelectOptionsService from "../../services/options.services";
@@ -28,7 +28,7 @@ const AddDocument = ({ carId, setCarId }) => {
   const [transmission, setTransmission] = useState("");
   const [engine, setEngine] = useState("");
   const [doors, setDoors] = useState("");
-  const [interiorColor, setInteriorColor] = useState(null);
+  const [interiorColor, setInteriorColor] = useState("");
   const [exteriorColor, setExteriorColor] = useState("");
   const [year, setYear] = useState("");
   const [description, setDescription] = useState("");
@@ -38,7 +38,7 @@ const AddDocument = ({ carId, setCarId }) => {
   const descriptionInputRef = React.useRef();
   const [imageForeignId, setImageForeignId] = useState("");
   const [imageStorageName, setImageStorageName] = useState([]);
-  // const imageStorageName = [];
+  const [featuredListing, setFeaturedListing] = useState("");
   const [uploading, setUploading] = useState(false);
   const storage = getStorage();
 
@@ -57,17 +57,7 @@ const AddDocument = ({ carId, setCarId }) => {
   const carEngineOptions = SelectOptionsService.getCarEngineOptions();
   const carDoorOptions = SelectOptionsService.getCarDoorOptions();
   const carColorsOptions = SelectOptionsService.getCarColorOptions();
-
-  // const handleCarMakeChange = useCallback((inputValue) => setCarMakeValue(inputValue), []);
-
-  // const handleCarMakeCreate = useCallback(
-  //   (inputValue) => {
-  //     const newCarMakeOption = { value: inputValue.toLowerCase(), label: inputValue };
-  //     setCarMakeOptions([...carMakeOptions, newCarMakeOption]);
-  //     setCarMakeValue(newCarMakeOption);
-  //   },
-  //   [carMakeOptions]
-  // )
+  const featuredListingOptions = SelectOptionsService.getFeaturedListingOptions();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -85,7 +75,8 @@ const AddDocument = ({ carId, setCarId }) => {
       doors === "" ||
       interiorColor === "" ||
       exteriorColor === "" ||
-      description === ""
+      description === "" ||
+      featuredListing === ""
     ) {
       toast.error("All fields must be filled out!");
       return;
@@ -105,6 +96,7 @@ const AddDocument = ({ carId, setCarId }) => {
       interiorColor,
       exteriorColor,
       description,
+      featuredListing,
     };
 
     const newImage = { imageForeignId, imageStorageName, imageUrl };
@@ -154,6 +146,7 @@ const AddDocument = ({ carId, setCarId }) => {
     setImages("");
     setImageForeignId("");
     setImageStorageName("")
+    setFeaturedListing("");
     imageInputRef.current.value = "";
     descriptionInputRef.current.value = "";
   };
@@ -243,6 +236,7 @@ const AddDocument = ({ carId, setCarId }) => {
       setInteriorColor(carDocSnap.data().interiorColor);
       setExteriorColor(carDocSnap.data().exteriorColor);
       setDescription(carDocSnap.data().description);
+      setFeaturedListing(carDocSnap.data().featuredListing);
       descriptionInputRef.current.value = carDocSnap.data().description;
       toast.info(
         "To edit listing, change any of the fields and click 'Add/Update'"
@@ -292,7 +286,7 @@ const AddDocument = ({ carId, setCarId }) => {
               <Form.Label><strong>Model:</strong></Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Ex. Pontiac, Traverse..."
+                    placeholder=""
                     value={model}
                     onChange={(e) => setModel(e.target.value)}
                   />
@@ -303,7 +297,7 @@ const AddDocument = ({ carId, setCarId }) => {
                 <Form.Label><strong>Mileage:</strong></Form.Label>
                   <Form.Control
                     type="number"
-                    placeholder="Enter mileage #"
+                    placeholder="#"
                     value={mileage}
                     onChange={(e) => setMileage(e.target.value)}
                   />
@@ -314,29 +308,22 @@ const AddDocument = ({ carId, setCarId }) => {
             <Col md={4}>
               <Form.Group className="mb-3" controlId="formCarPrice">
                 <Form.Label><strong>Price:</strong></Form.Label>
-                  {/* <CurrencyInput
+                  <CurrencyInput
                   className="form-control"
-                  placeholder="Please enter a number"
-                  defaultValue={price}
+                  placeholder="$"
+                  value={price}
                   decimalsLimit={2}
                   prefix="$"
-                  onValueChange={(value, name) => setPrice(value)}
-                />             */}
-                  <Form.Control
-                    type="number"
-                    placeholder="Enter a dollar amount"
-                    prefix="$"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                  />
+                  onValueChange={(value) => setPrice(value)}
+                />            
               </Form.Group>
             </Col>
             <Col md={4}>
               <Form.Group className="mb-3" controlId="formCarVin">
-                <Form.Label><strong>Vin #:</strong></Form.Label>
+                <Form.Label><strong>Vin:</strong></Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Vehicles unique ID"
+                    placeholder="#"
                     value={vin}
                     onChange={(e) => setVin(e.target.value)}
                   />
@@ -353,7 +340,6 @@ const AddDocument = ({ carId, setCarId }) => {
                     onChange={(e) => {
                       setYear(e.value);
                     }}
-                    defaultValue='Hi'
                   ></Select>
               </Form.Group>
             </Col>
@@ -424,9 +410,6 @@ const AddDocument = ({ carId, setCarId }) => {
                     className="w-100"
                     value={{ value: interiorColor, label: interiorColor }}
                     placeholder="Select Color"
-                    // // value={interiorColor.color}
-                    // value={{value: interiorColor.color, label: interiorColor.color}}
-                    // defaultValue={interiorColor.color}
                     type="text"
                     options={carColorsOptions}
                     onChange={(e) => {
@@ -442,7 +425,6 @@ const AddDocument = ({ carId, setCarId }) => {
                     className="w-100"
                     value={{ value: exteriorColor, label: exteriorColor }}
                     options={carColorsOptions}
-                    
                     onChange={(e) => {
                       setExteriorColor(e.value);
                     }}
@@ -478,6 +460,17 @@ const AddDocument = ({ carId, setCarId }) => {
                   onChange={handleImageFileChange}
                   ref={imageInputRef}
                 />
+              </Form.Group>
+              <Form.Group className="mb-3">
+               <Form.Label><strong>Featured Listing?</strong></Form.Label>
+                <Select
+                    className="w-100"
+                    value={{ value: featuredListing, label: featuredListing }}
+                    options={featuredListingOptions}
+                    onChange={(e) => {
+                      setFeaturedListing(e.value);
+                    }}
+                  ></Select>
               </Form.Group>
               <div className="d-grid gap-2 mt-5">
                 <Button variant="primary" type="Submit" disabled={uploading}>
