@@ -1,6 +1,7 @@
 import { AuthProvider } from "../contexts/AuthContext";
 import { useRouter } from 'next/router';
 import { useEffect } from 'react'
+import { FormspreeProvider } from '@formspree/react';
 import PrivateRoute from '../components/PrivateRoute';
 import '../styles/globals.css';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -19,14 +20,17 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <AuthProvider>
-      {noAuthRequired.includes(router.pathname) ? ( 
-          getLayout(<Component {...pageProps} />)
-      ) : (
-        <PrivateRoute>
-          <Component {...pageProps} />
-        </PrivateRoute>
-      )}
-    </AuthProvider>
+        {noAuthRequired.includes(router.pathname) ? ( 
+          getLayout(
+              <FormspreeProvider project={process.env.NEXT_PUBLIC_FORMSPREE_PROJECT_ID}> 
+                <Component {...pageProps}/>
+              </FormspreeProvider>)
+        ) : (
+          <PrivateRoute>
+            <Component {...pageProps} />
+          </PrivateRoute>
+        )}
+      </AuthProvider>
   );
 }
 
