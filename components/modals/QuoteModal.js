@@ -21,13 +21,11 @@ const QuoteModal = ({ handleClose, show, setCar }) => {
           <Modal.Title>Request A Quote</Modal.Title>
         </Modal.Header>
         <GradBar />
-        <Modal.Body className="d-flex justify-content-center flex-column align-items-center">
+        <Modal.Body>
           <Row className="mb-3">
             <Col className="">
-              <Card style={{ width: '16rem' }}>
-               
+              <Card>
                   <Card.Title><h5 className="text-center my-2">Interested Vehicle</h5></Card.Title>
-             
                 <Card.Img variant="top" src={setCar.thumbnailImage} />
               </Card>
             </Col>

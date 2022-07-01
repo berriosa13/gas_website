@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Modal, Row, Col, ListGroup } from "react-bootstrap";
+import { Card, Modal, Row, Col, ListGroup, Container } from "react-bootstrap";
 import GradBar from "../GradBar";
 import Image from "next/image";
 import AvailabilityForm from "../forms/AvailabilityForm"
@@ -12,7 +12,6 @@ const AvailabilityModal = ({ handleClose, show, setCar }) => {
         scrollable
         size="lg"
         backdrop="static"
-        className=""
         show={show}
         onHide={handleClose}
         centered
@@ -21,13 +20,11 @@ const AvailabilityModal = ({ handleClose, show, setCar }) => {
           <Modal.Title>Confirm Availibility</Modal.Title>
         </Modal.Header>
         <GradBar />
-        <Modal.Body className="d-flex justify-content-center flex-column align-items-center">
-          <Row className="mb-3">
+        <Modal.Body>
+          <Row className="m-3">
             <Col>
-              <Card style={{ width: '18rem' }}>
-               
+              <Card>
                   <Card.Title><h5 className="text-center my-2">Interested Vehicle</h5></Card.Title>
-             
                 <Card.Img variant="top" src={setCar.thumbnailImage} />
               </Card>
             </Col>
@@ -70,7 +67,7 @@ const AvailabilityModal = ({ handleClose, show, setCar }) => {
         <GradBar />
         <Modal.Footer className="d-flex justify-content-center">
           <Image
-            className=""
+            priority="true"
             src="/imgs/GAS-Text-Only-2-Color.png"
             height={56}
             width={216}
@@ -88,6 +85,7 @@ const AvailabilityModal = ({ handleClose, show, setCar }) => {
           }
         `}</style>
       </Modal>
+    
     </>
     );
 };

@@ -1,4 +1,5 @@
-/** @type {import('next').NextConfig} */
+const withPWA = require('next-pwa');
+
 const nextConfig = {
   reactStrictMode: true,
   images: { domains: ['firebasestorage.googleapis.com'], },
@@ -12,4 +13,13 @@ const nextConfig = {
   
 }
 
-module.exports = nextConfig
+module.exports = withPWA({
+  pwa: { 
+    dest: "public",
+    register: true,
+    skipWaiting: true,
+    disable: process.env.NODE_ENV !== "development"
+  },
+  nextConfig
+})
+  

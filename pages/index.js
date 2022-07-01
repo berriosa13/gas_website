@@ -14,7 +14,6 @@ import React from "react";
 
 export async function getStaticProps(context) {
   const featuredListings = await CarDataService.getAllFeaturedListings();
-
   return {
     props: {
       featuredListings,

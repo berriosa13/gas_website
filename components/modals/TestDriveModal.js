@@ -21,13 +21,11 @@ const TestDriveModal = ({ handleClose, show, setCar }) => {
           <Modal.Title>Schedule A Test Drive</Modal.Title>
         </Modal.Header>
         <GradBar />
-        <Modal.Body className="d-flex justify-content-center flex-column align-items-center">
+        <Modal.Body>
           <Row className="mb-3">
             <Col>
-              <Card style={{ width: '18rem' }}>
-               
+              <Card>
                   <Card.Title><h5 className="text-center my-2">Interested Vehicle</h5></Card.Title>
-             
                 <Card.Img variant="top" src={setCar.thumbnailImage} />
               </Card>
             </Col>

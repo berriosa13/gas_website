@@ -33,6 +33,7 @@ function AvailabilityForm( { setCar }) {
                 className="form-control"
                 name="firstName"
                 id="firstName"
+                autoFocus
                 required
               />
             </FloatingLabel>

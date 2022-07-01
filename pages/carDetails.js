@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import Layout from '../components/Layout'
@@ -115,11 +115,10 @@ export default function CarDetails() {
             
       <main>
         <section className={styles.featured_places}>
-
           <div className="container mt-5">
             <div className="row">
               <section id="photoArray">
-              <div><Image priority="true" layout="responsive" width="600" height="438" alt="thumbnailImage" src={car.thumbnailImage}/></div>
+              <div><Image layout="responsive" width="600" height="438" alt="thumbnailImage" src={car.thumbnailImage}/></div>
                 {displayImages.map((displayImage) => {
                   return(
                     <div key={displayImage.id}>
@@ -131,7 +130,7 @@ export default function CarDetails() {
                         height="215"
                         alt="displayImages"
                       />
-                      </div>
+                    </div>
                     );
                   })}
                 <style jsx>{`
