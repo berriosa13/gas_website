@@ -134,13 +134,13 @@ const Footer = () => {
                     </li>
                     <li>
                       <FaPhoneAlt />
-                      <Link href="/">
-                        <a>+1 333 4040 5566</a>
+                      <Link href="tel:570-800-1208">
+                        <a>(570)-800-1208)</a>
                       </Link>
                     </li>
                     <li>
                       <MdEmail />
-                      <Link href="/">
+                      <Link href="mailto:info@gasautomobilesales.com">
                         <a>info@gasautomobilesales.com</a>
                       </Link>
                     </li>
