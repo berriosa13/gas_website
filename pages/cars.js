@@ -8,7 +8,7 @@ import { Row, Col, Button, Breadcrumb } from "react-bootstrap";
 import styles from "../styles/page_styles/Cars.module.css";
 import GradBar from "../components/GradBar";
 import { GoDashboard } from "react-icons/go";
-import { GiCog } from "react-icons/gI";
+import { GiCog } from "react-icons/gi";
 import { TbSteeringWheel } from "react-icons/tb";
 import CarDataService from "../services/cars.services"
 

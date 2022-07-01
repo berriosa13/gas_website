@@ -6,7 +6,7 @@ import styles from "../styles/page_styles/Home.module.css";
 import carStyles from "../styles/page_styles/Cars.module.css";
 import GradBar from "../components/GradBar";
 import { GoDashboard } from "react-icons/go";
-import { GiCog } from "react-icons/gI";
+import { GiCog } from "react-icons/gi";
 import { TbSteeringWheel } from "react-icons/tb";
 import { Row, Col, Button } from "react-bootstrap";
 import CarDataService from "../services/cars.services";
