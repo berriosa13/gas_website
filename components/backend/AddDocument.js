@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Form, InputGroup, Button, Row, Col, FloatingLabel } from "react-bootstrap";
 import Select from "react-select";
-import CreatableSelect from "react-select/creatable";
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CurrencyInput from "react-currency-input-field";
 import CarDataService from "../../services/cars.services";
 import ImageDataService from "../../services/images.services";
 import SelectOptionsService from "../../services/options.services";
@@ -50,7 +48,6 @@ const AddDocument = ({ carId, setCarId }) => {
   };
 
   const [carMakeOptions, setCarMakeOptions] = useState(SelectOptionsService.getCarMakeOptions)
-  const [carMakeValue, setCarMakeValue] = useState("");
   const carYearOptions = SelectOptionsService.getCarYearOptions();
   const carDrivetrainOptions = SelectOptionsService.getCarDrivetrainOptions();
   const carTransmissionOptions = SelectOptionsService.getCarTransmissionOptions();
@@ -308,14 +305,12 @@ const AddDocument = ({ carId, setCarId }) => {
             <Col md={4}>
               <Form.Group className="mb-3" controlId="formCarPrice">
                 <Form.Label><strong>Price:</strong></Form.Label>
-                  <CurrencyInput
-                  className="form-control"
-                  placeholder="$"
-                  value={price}
-                  decimalsLimit={2}
-                  prefix="$"
-                  onValueChange={(value) => setPrice(value)}
-                />            
+                  <Form.Control
+                      type="text"
+                      placeholder="$"
+                      value={price}
+                      onChange={(e) => setPrice(e.target.value)}
+                  />
               </Form.Group>
             </Col>
             <Col md={4}>
@@ -441,7 +436,7 @@ const AddDocument = ({ carId, setCarId }) => {
                 <Form.Control
                   as="textarea"
                   placeholder="Vehicle Description"
-                  style={{ height: "300px" }}
+                  style={{ height: "150px" }}
                   onChange={(e) => {
                     setDescription(e.target.value);
                   }}

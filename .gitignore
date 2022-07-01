@@ -40,4 +40,4 @@ yarn-error.log*
 **/public/worker-*.js.map 
 
 # firebase
-.firebasesrc
+/firebasesrc
