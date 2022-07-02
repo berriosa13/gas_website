@@ -1,14 +1,5 @@
-const withPWA = require('next-pwa');
-const runtimeCaching = require('next-pwa/cache')
 
-module.exports = withPWA({
-  pwa: { 
-    dest: "public",
-    register: true,
-    skipWaiting: true,
-    disable: process.env.NODE_ENV !== "development",
-    runtimeCaching
-  },
+const nextConfig = ({
   reactStrictMode: true,
     images: { domains: ['firebasestorage.googleapis.com'], },
   
@@ -19,3 +10,5 @@ module.exports = withPWA({
       },
     ],
 })
+
+module.exports = nextConfig;
