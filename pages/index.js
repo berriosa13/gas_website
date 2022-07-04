@@ -22,7 +22,6 @@ export async function getStaticProps(context) {
 }
 
 export default function Home({ featuredListings }) {
-  console.log("featuredListings: ", featuredListings);
   return (
     <>
       <Head>

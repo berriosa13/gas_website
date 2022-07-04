@@ -1,22 +1,35 @@
 {
-    "name": "Gas Automobile Sales",
-    "short_name": "G.A.S",
+    "name": "Guardian Automobile Sales",
+    "short_name": "GAS",
+    "theme_color": "#ffffff",
+    "background_color": "#004740",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/",
     "icons": [
       {
-        "src": "/icon-192x192.png",
+        "src": "icons/icon-192x192.png",
         "sizes": "192x192",
         "type": "image/png"
       },
-  
       {
-        "src": "/icon-512x512.png",
+        "src": "icons/icon-512x512.png",
         "sizes": "512x512",
         "type": "image/png"
+      },
+      {
+        "src": "icons/maskable_icon_x192.png",
+        "sizes": "192x192",
+        "type": "image/png",
+        "purpose": "maskable"
+      },
+      {
+        "src": "icons/maskable_icon_x512.png",
+        "sizes": "512x512",
+        "type": "image/png",
+        "purpose": "maskable"
       }
     ],
-    "theme_color": "#FFFFFF",
-    "background_color": "#FFFFFF",
-    "start_url": "/",
-    "display": "standalone",
-    "orientation": "portrait"
+    "splash_pages": null
   }
