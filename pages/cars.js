@@ -162,7 +162,7 @@ export default function Cars({ cars }) {
 
         <section className={styles.featured_places}>
           <Row>
-          {carsToRender.size > 1 ? (
+          {cars ? (
                     carsToRender.map((car) => {
                       return (
                         <Col className="mb-3" key={car.id} md={4} sm={6} xs={12}>

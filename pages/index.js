@@ -23,6 +23,7 @@ export async function getStaticProps(context) {
 }
 
 export default function Home({ featuredListings }) {
+  console.log(featuredListings)
   return (
     <>
       <Head>
@@ -188,7 +189,7 @@ export default function Home({ featuredListings }) {
             <GradBar />
           </h1>
           <Row>
-          {featuredListings.size > 1 ? (
+          {featuredListings.length != 0 ? (
                     featuredListings.map((car) => {
                       return (
                         <Col className="mb-3" key={car.id} md={4} sm={6} xs={12}>
