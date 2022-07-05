@@ -11,6 +11,7 @@ import { GoDashboard } from "react-icons/go";
 import { GiCog } from "react-icons/gi";
 import { TbSteeringWheel } from "react-icons/tb";
 import CarDataService from "../services/cars.services"
+import { AiOutlineFrown } from "react-icons/ai";
 
 export async function getStaticProps(context) {
 
@@ -161,8 +162,7 @@ export default function Cars({ cars }) {
 
         <section className={styles.featured_places}>
           <Row>
-          {carsToRender ? 
-                  (
+          {carsToRender.size > 1 ? (
                     carsToRender.map((car) => {
                       return (
                         <Col className="mb-3" key={car.id} md={4} sm={6} xs={12}>

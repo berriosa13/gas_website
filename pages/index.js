@@ -10,6 +10,7 @@ import { GiCog } from "react-icons/gi";
 import { TbSteeringWheel } from "react-icons/tb";
 import { Row, Col, Button } from "react-bootstrap";
 import CarDataService from "../services/cars.services";
+import { AiOutlineFrown } from "react-icons/ai";
 import React from "react";
 
 export async function getStaticProps(context) {
@@ -187,75 +188,91 @@ export default function Home({ featuredListings }) {
             <GradBar />
           </h1>
           <Row>
-            {featuredListings.map((car) => {
-              return (
-                <Col className="mb-3" key={car.id} md={4} sm={6} xs={12}>
-                  <div className={carStyles.featured_item}>
-                    <div className={carStyles.thumb}>
-                      <div className={carStyles.thumb_img}>
-                        {car.thumbnailImage != null ? (
-                          <Image
-                            priority="true"
-                            src={car.thumbnailImage}
-                            layout="responsive"
-                            alt="thumbnail image"
-                            width={450}
-                            height={300}
-                          />
-                        ) : (
-                          <h2>Image Coming Soon...</h2>
-                        )}
+          {featuredListings.size > 1 ? (
+                    featuredListings.map((car) => {
+                      return (
+                        <Col className="mb-3" key={car.id} md={4} sm={6} xs={12}>
+                          <div className={carStyles.featured_item}>
+                            <div className={carStyles.thumb}>
+                              <div className={carStyles.thumb_img}>
+                                {car.thumbnailImage != null ? (
+                                  <Image
+                                    priority="true"
+                                    src={car.thumbnailImage}
+                                    layout="responsive"
+                                    alt="thumbnail image"
+                                    width={450}
+                                    height={300}
+                                  />
+                                ) : (
+                                  <h2>Image Coming Soon...</h2>
+                                )}
+                              </div>
+                              <div className={carStyles.overlay_content}>
+                                <strong>
+                                  <GoDashboard />{" "}
+                                  {car.mileage
+                                    .toString()
+                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                </strong>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <strong>
+                                  <TbSteeringWheel /> {car.drivetrain}
+                                </strong>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <strong>
+                                  <GiCog /> {car.transmission}
+                                </strong>
+                              </div>
+                            </div>
+                            <div className={carStyles.down_content}>
+                              <h4>
+                                Used {car.year} {car.make} {car.model}
+                              </h4>
+        
+                              <br />
+        
+                              <p>
+                                <span>
+                                  <strong>
+                                    <sup>$</sup>
+                                    {car.price
+                                      .toString()
+                                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                  </strong>
+                                </span>
+                              </p>
+        
+                              <div className={carStyles.text_button}>
+                                <Link
+                                  href={{
+                                    pathname: "/carDetails",
+                                    query: car,
+                                  }}
+                                >
+                                  <a>View More</a>
+                                </Link>
+                              </div>
+                            </div>
+                          </div>
+                        </Col>
+                      );
+                    })           
+                  )
+                  :
+                  (
+                    <>
+                      <div className="d-flex justify-content-center align-items-center flex-column">
+                        <strong><h3 className="m-3">No featured listings at this time <AiOutlineFrown/></h3></strong>
+                        <div className="m-3">
+                          <h3 className="">Click below to see our current selection of vehicles</h3> 
+                        </div>
+                          <Link a href="/cars"><Button className="mt-3">View Inventory</Button></Link>
                       </div>
-                      <div className={carStyles.overlay_content}>
-                        <strong>
-                          <GoDashboard />{" "}
-                          {car.mileage
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                        </strong>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>
-                          <TbSteeringWheel /> {car.drivetrain}
-                        </strong>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>
-                          <GiCog /> {car.transmission}
-                        </strong>
-                      </div>
-                    </div>
-                    <div className={carStyles.down_content}>
-                      <h4>
-                        Used {car.year} {car.make} {car.model}
-                      </h4>
+                    </>
+                  )
+                }
 
-                      <br />
-
-                      <p>
-                        <span>
-                          <strong>
-                            <sup>$</sup>
-                            {car.price
-                              .toString()
-                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                          </strong>
-                        </span>
-                      </p>
-
-                      <div className={carStyles.text_button}>
-                        <Link
-                          href={{
-                            pathname: "/carDetails",
-                            query: car,
-                          }}
-                        >
-                          <a>View More</a>
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-              );
-            })}
             <style jsx>{`
               strong sup {
                 color: var(--main-color);

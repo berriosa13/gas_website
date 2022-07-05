@@ -16,7 +16,7 @@ import GradBar from "../GradBar"
         // First delete image files from storage
         try {
           await ImageDataService.deleteImageStorageById(id);
-          toast.success("Images successfully removed from storage");
+          // toast.success("Images successfully removed from storage");
         } catch(e) {
            toast.error("Error attempting to remove images from storage", e);
            isSuccessful = false; 
@@ -24,7 +24,7 @@ import GradBar from "../GradBar"
         // Second, delete imageDoc(s) from collection that contain carDocId
         try {
           await ImageDataService.deleteImageDocs(id);
-          toast.success("imageDoc(s) successfully removed from collection");
+          // toast.success("imageDoc(s) successfully removed from collection");
         } catch(e) {
           toast.error("Error attempting to remove imageDoc from collection", e);
           isSuccessful = false;
@@ -32,7 +32,7 @@ import GradBar from "../GradBar"
         // Finally, delete carDoc from collection
         try {
           await CarDataService.deleteCar(id);  
-          toast.success("carDoc successfully removed from collection");
+          // toast.success("carDoc successfully removed from collection");
         } catch(e) {
           toast.error("Error attempting to remove carDoc from collection", e);
           isSuccessful = false;
