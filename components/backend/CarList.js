@@ -56,14 +56,7 @@ const CarsList = ({
   // create new instance with createdAt field modified for viewing
   const newCars = cars.map((car) => ({
     id: car.id,
-    createdAt: new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    }).format(car.createdAt),
+    createdAt: new Date(car.createdAt.seconds * 1000 + car.createdAt.nanoseconds / 1000000, ),
     make: car.make,
     mileage: car.mileage,
     model: car.model,
@@ -80,6 +73,7 @@ const CarsList = ({
     description: car.description,
     featuredListing: car.featuredListing,
   }));
+  console.log("newCars: ", newCars);
 
   return (
     <>
@@ -129,7 +123,8 @@ const CarsList = ({
                   <td>
                     Interior <BsArrowRightShort/> {doc.interiorColor} <br /> Exterior <BsArrowRightShort/> {doc.exteriorColor}
                   </td>
-                  <td>{doc.createdAt}</td>
+                  <td>{doc.createdAt.toDateString()} {doc.createdAt.toLocaleTimeString()}</td>
+                  
                   <td>{doc.featuredListing}</td>
                   <td>
                   {['View'].map((placement) => (

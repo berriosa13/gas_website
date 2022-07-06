@@ -1,22 +1,39 @@
-import React from 'react';
-import { useForm, ValidationError } from '@formspree/react';
+import React from "react";
+import { useForm, ValidationError } from "@formspree/react";
 import { FiSend } from "react-icons/fi";
 import { HiBadgeCheck } from "react-icons/hi";
-import { Table, Button, Card, Modal, Row, Col, Form, FloatingLabel } from "react-bootstrap";
+import {
+  Table,
+  Button,
+  Card,
+  Modal,
+  Row,
+  Col,
+  Form,
+  FloatingLabel,
+} from "react-bootstrap";
 import { useRouter } from "next/router";
 
-
-function AvailabilityForm( { setCar }) {
+function AvailabilityForm({ setCar }) {
   const [state, handleSubmit] = useForm("availabilityForm");
   const router = useRouter();
-  const defaultMessageText = "Hello, I am confirming availability for the " + setCar.year + " " + setCar.make + " " + setCar.model;
+  const defaultMessageText =
+    "Hello, I am confirming availability for the " +
+    setCar.year +
+    " " +
+    setCar.make +
+    " " +
+    setCar.model;
 
   if (state.succeeded) {
-      return (
-        <>
-            <h5 className="text-center mt-3">Your availability confirmation has been successfully sent <HiBadgeCheck/> <br/> We will get back to you as soon as possible</h5>
-        </>
-      )
+    return (
+      <>
+        <h5 className="text-center mt-3">
+          Your availability confirmation has been successfully sent{" "}
+          <HiBadgeCheck /> <br /> We will get back to you as soon as possible
+        </h5>
+      </>
+    );
   }
   return (
     <>
@@ -28,7 +45,7 @@ function AvailabilityForm( { setCar }) {
               label="First Name"
               className="mb-3"
             >
-                <input
+              <input
                 type="text"
                 className="form-control"
                 name="firstName"
@@ -50,7 +67,7 @@ function AvailabilityForm( { setCar }) {
                 name="lastName"
                 id="lastName"
                 required
-                />
+              />
             </FloatingLabel>
           </Col>
           <Col md={4}>
@@ -65,7 +82,7 @@ function AvailabilityForm( { setCar }) {
                 name="phone"
                 id="phone"
                 required
-                />
+              />
             </FloatingLabel>
           </Col>
         </Row>
@@ -82,21 +99,27 @@ function AvailabilityForm( { setCar }) {
                 name="email"
                 id="email"
                 required
-                />
+              />
             </FloatingLabel>
           </Col>
           <Col md={6}>
-            <FloatingLabel
-              controlId="floatingSelect"
-              label="Contact Preference"
-            >
-              <select className="form-control" name="contactPreference" aria-label="Contact preference select label">
-                <option>Select...</option>
-                <option value="email">Email</option>
-                <option value="phone">Phone</option>
-                <option value="text-message">SMS</option>
-              </select>
-            </FloatingLabel>
+            <div className="mb-3">
+              <FloatingLabel
+                controlId="floatingSelect"
+                label="Contact Preference"
+              >
+                <select
+                  className="form-control"
+                  name="contactPreference"
+                  aria-label="Contact preference select label"
+                >
+                  <option>Select...</option>
+                  <option value="email">Email</option>
+                  <option value="phone">Phone</option>
+                  <option value="text-message">SMS</option>
+                </select>
+              </FloatingLabel>
+            </div>
           </Col>
         </Row>
         <Row>
@@ -104,13 +127,13 @@ function AvailabilityForm( { setCar }) {
             <div className="form-group mb-3" controlId="formContactPreference">
               <FloatingLabel controlId="description" label="Comments">
                 <input
-                type="text"
-                as="textarea"
-                className="form-control"
-                name="comments"
-                comments
-                defaultValue={defaultMessageText}
-                required
+                  type="text"
+                  as="textarea"
+                  className="form-control"
+                  name="comments"
+                  comments
+                  defaultValue={defaultMessageText}
+                  required
                 />
               </FloatingLabel>
             </div>
@@ -118,7 +141,15 @@ function AvailabilityForm( { setCar }) {
         </Row>
         <Row className="m-3">
           <Col>
-            <p className="">By clicking SEND, I consent to be contacted by <em>Guardian Automobile Sales</em> at any phone number or email I provide, including, without limitation, communications sent via text message to my cell phone or communications sent using an autodialer or prerecorded message. This acknowledgment constitutes my written consent to receive such communications. I have read and agree to the Privacy Policy of <em>Guardian Automobile Sales</em>.</p>
+            <p className="">
+              By clicking SEND, I consent to be contacted by{" "}
+              <em>Guardian Automobile Sales</em> at any phone number or email I
+              provide, including, without limitation, communications sent via
+              text message to my cell phone or communications sent using an
+              autodialer or prerecorded message. This acknowledgment constitutes
+              my written consent to receive such communications. I have read and
+              agree to the Privacy Policy of <em>Guardian Automobile Sales</em>.
+            </p>
           </Col>
         </Row>
         <Row className="text-center m-3">

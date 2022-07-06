@@ -31,8 +31,8 @@ export default function Home({ featuredListings }) {
         <meta name="keywords" content="cars" />
       </Head>
 
-      <section className="mb-3">
-        <Row>
+      <section>
+        <Row className="mx-3">
           <Col md={6}>
             <div className="text-center homeWelcome">
               <h2 className="text-left mt-5 mb-3 fw-bold ">

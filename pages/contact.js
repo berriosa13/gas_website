@@ -7,7 +7,7 @@ import { BsAlarm, BsCalendar2Check, BsCalendarX  } from "react-icons/bs";
 import spinner from "../public/spinner.gif";
 import ContactForm from "../components/forms/ContactForm";
 
-export default function Contact( {map} ) {
+export default function Contact() {
   return (
     <>
       <Head>

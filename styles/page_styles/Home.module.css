@@ -43,3 +43,7 @@
     transform: translateY(-10px);
   }
 }
+
+.layout_row {
+  margin-top: 125px;
+}

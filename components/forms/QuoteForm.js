@@ -86,17 +86,19 @@ function QuoteForm( { setCar }) {
             </FloatingLabel>
           </Col>
           <Col md={6}>
-            <FloatingLabel
-              controlId="floatingSelect"
-              label="Contact Preference"
-            >
-              <select className="form-control" name="contactPreference" aria-label="Contact preference select label">
-                <option>Select...</option>
-                <option value="email">Email</option>
-                <option value="phone">Phone</option>
-                <option value="text-message">SMS</option>
-              </select>
-            </FloatingLabel>
+            <div className="mb-3">
+              <FloatingLabel
+                controlId="floatingSelect"
+                label="Contact Preference"
+              >
+                <select className="form-control" name="contactPreference" aria-label="Contact preference select label">
+                  <option>Select...</option>
+                  <option value="email">Email</option>
+                  <option value="phone">Phone</option>
+                  <option value="text-message">SMS</option>
+                </select>
+              </FloatingLabel>
+            </div>
           </Col>
         </Row>
         <Row>

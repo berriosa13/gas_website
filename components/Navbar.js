@@ -12,15 +12,16 @@ const NavBar = () => {
   const openMenu = () => setIsOpen(!isOpen);
 
   return (
-    <>
-    <Container>
-
-        <ReactBootStrap.Navbar
-          className="d-flex justify-content-center align-items-center fs-4"
-          collapseOnSelect
-          expand="md"
-          variant="light"
-        >
+    <> 
+      <ReactBootStrap.Navbar
+        className="d-flex justify-content-center align-items-center fs-4"
+        collapseOnSelect
+        expand="lg"
+        variant="light"
+        bg="light"
+        fixed="top"
+      >
+        <Container>
           <ReactBootStrap.Navbar.Brand>
             <Link href="/">
               <a>
@@ -35,32 +36,37 @@ const NavBar = () => {
           </ReactBootStrap.Navbar.Brand>
           <ReactBootStrap.Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <ReactBootStrap.Navbar.Collapse id="responsive-navbar-nav">
-            <ReactBootStrap.Nav navbarScroll className="mr-auto">
+            <ReactBootStrap.Nav navbarScroll>
               <Link href="/" passhref>
-                <ReactBootStrap.Nav.Link as="a" href="/">Home</ReactBootStrap.Nav.Link>
+                <ReactBootStrap.Nav.Link as="a" href="/">
+                  Home
+                </ReactBootStrap.Nav.Link>
               </Link>
               <Link href="/about" passhref>
-                <ReactBootStrap.Nav.Link as="a" href="/about">About</ReactBootStrap.Nav.Link>
+                <ReactBootStrap.Nav.Link as="a" href="/about">
+                  About
+                </ReactBootStrap.Nav.Link>
               </Link>
               <Link href="/cars" passhref>
-                <ReactBootStrap.Nav.Link as="a" href="/cars">Inventory</ReactBootStrap.Nav.Link>
+                <ReactBootStrap.Nav.Link as="a" href="/cars">
+                  Inventory
+                </ReactBootStrap.Nav.Link>
               </Link>
               <Link href="/contact" passhref>
-                <ReactBootStrap.Nav.Link as="a" href="/contact">Contact</ReactBootStrap.Nav.Link>
+                <ReactBootStrap.Nav.Link as="a" href="/contact">
+                  Contact
+                </ReactBootStrap.Nav.Link>
               </Link>
-              
+
               <Link href="/apply" passhref>
-                <ReactBootStrap.Nav.Link as="a" href="/apply">Apply Now</ReactBootStrap.Nav.Link>
+                <ReactBootStrap.Nav.Link as="a" href="/apply">
+                  Apply Now
+                </ReactBootStrap.Nav.Link>
               </Link>
             </ReactBootStrap.Nav>
           </ReactBootStrap.Navbar.Collapse>
-        </ReactBootStrap.Navbar>
-    </Container>
-        <GradBar/>
-
-
-     
-      
+        </Container>
+      </ReactBootStrap.Navbar>
     </>
   );
 };

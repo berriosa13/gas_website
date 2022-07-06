@@ -50,7 +50,6 @@ a {
  height: auto;
 } */
 nav {
-  /* padding: 10px 0; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -59,7 +58,7 @@ nav {
 nav a {
  padding:2rem;
  margin:1rem;
-}
+}sss
 nav a:hover {
   color: var(--secondary-color);
 }
@@ -82,6 +81,10 @@ nav ul {
 
 nav ul li {
   padding: 0 10px;
+}
+
+nav {
+  margin-bottom: 3rem !important;
 }
 
 .logo img {
