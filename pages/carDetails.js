@@ -118,16 +118,15 @@ export default function CarDetails() {
           <div className="container mt-5">
             <div className="row">
               <section id="photoArray">
-              <div><Image layout="responsive" width="600" height="438" alt="thumbnailImage" src={car.thumbnailImage}/></div>
+              <div><Image layout="responsive" width={600} height={625} alt="thumbnailImage" src={car.thumbnailImage}/></div>
                 {displayImages.map((displayImage) => {
                   return(
-                    <div key={displayImage.id}>
+                    <div key={displayImage.id} style={{  position: 'relative', width: 'auto', height: 'auto'}}>
                       <Image
                         priority="true"
                         src={displayImage.imageUrl}
-                        layout="responsive"
-                        width="300"
-                        height="215"
+                        layout="fill"
+                        objectFit="unset"
                         alt="displayImages"
                       />
                     </div>
@@ -152,9 +151,10 @@ export default function CarDetails() {
                     height: auto;
                   }
                   #photoArray > img {
-                    object-fit: cover;
-                    width: 100%;
-                    max-height: 100%;
+                    object-fit: contain;
+                    width: 100% !important;
+                    height:unset !important;
+                    position: relative !important; 
                   }
                   #photoArray > img:last-child {
                     background-color: #333;
@@ -162,7 +162,7 @@ export default function CarDetails() {
                   }
 
                   }
-                  
+
                   `}</style>
                   
               </section>
