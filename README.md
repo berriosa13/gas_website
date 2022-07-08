@@ -15,5 +15,6 @@ Just some of the various packages & libraries were also used:
 - react-icons
 - react-select
 - react-toastify
+- next-pwa
 
 See the website live at https://www.gasautomobilesales.com/
