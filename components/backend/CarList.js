@@ -157,19 +157,22 @@ const CarsList = ({
                     </OverlayTrigger>
                   ))}
                 </td>
-                <td>
                   {doc.thumbnailImage != null ? (
-                    <Image
-                      src={doc.thumbnailImage}
-                      className="mb-3"
-                      width="100"
-                      height="100"
-                      alt="thumbnailImage"
-                    />
+                    <td>
+                      <Image
+                        src={doc.thumbnailImage}
+                        className="mb-3"
+                        width="100"
+                        height="100"
+                        alt="thumbnailImage"
+                      />
+                      </td>
                   ) : (
-                    <p>Thumbnail not set</p>
+                    <td>
+                      Thumbnail not set 😔
+                    </td>
                   )}
-                </td>
+                
                 <td>
                   {["Display"].map((placement) => (
                     <OverlayTrigger
