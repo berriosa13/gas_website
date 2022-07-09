@@ -118,20 +118,95 @@ export default function CarDetails() {
           <div className="container mt-5">
             <div className="row">
               <section id="photoArray">
-              <div><Image layout="responsive" width={600} height={625} alt="thumbnailImage" src={car.thumbnailImage}/></div>
-                {displayImages.map((displayImage) => {
-                  return(
-                    <div key={displayImage.id} style={{  position: 'relative', width: 'auto', height: 'auto'}}>
-                      <Image
-                        priority="true"
-                        src={displayImage.imageUrl}
-                        layout="fill"
-                        objectFit="unset"
-                        alt="displayImages"
-                      />
-                    </div>
-                    );
-                  })}
+                
+                  {car.thumbnailImage != null && displayImages != null ? (
+                    <>
+                      <div>
+                        <Image
+                          layout="responsive"
+                          width={600}
+                          height={500}
+                          alt="thumbnailImage"
+                          src={car.thumbnailImage}
+                        />
+                      </div>
+                       {displayImages.map((displayImage) => {
+                        return(
+                          <div key={displayImage.id} style={{  position: 'relative', width: 'auto', height: 'auto'}}>
+                            <Image
+                              priority="true"
+                              src={displayImage.imageUrl}
+                              layout="fill"
+                              objectFit="unset"
+                              alt="displayImages"
+                            />
+                          </div>
+                          );
+                        })}
+                    
+                    </>
+                    )
+                    : 
+                    (
+                      <>
+                      <div>
+                        <Image
+                          priority="true"
+                          src="https://via.placeholder.com/600x500.png?text=Image+Coming+Soon..."
+                          layout="responsive"
+                          alt="thumbnail image"
+                          width={600}
+                          height={500}
+                        />
+                      </div>
+                      <div style={{  position: 'relative', width: 'auto', height: 'auto'}}>
+                        <Image
+                          priority="true"
+                          src="https://via.placeholder.com/600x500.png?text=Image+Coming+Soon..."
+                          layout="fill"
+                          objectFit="unset"
+                          alt="thumbnail image"
+                          
+                          
+                        />
+                      </div>
+                      <div style={{  position: 'relative', width: 'auto', height: 'auto'}}>
+                        <Image
+                          priority="true"
+                          src="https://via.placeholder.com/600x500.png?text=Image+Coming+Soon..."
+                          layout="fill"
+                          objectFit="unset"
+                          alt="thumbnail image"
+                          
+                          
+                        />
+                      </div>
+                      <div style={{  position: 'relative', width: 'auto', height: 'auto'}}>
+                        <Image
+                          priority="true"
+                          src="https://via.placeholder.com/600x500.png?text=Image+Coming+Soon..."
+                          layout="fill"
+                          objectFit="unset"
+                          alt="thumbnail image"
+                          
+                          
+                        />
+                      </div>
+                      <div style={{  position: 'relative', width: 'auto', height: 'auto'}}>
+                        <Image
+                          priority="true"
+                          src="https://via.placeholder.com/600x500.png?text=Image+Coming+Soon..."
+                          layout="fill"
+                          objectFit="unset"
+                          alt="thumbnail image"
+                          
+                          
+                        />
+                      </div>
+                      </>
+                    )}
+                    
+             
                 <style jsx>{`
                   #photoArray {
                     display: grid;
@@ -383,3 +458,4 @@ CarDetails.getLayout = function getLayout(page) {
     </Layout>
   )
 }
+

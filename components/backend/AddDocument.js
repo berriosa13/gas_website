@@ -119,14 +119,13 @@ const AddDocument = ({ carId, setCarId }) => {
         toast.success("Updated successfully!");
         setCarId("");
       } else {
-        if (images === "") {
-          toast.error("Select an image(s) for this listing");
-          return;
-        }
         const carDocRef = await CarDataService.addCars(newCar);
         const carId = carDocRef.id;
-        // add newImage to Image collection
-        sendImageDocToCollection(carId, newImage);
+        // Check if images were uploaded
+        if (imageUrl !== undefined && imageUrl !== "") {
+          sendImageDocToCollection(carId, newImage);
+          console.log("sendImageDocToCollection for carId: {}, image: {}", carId, newImage);
+        }
         console.log("Successfully added Car document with ID: ", carDocRef.id);
         toast.success("Created successfully");
       }
