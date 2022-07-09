@@ -39,7 +39,8 @@ const ImageModal = ({ setOpenImageModal, setIdForImages, carData }) => {
       collection(db, "Image"),
       where("imageForeignId", "==", carId)
     );
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+
+    const imageUnsubscribe = onSnapshot(q, (querySnapshot) => {
       const list = [];
       querySnapshot.forEach((doc) => {
         list.push({ id: doc.id, ...doc.data() });
@@ -47,30 +48,27 @@ const ImageModal = ({ setOpenImageModal, setIdForImages, carData }) => {
       setImages(list);
     });
 
-    return () => {
-      unsubscribe();
-    };
-  }, [carId]);
-
-  useEffect(() => {
-    // Listen for this doc's changes
-    console.log("carId being passed into doc listener: ", carId);
-    const carDocRef = doc(db, "Cars", carId);
-    const list = [];
-    const unsubscribe = async () => {
+    const carUnsubscribe = async () => {
+      console.log("carId being passed into doc listener: ", carId);
+      const carDocRef = doc(db, "Cars", carId);
+      const list = [];
       const carDocSnap = await getDoc(carDocRef);
       list.push({ id: carDocSnap.id, ...carDocSnap.data() });
       setCurrentCar(list);
     };
+
     return () => {
-      unsubscribe();
+      imageUnsubscribe();
+      carUnsubscribe();
     };
   }, [carId]);
 
   const deleteImage = async (imageId, imageStorageName, imageUrl) => {
     const storageRef = ref(storage, `images/${imageStorageName}`);  
     // Check if imageUrl matches thumbnailImage url
-      if(currentCar[0].thumbnailImage === imageUrl) {
+    const thumbnailImage = currentCar?.[0]?.thumbnailImage;
+    console.log("Current car: ", currentCar);
+      if(thumbnailImage === imageUrl) {
         // Delete thumbnailImage from carDoc
         try {
           await CarDataService.deleteThumbnailImageField(carData.id);
@@ -84,7 +82,7 @@ const ImageModal = ({ setOpenImageModal, setIdForImages, carData }) => {
     .then( async () => {
       // Image file successfully deleted from storage, now delete from image collection
       console.log(
-        "Image successfully deleted from firebase storage, now deleting from collection"
+        "Image successfully deleted from firebase storage."
         );
         await ImageDataService.deleteImage(imageId);
       })
@@ -92,6 +90,7 @@ const ImageModal = ({ setOpenImageModal, setIdForImages, carData }) => {
         console.log("Error deleting image in deleteImage method ", error);
         toast.error("Error deleting image from database");
       });
+      console.log("Image deleted from Image collection");
     toast.success("Image deleted successfully");
   };
 

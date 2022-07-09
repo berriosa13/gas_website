@@ -481,6 +481,7 @@ const AddDocument = ({ carId, setCarId }) => {
                   multiple
                   onChange={handleImageFileChange}
                   ref={imageInputRef}
+                  accept="image/png , image/jpeg, image/webp"
                 />
               </Form.Group>
               <Form.Group className="mb-3">
