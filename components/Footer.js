@@ -46,7 +46,7 @@ const Footer = () => {
                     <p>
                       <FaPhoneAlt />{" "}
                       <Link href="tel:570-800-1208">
-                        <a>(570)-800-1208)</a>
+                        <a>(570)-800-1208</a>
                       </Link>
                     </p>
                   </li>
