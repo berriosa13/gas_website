@@ -10,6 +10,7 @@ import QuoteModal from "../components/modals/QuoteModal";
 import AvailabilityModal from "../components/modals/AvailabilityModal";
 import TestDriveModal from "../components/modals/TestDriveModal";
 import { BsDashLg } from "react-icons/bs";
+import GradBar from '../components/GradBar'
 
 import {
   Container,
@@ -110,9 +111,12 @@ export default function CarDetails() {
       </Head>
 
       <div className="d-flex my-5 justify-content-between">
-        <h1>
-          Used {car.year} {car.make} {car.model}
-        </h1>
+        <div>
+          <h1>
+            Used {car.year} {car.make} {car.model}
+          </h1>
+          <GradBar/>
+        </div>
         <Breadcrumb className="fst-italic mx-3">
           <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
           <Breadcrumb.Item href="/cars">Inventory</Breadcrumb.Item>
@@ -123,9 +127,7 @@ export default function CarDetails() {
             a:hover {
               color: var(--secondary-color) !important;
             }
-            h1 {
-              font-weight: bold;
-            }
+
           `}</style>
         </Breadcrumb>
       </div>
@@ -388,6 +390,9 @@ export default function CarDetails() {
                     font-weight: bold !important;
                   }
                   .text-primary {
+                    color: var(--main-color) !important;
+                  }
+                  .text-primary:hover {
                     color: var(--secondary-color) !important;
                   }
                 `}</style>
