@@ -8,6 +8,7 @@ import {
   FaMapMarkerAlt,
   FaStop,
   FaPhoneAlt,
+  FaInstagram,
 } from "react-icons/fa";
 import { HiLink } from "react-icons/hi";
 import { MdEmail } from "react-icons/md";
@@ -149,10 +150,18 @@ const Footer = () => {
                     <GradBar />
                   </h4>
                   <h5 className="mb-3">
-                    Check us out on Facebook {"  "}
+                    Check us out on  {"  "}
                     <Link href="https://www.facebook.com/Guardian-Automobile-Sales-104122725674174/">
                       <a target="_blank" rel="noopener noreferrer">
                         <FaFacebookSquare />
+                      </a>
+                    </Link>
+                  </h5>
+                  <h5 className="mb-3">
+                    Check us out on  {"  "}
+                    <Link href="https://www.instagram.com/gasautomobilesales/">
+                      <a target="_blank" rel="noopener noreferrer">
+                        <FaInstagram />
                       </a>
                     </Link>
                   </h5>

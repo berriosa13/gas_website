@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import Layout from "../components/Layout";
+import Link from "next/link";
+import Layout from '../components/Layout'
 import { useRouter } from "next/router";
 import styles from "../styles/page_styles/Cars.module.css";
 import utilMethods from "../services/utils";
@@ -111,15 +112,14 @@ export default function CarDetails() {
       </Head>
 
       <div className="d-flex my-5 justify-content-between">
-        <div>
-          <h1>
-            Used {car.year} {car.make} {car.model}
-          </h1>
-          <GradBar/>
-        </div>
-        <Breadcrumb className="fst-italic mx-3">
-          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href="/cars">Inventory</Breadcrumb.Item>
+        <h1>Used {car.year} {car.make} {car.model}</h1>
+          <Breadcrumb className="fst-italic mx-3">
+            <Link href="/" passhref>
+              <Breadcrumb.Item as="a" href="/">Home</Breadcrumb.Item>
+            </Link>
+            <Link href="/cars" passhref>
+              <Breadcrumb.Item as="a" href="/cars">Inventory</Breadcrumb.Item>
+            </Link>
           <style jsx global>{`
             a {
               color: var(--main-color) !important;

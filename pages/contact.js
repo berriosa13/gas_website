@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Layout from '../components/Layout'
+import Link from 'next/link';
 import { Breadcrumb, Row, Button, Col } from "react-bootstrap";
 import styles from "../styles/page_styles/Contact.module.css";
 import GradBar from "../components/GradBar"
@@ -20,8 +21,12 @@ export default function Contact() {
           <GradBar />
         </h1>
         <Breadcrumb>
-          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href="/contact">Contact</Breadcrumb.Item>
+        <Link href="/" passhref>
+            <Breadcrumb.Item as="a" href="/">Home</Breadcrumb.Item>
+          </Link>
+          <Link href="/contact" passhref>
+            <Breadcrumb.Item as="a" href="/contact">Contact</Breadcrumb.Item>
+          </Link>
           <style jsx global>{`
             a {
               color: var(--main-color) !important;

@@ -55,8 +55,12 @@ export default function Cars({ cars }) {
         </h1>
 
         <Breadcrumb className="fst-italic">
-          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href="/cars">Inventory</Breadcrumb.Item>
+          <Link href="/" passhref>
+              <Breadcrumb.Item as="a" href="/">Home</Breadcrumb.Item>
+          </Link>
+          <Link href="/cars" passhref>
+            <Breadcrumb.Item as="a" href="/cars">Inventory</Breadcrumb.Item>
+          </Link>
           <style jsx global>{`
             a {
               color: var(--main-color) !important;
