@@ -18,7 +18,7 @@ function TestDriveForm({ setCar }) {
     return (
       <>
         <h5 className="text-center mt-3">
-          Your test drive request has been successfully sent <HiBadgeCheck />{" "}
+          Your test drive request has been successfully sent ✅{" "}
           <br /> We will get back to you as soon as possible
         </h5>
       </>

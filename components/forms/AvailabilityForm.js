@@ -30,7 +30,7 @@ function AvailabilityForm({ setCar }) {
       <>
         <h5 className="text-center mt-3">
           Your availability confirmation has been successfully sent{" "}
-          <HiBadgeCheck /> <br /> We will get back to you as soon as possible
+          ✅ <br /> We will get back to you as soon as possible
         </h5>
       </>
     );
