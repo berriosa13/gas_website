@@ -10,7 +10,7 @@ const nextConfig = withPWA({
     runtimeCaching
   },
   reactStrictMode: true,
-    images: { domains: ['firebasestorage.googleapis.com'], },
+    images: { domains: ['firebasestorage.googleapis.com', 'via.placeholder.com'], },
   
     rewrites: async () => [
       {

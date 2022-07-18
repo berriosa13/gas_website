@@ -167,33 +167,43 @@ export default function Cars({ cars }) {
                     <div className={styles.thumb}>
                       <div className={styles.thumb_img}>
                         {car.thumbnailImage != null ? (
-                          <Image
-                            priority="true"
-                            src={car.thumbnailImage}
-                            layout="responsive"
-                            alt="thumbnail image"
-                            width={450}
-                            height={300}
-                          />
+                          <>
+                            <Image
+                              priority="true"
+                              src={car.thumbnailImage}
+                              layout="responsive"
+                              alt="thumbnail image"
+                              width={450}
+                              height={300}
+                            />
+
+                            <div className={styles.overlay_content}>
+                              <strong>
+                                <GoDashboard />{" "}
+                                {car.mileage
+                                  .toString()
+                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                              </strong>
+                              &nbsp;&nbsp;&nbsp;&nbsp;
+                              <strong>
+                                <TbSteeringWheel /> {car.drivetrain}
+                              </strong>
+                              &nbsp;&nbsp;&nbsp;&nbsp;
+                              <strong>
+                                <GiCog /> {car.transmission}
+                              </strong>
+                            </div>
+                          </>
                         ) : (
-                          <h2>Image Coming Soon...</h2>
+                          <Image
+                          priority="true"
+                          src="https://via.placeholder.com/450x300.png?text=Image+Coming+Soon..."
+                          layout="responsive"
+                          alt="thumbnail image"
+                          width={450}
+                          height={300}
+                        />
                         )}
-                      </div>
-                      <div className={styles.overlay_content}>
-                        <strong>
-                          <GoDashboard />{" "}
-                          {car.mileage
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                        </strong>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>
-                          <TbSteeringWheel /> {car.drivetrain}
-                        </strong>
-                        &nbsp;&nbsp;&nbsp;&nbsp;
-                        <strong>
-                          <GiCog /> {car.transmission}
-                        </strong>
                       </div>
                     </div>
                     <div className={styles.down_content}>
