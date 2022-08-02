@@ -184,9 +184,7 @@ export default function Cars({ cars }) {
                             <div className={styles.overlay_content}>
                               <strong>
                                 <GoDashboard />{" "}
-                                {car.mileage
-                                  .toString()
-                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                {car.mileage}
                               </strong>
                               &nbsp;&nbsp;&nbsp;&nbsp;
                               <strong>
@@ -220,10 +218,7 @@ export default function Cars({ cars }) {
                       <p>
                         <span>
                           <strong>
-                            <sup>$</sup>
-                            {car.price
-                              .toString()
-                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                            {car.price}
                           </strong>
                         </span>
                       </p>

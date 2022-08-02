@@ -294,10 +294,7 @@ export default function CarDetails() {
                 <h2>
                   {car.price ? (
                     <strong className="text-primary">
-                      $
-                      {car.price
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      {car.price}
                     </strong>
                   ) : (
                     <strong className="text-primary">Unavailable</strong>
@@ -346,9 +343,7 @@ export default function CarDetails() {
                   <ListGroup.Item className="w-50 d-flex justify-content-end">
                     {car.mileage ? (
                       <strong>
-                        {car.mileage
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        {car.mileage}
                       </strong>
                     ) : (
                       <strong>Unavailable</strong>
@@ -394,6 +389,17 @@ export default function CarDetails() {
                   }
                   .text-primary:hover {
                     color: var(--secondary-color) !important;
+                  }
+                  @media only screen and (max-width: 768px) {
+                    .list-group-horizontal {
+                      font-size: x-small !important;
+                    }
+                    .accordion-body {
+                      font-size: x-small !important;
+                    }
+                    .accordion-button {
+                      font-size: x-small !important;
+                    }
                   }
                 `}</style>
 

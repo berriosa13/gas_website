@@ -62,7 +62,7 @@ function QuoteForm( { setCar }) {
               label="Phone"
               className="mb-3"
             >
-            <PhoneNumberInput/>
+            <PhoneNumberInput name={'phoneNumber'} isRequired={true}/>
             </FloatingLabel>
           </Col>
         </Row>

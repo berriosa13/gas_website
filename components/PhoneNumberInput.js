@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 
-export default function PhoneNumberInput() {
+export default function PhoneNumberInput( { name, isRequired } ) {
     const [inputValue, setInputValue] = useState('');
     const handleInput = (e) => {
         const formattedPhoneNumber = formatPhoneNumber(e.target.value);
         setInputValue(formattedPhoneNumber);
     };
-    return <input className="form-control" onChange={e => handleInput(e)} value={inputValue} name="Cell Phone" placeholder="Cell Phone" />
+    return <input className="form-control" onChange={e => handleInput(e)} value={inputValue} name={name} placeholder="cellphone" required={isRequired} />
 }
 
 function formatPhoneNumber(value) {

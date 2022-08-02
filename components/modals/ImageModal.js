@@ -9,7 +9,7 @@ const ImageModal = ({ handleClose, show, setImages, setCar }) => {
       <>
         <Modal scrollable size="lg" className="" show={show} onHide={handleClose} centered>
           <Modal.Header closeButton>
-            <Modal.Title>Used {setCar.year} {setCar.make} {setCar.model} - ${setCar.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</Modal.Title>
+            <Modal.Title>Used {setCar.year} {setCar.make} {setCar.model} - {setCar.price}</Modal.Title>
           </Modal.Header>
             <GradBar/>
           <Modal.Body>

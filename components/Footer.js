@@ -157,14 +157,14 @@ const Footer = () => {
                       </a>
                     </Link>
                   </h5>
-                  <h5 className="mb-3">
+                  {/* <h5 className="mb-3">
                     Check us out on  {"  "}
                     <Link href="https://www.instagram.com/gasautomobilesales/">
                       <a target="_blank" rel="noopener noreferrer">
                         <FaInstagram />
                       </a>
                     </Link>
-                  </h5>
+                  </h5> */}
                 </div>
               </div>
             </Col>

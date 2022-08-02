@@ -8,6 +8,7 @@ import {
   FloatingLabel,
 } from "react-bootstrap";
 import Select from "react-select";
+import NumberFormat from 'react-number-format';
 import { ToastContainer, toast, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CarDataService from "../../services/cars.services";
@@ -302,11 +303,11 @@ const AddDocument = ({ carId, setCarId }) => {
                 <Form.Label>
                   <strong>Mileage:</strong>
                 </Form.Label>
-                <Form.Control
-                  type="number"
-                  placeholder="#"
+                  <NumberFormat
+                  className="form-control"
                   value={mileage}
                   onChange={(e) => setMileage(e.target.value)}
+                  thousandSeparator={true}
                 />
               </Form.Group>
             </Col>
@@ -317,12 +318,19 @@ const AddDocument = ({ carId, setCarId }) => {
                 <Form.Label>
                   <strong>Price:</strong>
                 </Form.Label>
-                <Form.Control
+                <NumberFormat
+                  className="form-control"
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                  prefix="$"
+                  thousandSeparator={true}
+                />
+                {/* <Form.Control
                   type="number"
                   placeholder="$"
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
-                />
+                /> */}
               </Form.Group>
             </Col>
             <Col md={4}>

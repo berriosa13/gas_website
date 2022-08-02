@@ -42,18 +42,13 @@ const AvailabilityModal = ({ handleClose, show, setCar }) => {
                 <ListGroup.Item>
                   Mileage:{" "}
                   <strong>
-                    {setCar.mileage
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    {setCar.mileage}
                   </strong>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   Price:{" "}
                   <strong>
-                    $
-                    {setCar.price
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    {setCar.price}
                   </strong>
                 </ListGroup.Item>
               </ListGroup>

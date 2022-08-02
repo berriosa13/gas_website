@@ -111,7 +111,7 @@ const CarsList = ({
                   </div>
                 </td>
                 <td className="">{doc.mileage}</td>
-                <td>${doc.price}</td>
+                <td>{doc.price}</td>
                 <td>#{doc.vin}</td>
                 <td>{doc.year}</td>
                 <td>

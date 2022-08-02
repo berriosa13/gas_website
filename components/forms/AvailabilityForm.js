@@ -2,6 +2,7 @@ import React from "react";
 import { useForm, ValidationError } from "@formspree/react";
 import { FiSend } from "react-icons/fi";
 import { HiBadgeCheck } from "react-icons/hi";
+import PhoneNumberInput from '../PhoneNumberInput'
 import {
   Table,
   Button,
@@ -76,13 +77,7 @@ function AvailabilityForm({ setCar }) {
               label="Phone"
               className="mb-3"
             >
-              <input
-                type="number"
-                className="form-control"
-                name="phone"
-                id="phone"
-                required
-              />
+              <PhoneNumberInput name={'phoneNumber'} isRequired={true}/>
             </FloatingLabel>
           </Col>
         </Row>
