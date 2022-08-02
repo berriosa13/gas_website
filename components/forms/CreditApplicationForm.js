@@ -1081,7 +1081,7 @@ function CreditApplicationForm({ setCar }) {
                 value="I accept the terms above"
                 required
               />
-              <label for="terms">I accept the terms above.</label>
+              <label htmlFor="terms">I accept the terms above.</label>
               <br />
             </Col>
             <Col>
