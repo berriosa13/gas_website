@@ -1,4 +1,4 @@
-Used Car Dealership PWA with customized bult in backend that allows a user to create and manipulate data that is displayed on the site.
+Used Car Dealership PWA with customized built in backend that allows a user to create and manipulate data that is displayed on the site.
 
 Built with the following technologies:
 - React
