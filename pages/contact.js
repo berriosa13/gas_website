@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import Head from "next/head";
 import Layout from '../components/Layout'
 import Link from 'next/link';
@@ -5,10 +6,19 @@ import { Breadcrumb, Row, Button, Col } from "react-bootstrap";
 import styles from "../styles/page_styles/Contact.module.css";
 import GradBar from "../components/GradBar"
 import { BsAlarm, BsCalendar2Check, BsCalendarX  } from "react-icons/bs";
-import spinner from "../public/spinner.gif";
 import ContactForm from "../components/forms/ContactForm";
+import { TailSpin } from  'react-loader-spinner';
+
+
 
 export default function Contact() {
+  
+  const [loading, setLoading] = useState(true);
+
+  const hideSpinner = () => {
+    setLoading(false);
+  }
+
   return (
     <>
       <Head>
@@ -20,22 +30,6 @@ export default function Contact() {
           Contact
           <GradBar />
         </h1>
-        <Breadcrumb>
-        <Link href="/" passhref>
-            <Breadcrumb.Item as="a" href="/">Home</Breadcrumb.Item>
-          </Link>
-          <Link href="/contact" passhref>
-            <Breadcrumb.Item as="a" href="/contact">Contact</Breadcrumb.Item>
-          </Link>
-          <style jsx global>{`
-            a {
-              color: var(--main-color) !important;
-            }
-            a:hover {
-              color: var(--secondary-color) !important;
-            }
-          `}</style>
-        </Breadcrumb>
       </div>
       <Row>
         <style jsx global>{`
@@ -114,20 +108,26 @@ export default function Contact() {
           </Row>
         </Col>
         <Col md={8}>
-          <iframe
-            src="https://maps.google.com/maps?q=1033%20reeves%20street%20dunmore&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            width="100%"
-            height="100%"
-            frameBorder="0"
-            allowFullScreen
-          ></iframe>
+            {loading === true ? (
+              <div className="d-flex justify-content-center align-items-center w-100 h-100">
+                <TailSpin color="#BEBBBB" width="30%"height="30%" />
+              </div>
+            ) : null}
+            <iframe
+              src="https://maps.google.com/maps?q=1033%20reeves%20street%20dunmore&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              onLoad={hideSpinner}
+              allowFullScreen
+            ></iframe>
         </Col>
       </Row>
       <Row className="mt-5">
         <h2 className="text-center">Questions?</h2>
       </Row>
       <Row>
-        <ContactForm/>
+        <ContactForm />
       </Row>
     </>
   );

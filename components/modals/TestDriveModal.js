@@ -30,11 +30,17 @@ const TestDriveModal = ({ handleClose, show, setCar }) => {
               </Card>
             </Col>
             <Col>
-              <ListGroup variant="flush" className="my-3">
+            <ListGroup variant="flush" className="my-3">
+              <ListGroup.Item>
+                  Type:{" "}
+                  <strong>
+                    Pre-Owned Vehicle
+                  </strong>
+                </ListGroup.Item>
                 <ListGroup.Item>
                   Vehicle:{" "}
                   <strong>
-                    {setCar.year} {setCar.make} {setCar.model}
+                    {setCar.year} {setCar.make} {setCar.model}   {setCar.trim}
                   </strong>
                 </ListGroup.Item>
                 <ListGroup.Item>

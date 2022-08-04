@@ -112,26 +112,11 @@ export default function CarDetails() {
       </Head>
 
       <div className="d-flex my-5 justify-content-between">
-        <h1>Used {car.year} {car.make} {car.model}</h1>
-          <Breadcrumb className="fst-italic mx-3">
-            <Link href="/" passhref>
-              <Breadcrumb.Item as="a" href="/">Home</Breadcrumb.Item>
-            </Link>
-            <Link href="/cars" passhref>
-              <Breadcrumb.Item as="a" href="/cars">Inventory</Breadcrumb.Item>
-            </Link>
-          <style jsx global>{`
-            a {
-              color: var(--main-color) !important;
-            }
-            a:hover {
-              color: var(--secondary-color) !important;
-            }
-
-          `}</style>
-        </Breadcrumb>
+        <h1>
+          {car.year} {car.make} {car.model}
+          <GradBar/>
+        </h1>
       </div>
-
       <main>
         <section className={styles.featured_places}>
           <div className="container mt-5">
@@ -308,7 +293,7 @@ export default function CarDetails() {
                     Type
                   </ListGroup.Item>
                   <ListGroup.Item className="font-weight-bold w-50 d-flex justify-content-end">
-                    Used vehicle
+                    Pre-Owned Vehicle
                   </ListGroup.Item>
                 </ListGroup>
                 <ListGroup horizontal>
@@ -317,6 +302,20 @@ export default function CarDetails() {
                   </ListGroup.Item>
                   <ListGroup.Item className="w-50 d-flex justify-content-end">
                     {car.make}
+                  </ListGroup.Item>
+                </ListGroup>
+                <ListGroup horizontal>
+                  <ListGroup.Item className="w-50 d-flex justify-content-start">
+                    Trim
+                  </ListGroup.Item>
+                  <ListGroup.Item className="w-50 d-flex justify-content-end">
+                    {car.trim ? (
+                          <>
+                            {car.trim}
+                          </> 
+                    ) : (
+                      <>Unavailable</>
+                    )}
                   </ListGroup.Item>
                 </ListGroup>
                 <ListGroup horizontal>

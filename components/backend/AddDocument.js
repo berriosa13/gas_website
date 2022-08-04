@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Form,
   InputGroup,
@@ -33,6 +33,7 @@ const AddDocument = ({ carId, setCarId }) => {
   const [transmission, setTransmission] = useState("");
   const [engine, setEngine] = useState("");
   const [doors, setDoors] = useState("");
+  const [trim, setTrim] = useState("");
   const [interiorColor, setInteriorColor] = useState("");
   const [exteriorColor, setExteriorColor] = useState("");
   const [year, setYear] = useState("");
@@ -81,6 +82,7 @@ const AddDocument = ({ carId, setCarId }) => {
       transmission === "" ||
       engine === "" ||
       doors === "" ||
+      trim === "" ||
       interiorColor === "" ||
       exteriorColor === "" ||
       description === "" ||
@@ -93,6 +95,7 @@ const AddDocument = ({ carId, setCarId }) => {
     const newCar = {
       make,
       model,
+      trim,
       mileage,
       price,
       vin,
@@ -136,6 +139,7 @@ const AddDocument = ({ carId, setCarId }) => {
     }
     setMake("");
     setModel("");
+    setTrim("");
     setMileage("");
     setPrice("");
     setVin("");
@@ -229,6 +233,7 @@ const AddDocument = ({ carId, setCarId }) => {
       console.log("the record requested to edit: ", carDocSnap.data());
       setMake(carDocSnap.data().make);
       setModel(carDocSnap.data().model);
+      setTrim(carDocSnap.data().trim);
       setMileage(carDocSnap.data().mileage);
       setPrice(carDocSnap.data().price);
       setVin(carDocSnap.data().vin);
@@ -270,7 +275,7 @@ const AddDocument = ({ carId, setCarId }) => {
         <h1 className="text-center mt-3">GAS Admin Dashboard</h1>
         <Form onSubmit={handleSubmit} className="mt-5">
           <Row>
-            <Col md={4}>
+            <Col md={3}>
               <Form.Group className="mb-3" controlId="formCarMake">
                 <Form.Label>
                   <strong>Make:</strong>
@@ -285,8 +290,8 @@ const AddDocument = ({ carId, setCarId }) => {
                 ></Select>
               </Form.Group>
             </Col>
-            <Col md={4}>
-              <Form.Group className="mb-3" controlId="fromCarModel">
+            <Col md={3}>
+              <Form.Group className="mb-3" controlId="formCarModel">
                 <Form.Label>
                   <strong>Model:</strong>
                 </Form.Label>
@@ -298,7 +303,20 @@ const AddDocument = ({ carId, setCarId }) => {
                 />
               </Form.Group>
             </Col>
-            <Col md={4}>
+            <Col md={3}>
+              <Form.Group className="mb-3" controlId="formCarTrim">
+                <Form.Label>
+                  <strong>Trim:</strong>
+                </Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder=""
+                  value={trim}
+                  onChange={(e) => setTrim(e.target.value)}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={3}>
               <Form.Group className="mb-3" controlId="formCarMileage">
                 <Form.Label>
                   <strong>Mileage:</strong>
@@ -325,12 +343,6 @@ const AddDocument = ({ carId, setCarId }) => {
                   prefix="$"
                   thousandSeparator={true}
                 />
-                {/* <Form.Control
-                  type="number"
-                  placeholder="$"
-                  value={price}
-                  onChange={(e) => setPrice(e.target.value)}
-                /> */}
               </Form.Group>
             </Col>
             <Col md={4}>
@@ -411,7 +423,7 @@ const AddDocument = ({ carId, setCarId }) => {
             </Col>
           </Row>
           <Row>
-            <Col md={4}>
+            <Col md={3}>
               <Form.Group className="mb-3" controlId="formCarDoors">
                 <Form.Label>
                   <strong># of Doors:</strong>
@@ -426,7 +438,7 @@ const AddDocument = ({ carId, setCarId }) => {
                 ></Select>
               </Form.Group>
             </Col>
-            <Col md={4}>
+            <Col md={3}>
               <Form.Group className="mb-3" controlId="formCarInteriorColor">
                 <Form.Label>
                   <strong>Interior Color:</strong>
@@ -443,7 +455,7 @@ const AddDocument = ({ carId, setCarId }) => {
                 ></Select>
               </Form.Group>
             </Col>
-            <Col md={4}>
+            <Col md={3}>
               <Form.Group className="mb-3" controlId="formCarExteriorColor">
                 <Form.Label>
                   <strong>Exterior Color:</strong>
@@ -457,6 +469,21 @@ const AddDocument = ({ carId, setCarId }) => {
                   }}
                 ></Select>
               </Form.Group>
+            </Col>
+            <Col md={3}>
+              <Form.Group className="mb-3">
+                  <Form.Label>
+                    <strong>Featured Listing?</strong>
+                  </Form.Label>
+                  <Select
+                    className="w-100"
+                    value={{ value: featuredListing, label: featuredListing }}
+                    options={featuredListingOptions}
+                    onChange={(e) => {
+                      setFeaturedListing(e.value);
+                    }}
+                  ></Select>
+                </Form.Group>
             </Col>
           </Row>
           <Row>
@@ -490,19 +517,6 @@ const AddDocument = ({ carId, setCarId }) => {
                   ref={imageInputRef}
                   accept="image/png , image/jpeg, image/webp"
                 />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>
-                  <strong>Featured Listing?</strong>
-                </Form.Label>
-                <Select
-                  className="w-100"
-                  value={{ value: featuredListing, label: featuredListing }}
-                  options={featuredListingOptions}
-                  onChange={(e) => {
-                    setFeaturedListing(e.value);
-                  }}
-                ></Select>
               </Form.Group>
               <div className="d-grid gap-2 mt-5">
                 <Button variant="primary" type="Submit" disabled={uploading}>

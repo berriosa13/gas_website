@@ -235,7 +235,7 @@ export default function Home({ featuredListings }) {
                       </div>
                       <div className={carStyles.down_content}>
                         <h4>
-                          Used {car.year} {car.make} {car.model}
+                          {car.year} {car.make} {car.model} {car.trim}
                         </h4>
 
                         <br />

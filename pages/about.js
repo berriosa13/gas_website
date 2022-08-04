@@ -18,14 +18,6 @@ export default function About() {
           About Us
           <GradBar />
         </h1>
-        <Breadcrumb className="fst-italic">
-          <Link href="/" passhref>
-            <Breadcrumb.Item as="a" href="/">Home</Breadcrumb.Item>
-          </Link>
-          <Link href="/about" passhref>
-            <Breadcrumb.Item as="a" href="/about">About</Breadcrumb.Item>
-          </Link>
-        </Breadcrumb>
       </div>
 
       <Row>

@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/Layout";
-import { Row, Col, Button, Breadcrumb } from "react-bootstrap";
+import { Row, Col, Button, Breadcrumb, Container, Form } from "react-bootstrap";
 import styles from "../styles/page_styles/Cars.module.css";
 import GradBar from "../components/GradBar";
 import { GoDashboard } from "react-icons/go";
@@ -53,23 +53,6 @@ export default function Cars({ cars }) {
           Inventory
           <GradBar />
         </h1>
-
-        <Breadcrumb className="fst-italic">
-          <Link href="/" passhref>
-              <Breadcrumb.Item as="a" href="/">Home</Breadcrumb.Item>
-          </Link>
-          <Link href="/cars" passhref>
-            <Breadcrumb.Item as="a" href="/cars">Inventory</Breadcrumb.Item>
-          </Link>
-          <style jsx global>{`
-            a {
-              color: var(--main-color) !important;
-            }
-            a:hover {
-              color: var(--secondary-color) !important;
-            }
-          `}</style>
-        </Breadcrumb>
       </div>
       <div>
         <h1 className="text-center my-5"></h1>
@@ -210,7 +193,7 @@ export default function Cars({ cars }) {
                     </div>
                     <div className={styles.down_content}>
                       <h4>
-                        Used {car.year} {car.make} {car.model}
+                        {car.year} {car.make} {car.model} {car.trim}
                       </h4>
 
                       <br />
