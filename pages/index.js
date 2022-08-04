@@ -209,9 +209,7 @@ export default function Home({ featuredListings }) {
                               <div className={carStyles.overlay_content}>
                                 <strong>
                                   <GoDashboard />{" "}
-                                  {car.mileage
-                                    .toString()
-                                    .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                  {car.mileage}
                                 </strong>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <strong>
@@ -237,7 +235,7 @@ export default function Home({ featuredListings }) {
                       </div>
                       <div className={carStyles.down_content}>
                         <h4>
-                          Used {car.year} {car.make} {car.model}
+                          {car.year} {car.make} {car.model} {car.trim}
                         </h4>
 
                         <br />
@@ -245,10 +243,7 @@ export default function Home({ featuredListings }) {
                         <p>
                           <span>
                             <strong>
-                              <sup>$</sup>
-                              {car.price
-                                .toString()
-                                .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                              {car.price}
                             </strong>
                           </span>
                         </p>

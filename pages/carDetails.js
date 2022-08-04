@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
-import Layout from "../components/Layout";
+import Link from "next/link";
+import Layout from '../components/Layout'
 import { useRouter } from "next/router";
 import styles from "../styles/page_styles/Cars.module.css";
 import utilMethods from "../services/utils";
@@ -111,27 +112,11 @@ export default function CarDetails() {
       </Head>
 
       <div className="d-flex my-5 justify-content-between">
-        <div>
-          <h1>
-            Used {car.year} {car.make} {car.model}
-          </h1>
+        <h1>
+          {car.year} {car.make} {car.model}
           <GradBar/>
-        </div>
-        <Breadcrumb className="fst-italic mx-3">
-          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href="/cars">Inventory</Breadcrumb.Item>
-          <style jsx global>{`
-            a {
-              color: var(--main-color) !important;
-            }
-            a:hover {
-              color: var(--secondary-color) !important;
-            }
-
-          `}</style>
-        </Breadcrumb>
+        </h1>
       </div>
-
       <main>
         <section className={styles.featured_places}>
           <div className="container mt-5">
@@ -294,10 +279,7 @@ export default function CarDetails() {
                 <h2>
                   {car.price ? (
                     <strong className="text-primary">
-                      $
-                      {car.price
-                        .toString()
-                        .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                      {car.price}
                     </strong>
                   ) : (
                     <strong className="text-primary">Unavailable</strong>
@@ -311,7 +293,7 @@ export default function CarDetails() {
                     Type
                   </ListGroup.Item>
                   <ListGroup.Item className="font-weight-bold w-50 d-flex justify-content-end">
-                    Used vehicle
+                    Pre-Owned Vehicle
                   </ListGroup.Item>
                 </ListGroup>
                 <ListGroup horizontal>
@@ -320,6 +302,20 @@ export default function CarDetails() {
                   </ListGroup.Item>
                   <ListGroup.Item className="w-50 d-flex justify-content-end">
                     {car.make}
+                  </ListGroup.Item>
+                </ListGroup>
+                <ListGroup horizontal>
+                  <ListGroup.Item className="w-50 d-flex justify-content-start">
+                    Trim
+                  </ListGroup.Item>
+                  <ListGroup.Item className="w-50 d-flex justify-content-end">
+                    {car.trim ? (
+                          <>
+                            {car.trim}
+                          </> 
+                    ) : (
+                      <>Unavailable</>
+                    )}
                   </ListGroup.Item>
                 </ListGroup>
                 <ListGroup horizontal>
@@ -346,9 +342,7 @@ export default function CarDetails() {
                   <ListGroup.Item className="w-50 d-flex justify-content-end">
                     {car.mileage ? (
                       <strong>
-                        {car.mileage
-                          .toString()
-                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        {car.mileage}
                       </strong>
                     ) : (
                       <strong>Unavailable</strong>
@@ -394,6 +388,17 @@ export default function CarDetails() {
                   }
                   .text-primary:hover {
                     color: var(--secondary-color) !important;
+                  }
+                  @media only screen and (max-width: 768px) {
+                    .list-group-horizontal {
+                      font-size: x-small !important;
+                    }
+                    .accordion-body {
+                      font-size: x-small !important;
+                    }
+                    .accordion-button {
+                      font-size: x-small !important;
+                    }
                   }
                 `}</style>
 

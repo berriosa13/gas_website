@@ -49,23 +49,24 @@ const CarsList = ({
 
   // create new instance with createdAt field modified for viewing
   const newCars = cars.map((car) => ({
-    id: car.id,
+    id: car?.id,
     createdAt: car?.createdAt?.toDate(),
-    make: car.make,
-    mileage: car.mileage,
-    model: car.model,
-    price: car.price,
-    vin: car.vin,
-    year: car.year,
-    drivetrain: car.drivetrain,
-    engine: car.engine,
-    doors: car.doors,
-    exteriorColor: car.exteriorColor,
-    interiorColor: car.interiorColor,
-    transmission: car.transmission,
-    thumbnailImage: car.thumbnailImage,
-    description: car.description,
-    featuredListing: car.featuredListing,
+    make: car?.make,
+    trim: car?.trim,
+    mileage: car?.mileage,
+    model: car?.model,
+    price: car?.price,
+    vin: car?.vin,
+    year: car?.year,
+    drivetrain: car?.drivetrain,
+    engine: car?.engine,
+    doors: car?.doors,
+    exteriorColor: car?.exteriorColor,
+    interiorColor: car?.interiorColor,
+    transmission: car?.transmission,
+    thumbnailImage: car?.thumbnailImage,
+    description: car?.description,
+    featuredListing: car?.featuredListing,
   }));
   console.log("newCars: ", newCars);
 
@@ -87,6 +88,7 @@ const CarsList = ({
           <tr>
             <th>#</th>
             <th>Make/Model</th>
+            <th>Trim</th>
             <th>Mileage</th>
             <th>Price</th>
             <th>Vin</th>
@@ -110,8 +112,9 @@ const CarsList = ({
                     {doc.make} {doc.model}
                   </div>
                 </td>
+                <td>{doc.trim}</td>
                 <td className="">{doc.mileage}</td>
-                <td>${doc.price}</td>
+                <td>{doc.price}</td>
                 <td>#{doc.vin}</td>
                 <td>{doc.year}</td>
                 <td>

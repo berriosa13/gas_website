@@ -2,6 +2,7 @@ import React from "react";
 import { useForm, ValidationError } from "@formspree/react";
 import { FiSend } from "react-icons/fi";
 import { HiBadgeCheck } from "react-icons/hi";
+import PhoneNumberInput from '../PhoneNumberInput'
 import {
   Table,
   Button,
@@ -30,7 +31,7 @@ function AvailabilityForm({ setCar }) {
       <>
         <h5 className="text-center mt-3">
           Your availability confirmation has been successfully sent{" "}
-          <HiBadgeCheck /> <br /> We will get back to you as soon as possible
+          ✅ <br /> We will get back to you as soon as possible
         </h5>
       </>
     );
@@ -76,13 +77,7 @@ function AvailabilityForm({ setCar }) {
               label="Phone"
               className="mb-3"
             >
-              <input
-                type="number"
-                className="form-control"
-                name="phone"
-                id="phone"
-                required
-              />
+              <PhoneNumberInput name={'phoneNumber'} isRequired={true}/>
             </FloatingLabel>
           </Col>
         </Row>

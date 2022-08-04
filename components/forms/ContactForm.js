@@ -10,7 +10,7 @@ function ContactForm() {
   if (state.succeeded) {
       return (
         <>
-            <h5 className="text-center mt-3">Your message has been successfully sent <HiBadgeCheck/> <br/> We will get back to you as soon as possible</h5>
+            <h5 className="text-center mt-3">Your message has been successfully sent ✅ <br/> We will get back to you as soon as possible</h5>
         </>
       )
   }

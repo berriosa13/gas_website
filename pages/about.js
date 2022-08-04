@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import Layout from "../components/Layout";
 import { Breadcrumb, Row, Col, Button, Figure } from "react-bootstrap";
 import GradBar from "../components/GradBar";
@@ -17,10 +18,6 @@ export default function About() {
           About Us
           <GradBar />
         </h1>
-        <Breadcrumb className="fst-italic">
-          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href="/about">About</Breadcrumb.Item>
-        </Breadcrumb>
       </div>
 
       <Row>

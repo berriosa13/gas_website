@@ -1,23 +1,28 @@
 {
-    "forms": {
-      "contactForm": {
-        "name": "Contact Form",
-        "actions": [{ "type": "email", "to": "info@gasautomobilesales.com" }]
-      },
+  "forms": {
+    "contactForm": {
+      "name": "Contact Form",
+      "actions": [{ "type": "email", "to": "requests@gasautomobilesales.com" }]
+    },
 
-      "quoteForm": {
-        "name": "Request Quote Form",
-        "actions": [{ "type": "email", "to": "info@gasautomobilesales.com"}]
-      },
+    "quoteForm": {
+      "name": "Request Quote Form",
+      "actions": [{ "type": "email", "to": "requests@gasautomobilesales.com"}]
+    },
 
-      "availabilityForm": {
-        "name": "Availability Form",
-        "actions": [{ "type": "email", "to": "info@gasautomobilesales.com"}]
-      },
-      
-      "testDriveForm": {
-        "name": "Test Drive Form",
-        "actions": [{ "type": "email", "to": "info@gasautomobilesales.com"}]
-      }
+    "availabilityForm": {
+      "name": "Availability Form",
+      "actions": [{ "type": "email", "to": "requests@gasautomobilesales.com"}]
+    },
+    
+    "testDriveForm": {
+      "name": "Test Drive Form",
+      "actions": [{ "type": "email", "to": "requests@gasautomobilesales.com"}]
+    },
+
+    "creditApplicationForm": {
+      "name": "Credit Application Form",
+      "actions": [{ "type": "email", "to": "apply@gasautomobilesales.com"}]
     }
   }
+}

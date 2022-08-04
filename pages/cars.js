@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/Layout";
-import { Row, Col, Button, Breadcrumb } from "react-bootstrap";
+import { Row, Col, Button, Breadcrumb, Container, Form } from "react-bootstrap";
 import styles from "../styles/page_styles/Cars.module.css";
 import GradBar from "../components/GradBar";
 import { GoDashboard } from "react-icons/go";
@@ -53,19 +53,6 @@ export default function Cars({ cars }) {
           Inventory
           <GradBar />
         </h1>
-
-        <Breadcrumb className="fst-italic">
-          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-          <Breadcrumb.Item href="/cars">Inventory</Breadcrumb.Item>
-          <style jsx global>{`
-            a {
-              color: var(--main-color) !important;
-            }
-            a:hover {
-              color: var(--secondary-color) !important;
-            }
-          `}</style>
-        </Breadcrumb>
       </div>
       <div>
         <h1 className="text-center my-5"></h1>
@@ -180,9 +167,7 @@ export default function Cars({ cars }) {
                             <div className={styles.overlay_content}>
                               <strong>
                                 <GoDashboard />{" "}
-                                {car.mileage
-                                  .toString()
-                                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                                {car.mileage}
                               </strong>
                               &nbsp;&nbsp;&nbsp;&nbsp;
                               <strong>
@@ -208,7 +193,7 @@ export default function Cars({ cars }) {
                     </div>
                     <div className={styles.down_content}>
                       <h4>
-                        Used {car.year} {car.make} {car.model}
+                        {car.year} {car.make} {car.model} {car.trim}
                       </h4>
 
                       <br />
@@ -216,10 +201,7 @@ export default function Cars({ cars }) {
                       <p>
                         <span>
                           <strong>
-                            <sup>$</sup>
-                            {car.price
-                              .toString()
-                              .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                            {car.price}
                           </strong>
                         </span>
                       </p>

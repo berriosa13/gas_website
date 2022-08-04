@@ -3,7 +3,8 @@ import { useForm, ValidationError } from '@formspree/react';
 import { FiSend } from "react-icons/fi";
 import { HiBadgeCheck } from "react-icons/hi";
 import { Table, Button, Card, Modal, Row, Col, Form, FloatingLabel } from "react-bootstrap";
-import { useRouter } from "next/router";
+import { useRouter } from "next/router"
+import PhoneNumberInput from '../PhoneNumberInput'
 
 
 function QuoteForm( { setCar }) {
@@ -14,7 +15,7 @@ function QuoteForm( { setCar }) {
   if (state.succeeded) {
       return (
         <>
-            <h5 className="text-center mt-3">Your quote request has been successfully sent <HiBadgeCheck/> <br/> We will get back to you as soon as possible</h5>
+            <h5 className="text-center mt-3">Your quote request has been successfully sent ✅ <br/> We will get back to you as soon as possible</h5>
         </>
       )
   }
@@ -32,6 +33,7 @@ function QuoteForm( { setCar }) {
                 type="text"
                 className="form-control"
                 name="firstName"
+                placeholder="First Name"
                 id="firstName"
                 autoFocus
                 required
@@ -48,6 +50,7 @@ function QuoteForm( { setCar }) {
                 type="text"
                 className="form-control"
                 name="lastName"
+                placeholder="Last Name"
                 id="lastName"
                 required
                 />
@@ -59,13 +62,7 @@ function QuoteForm( { setCar }) {
               label="Phone"
               className="mb-3"
             >
-              <input
-                type="number"
-                className="form-control"
-                name="phone"
-                id="phone"
-                required
-                />
+            <PhoneNumberInput name={'phoneNumber'} isRequired={true}/>
             </FloatingLabel>
           </Col>
         </Row>
@@ -80,6 +77,7 @@ function QuoteForm( { setCar }) {
                 type="text"
                 className="form-control"
                 name="email"
+                placeholder="Email"
                 id="email"
                 required
                 />

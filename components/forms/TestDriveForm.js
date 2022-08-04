@@ -3,6 +3,7 @@ import { useForm } from "@formspree/react";
 import { FiSend } from "react-icons/fi";
 import { HiBadgeCheck } from "react-icons/hi";
 import { Button, Col, Row, FloatingLabel } from "react-bootstrap";
+import PhoneNumberInput from '../PhoneNumberInput'
 
 function TestDriveForm({ setCar }) {
   const [state, handleSubmit] = useForm("testDriveForm");
@@ -18,7 +19,7 @@ function TestDriveForm({ setCar }) {
     return (
       <>
         <h5 className="text-center mt-3">
-          Your test drive request has been successfully sent <HiBadgeCheck />{" "}
+          Your test drive request has been successfully sent ✅{" "}
           <br /> We will get back to you as soon as possible
         </h5>
       </>
@@ -65,13 +66,7 @@ function TestDriveForm({ setCar }) {
               label="Phone"
               className="mb-3"
             >
-              <input
-                type="number"
-                className="form-control"
-                name="phone"
-                id="phone"
-                required
-              />
+              <PhoneNumberInput name={'phoneNumber'} isRequired={true}/>
             </FloatingLabel>
           </Col>
         </Row>

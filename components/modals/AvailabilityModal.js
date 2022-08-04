@@ -29,11 +29,17 @@ const AvailabilityModal = ({ handleClose, show, setCar }) => {
               </Card>
             </Col>
             <Col>
-              <ListGroup variant="flush" className="my-3">
+            <ListGroup variant="flush" className="my-3">
+              <ListGroup.Item>
+                  Type:{" "}
+                  <strong>
+                    Pre-Owned Vehicle
+                  </strong>
+                </ListGroup.Item>
                 <ListGroup.Item>
                   Vehicle:{" "}
                   <strong>
-                    {setCar.year} {setCar.make} {setCar.model}
+                    {setCar.year} {setCar.make} {setCar.model}   {setCar.trim}
                   </strong>
                 </ListGroup.Item>
                 <ListGroup.Item>
@@ -42,18 +48,13 @@ const AvailabilityModal = ({ handleClose, show, setCar }) => {
                 <ListGroup.Item>
                   Mileage:{" "}
                   <strong>
-                    {setCar.mileage
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    {setCar.mileage}
                   </strong>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   Price:{" "}
                   <strong>
-                    $
-                    {setCar.price
-                      .toString()
-                      .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                    {setCar.price}
                   </strong>
                 </ListGroup.Item>
               </ListGroup>
