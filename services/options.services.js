@@ -269,6 +269,11 @@ class SelectOptionsService {
       { value: "Blue", label: "Blue" },
       { value: "Teal", label: "Teal" },
       { value: "Aqua", label: "Aqua" },
+      { value: "Tan", label: "Tan" },
+      { value: "Gold", label: "Gold" },
+      { value: "Beige", label: "Beige" },
+      { value: "Orange", label: "Orange" },
+      { value: "Beige", label: "Beige" },
     ];
   };
 
