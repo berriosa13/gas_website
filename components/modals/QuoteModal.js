@@ -44,9 +44,6 @@ const QuoteModal = ({ handleClose, show, setCar }) => {
                   </strong>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  Vin# <strong>{setCar.vin}</strong>
-                </ListGroup.Item>
-                <ListGroup.Item>
                   Mileage:{" "}
                   <strong>
                     {setCar.mileage}

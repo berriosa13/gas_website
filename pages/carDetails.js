@@ -111,9 +111,9 @@ export default function CarDetails() {
         <meta name="keywords" content="cars" />
       </Head>
 
-      <div className="d-flex my-5 justify-content-between">
+      <div className="d-flex mx-4 mt-5 justify-content-start">
         <h1>
-          {car.year} {car.make} {car.model}
+          {car.year} {car.make} {car.model} 
           <GradBar/>
         </h1>
       </div>
