@@ -84,22 +84,22 @@ export default function Contact() {
             </Col>
             <Col className="d-flex flex-column justify-content-start">
               <p>
-                <BsAlarm /> 10:00AM - 6:00PM
+                <BsAlarm /> 10:00AM - 5:00PM
               </p>
               <p>
-                <BsAlarm /> 10:00AM - 6:00PM
+                <BsAlarm /> 10:00AM - 5:00PM
               </p>
               <p>
-                <BsAlarm /> 10:00AM - 6:00PM
+                <BsAlarm /> 10:00AM - 5:00PM
               </p>
               <p>
-                <BsAlarm /> 10:00AM - 6:00PM
+                <BsAlarm /> 10:00AM - 5:00PM
               </p>
               <p>
-                <BsAlarm /> 10:00AM - 6:00PM
+                <BsAlarm /> 10:00AM - 5:00PM
               </p>
               <p>
-                <BsAlarm /> 10:00AM - 6:00PM
+                <BsAlarm /> 10:00AM - 3:00PM
               </p>
               <p>
                 <BsCalendarX /> CLOSED
