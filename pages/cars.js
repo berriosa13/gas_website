@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/Layout";
-import { Row, Col, Button, Breadcrumb, Container, Form } from "react-bootstrap";
+import { Row, Col, Button, Container, Form } from "react-bootstrap";
 import styles from "../styles/page_styles/Cars.module.css";
 import GradBar from "../components/GradBar";
 import { GoDashboard } from "react-icons/go";
@@ -13,7 +13,7 @@ import CarDataService from "../services/cars.services";
 import { AiOutlineFrown } from "react-icons/ai";
 
 export async function getStaticProps(context) {
-  const cars = await CarDataService.getAllListings();
+  const cars = await CarDataService.getAllActiveListings();
 
   return {
     props: {

@@ -23,7 +23,6 @@ export async function getStaticProps(context) {
 }
 
 export default function Home({ featuredListings }) {
-  // console.log(featuredListings);
   return (
     <>
       <Head>
@@ -73,10 +72,17 @@ export default function Home({ featuredListings }) {
 
       <div className="my-5 pt-5">
         <section className={styles.clients}>
-          <h2>Some of the brands we sell ...</h2>
+        
+        <div className="d-flex justify-content-center mb-3 mt-3"> 
+          <h1>
+            Some of the brands we sell ...
+            <GradBar/>
+          </h1>
+        </div>
+
+         
           <div className="row">
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              {/* <Image layout='fixed' className="img-fluid" src="/imgs/carLogos/ford_logo.png" alt="carBrandLogo" width="120" height="60"  /> */}
               <img
                 src="/imgs/carLogos/ford_logo.png"
                 className="img-fluid"
@@ -208,8 +214,7 @@ export default function Home({ featuredListings }) {
                               />
                               <div className={carStyles.overlay_content}>
                                 <strong>
-                                  <GoDashboard />{" "}
-                                  {car.mileage}
+                                  <GoDashboard /> {car.mileage}
                                 </strong>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <strong>
@@ -223,13 +228,13 @@ export default function Home({ featuredListings }) {
                             </>
                           ) : (
                             <Image
-                                priority="true"
-                                src="https://via.placeholder.com/450x300.png?text=Image+Coming+Soon..."
-                                layout="responsive"
-                                alt="thumbnail image"
-                                width={450}
-                                height={300}
-                              />
+                              priority="true"
+                              src="https://via.placeholder.com/450x300.png?text=Image+Coming+Soon..."
+                              layout="responsive"
+                              alt="thumbnail image"
+                              width={450}
+                              height={300}
+                            />
                           )}
                         </div>
                       </div>
@@ -242,9 +247,7 @@ export default function Home({ featuredListings }) {
 
                         <p>
                           <span>
-                            <strong>
-                              {car.price}
-                            </strong>
+                            <strong>{car.price}</strong>
                           </span>
                         </p>
 

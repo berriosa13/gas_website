@@ -278,9 +278,7 @@ export default function CarDetails() {
               <div className="col">
                 <h2>
                   {car.price ? (
-                    <strong className="text-primary">
-                      {car.price}
-                    </strong>
+                    <strong className="text-primary">{car.price}</strong>
                   ) : (
                     <strong className="text-primary">Unavailable</strong>
                   )}
@@ -309,13 +307,7 @@ export default function CarDetails() {
                     Trim
                   </ListGroup.Item>
                   <ListGroup.Item className="w-50 d-flex justify-content-end">
-                    {car.trim ? (
-                          <>
-                            {car.trim}
-                          </> 
-                    ) : (
-                      <>Unavailable</>
-                    )}
+                    {car.trim ? <>{car.trim}</> : <>Unavailable</>}
                   </ListGroup.Item>
                 </ListGroup>
                 <ListGroup horizontal>
@@ -341,9 +333,7 @@ export default function CarDetails() {
 
                   <ListGroup.Item className="w-50 d-flex justify-content-end">
                     {car.mileage ? (
-                      <strong>
-                        {car.mileage}
-                      </strong>
+                      <strong>{car.mileage}</strong>
                     ) : (
                       <strong>Unavailable</strong>
                     )}

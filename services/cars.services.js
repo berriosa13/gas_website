@@ -32,8 +32,14 @@ class CarDataService {
     }
 
     updateCar = (id, updatedCar)=> {
+      if(updatedCar.sold === 'Yes') {
+        updatedCar.dateSold = serverTimestamp();
         const carDoc = doc(carCollectionRef, id)
         return updateDoc(carDoc, updatedCar)
+      } else {
+        const carDoc = doc(carCollectionRef, id)
+        return updateDoc(carDoc, updatedCar)
+      }
     };
 
     deleteCar = (id) => {
@@ -71,10 +77,10 @@ class CarDataService {
 
     getAllFeaturedListings = async () => {
         const cars = [];
-      
         try {
           const getAllFeaturedListingsQuery = query(
             carCollectionRef,
+            where('sold', '==', 'No'),
             where('featuredListing', '==', 'Yes'),
           );
           const querySnapshot = await getDocs(getAllFeaturedListingsQuery);
@@ -93,15 +99,14 @@ class CarDataService {
         return cars;
     }
 
-    getAllListings = async () => {
+    getAllActiveListings = async () => {
         const cars = [];
-      
         try {
-          const getAllListingsQuery = query(
+          const getAllActiveListingsQuery = query(
             carCollectionRef,
-            orderBy("createdAt"),
-          );
-          const querySnapshot = await getDocs(getAllListingsQuery);
+            where('sold', '==', 'No'),
+            orderBy("createdAt"));
+          const querySnapshot = await getDocs(getAllActiveListingsQuery);
           querySnapshot.forEach(
             (doc) => {
               cars.push({
