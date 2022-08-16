@@ -83,8 +83,7 @@ const CarsList = ({
         listings.push({
           ...doc.data(),
            id: doc.id,
-          sold: doc.sold,
-          dateSold: doc.data().dateSold.toDate().getTime(),});
+          });
       });
      console.log("inactiveListings:",listings);
      setInactiveListings(listings);
