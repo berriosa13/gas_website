@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { useForm, ValidationError } from "@formspree/react";
 import { FiSend } from "react-icons/fi";
 import GradBar from "../GradBar";
@@ -6,28 +6,17 @@ import PhoneNumberInput from "../PhoneNumberInput";
 import SocialSecurityInput from "../SocialSecurityInput";
 import NumberFormat from 'react-number-format';
 import {
-  Table,
   Button,
-  Card,
-  Modal,
   Row,
   Col,
-  Form,
   FloatingLabel,
   Container,
   Tab,
   Tabs,
 } from "react-bootstrap";
-import { useRouter } from "next/router";
 
 function CreditApplicationForm() {
   const [state, handleSubmit] = useForm("creditApplicationForm");
-  const [firstName, setFirstName] = useState("");
-  const [socialInput, setSocialInput] = useState("");
-  const [trimmedDataUrl, setTrimmedDataUrl] = useState("");
-  const applicantSigRef = useRef();
-  const coApplicantSigRef = useRef();
-  const router = useRouter();
 
   if (state.succeeded) {
     return (

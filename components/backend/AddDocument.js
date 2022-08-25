@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   Form,
-  InputGroup,
   Button,
   Row,
   Col,
@@ -14,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CarDataService from "../../services/cars.services";
 import ImageDataService from "../../services/images.services";
 import SelectOptionsService from "../../services/options.services";
-import { v4 } from "uuid";
+import GradBar from "../GradBar";
 
 import {
   getStorage,
@@ -48,13 +47,6 @@ const AddDocument = ({ carId, setCarId }) => {
   const [featuredListing, setFeaturedListing] = useState("");
   const [uploading, setUploading] = useState(false);
   const storage = getStorage();
-
-  const styles = {
-    select: {
-      width: "100%",
-      maxWidth: 400,
-    },
-  };
 
   const [carMakeOptions, setCarMakeOptions] = useState(
     SelectOptionsService.getCarMakeOptions
@@ -279,7 +271,12 @@ const AddDocument = ({ carId, setCarId }) => {
             autoClose={3000}
           />
         </>
-        <h1 className="text-center mt-3">GAS Admin Dashboard</h1>
+        <div className="d-flex justify-content-center">
+          <h1 className="text-center mt-3">
+            GAS Admin Dashboard
+            <GradBar/>
+          </h1>
+        </div>
         <Form onSubmit={handleSubmit} className="mt-5">
           <Row>
             <Col md={3}>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Head from "next/head";
+import { NextSeo  } from "next-seo"; 
 import Layout from '../components/Layout'
 import Link from 'next/link';
 import { Breadcrumb, Row, Button, Col } from "react-bootstrap";
@@ -21,10 +21,26 @@ export default function Contact() {
 
   return (
     <>
-      <Head>
-        <title>GAS Automobile Sales | Contact</title>
-        <meta name="keywords" content="cars" />
-      </Head>
+      <NextSeo
+        title="Guardian Automobile Sales | Contact"
+        description="Send us a message for any questions or concerns"
+        canonical="https://www.gasautomobilesales.com/"
+        openGraph={{
+          url: "https://www.gasautomobilesales.com/",
+          title: "Guardian Automobile Sales | Contact",
+          description: "Send us a message for any questions or concerns.",
+          images: [
+            {
+              url: "/imgs/GAS-Text-Only-2-Color.png",
+              width: 800,
+              height: 600,
+              alt: "Og GAS Text Logo",
+              type: "image/png",
+            },
+          ],
+          site_name: "gasautomobilesales",
+        }}
+      />
       <div className="d-flex justify-content-between my-5">
         <h1>
           Contact

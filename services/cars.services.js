@@ -12,7 +12,8 @@ import {
     deleteField,
     query,
     where,
-    orderBy
+    orderBy,
+    onSnapshot
   } from "firebase/firestore";
 
 const carCollectionRef = collection(db, "Cars")
@@ -31,11 +32,17 @@ class CarDataService {
         })
     }
 
-    updateCar = (id, updatedCar)=> {
+    updateCar = async (id, updatedCar) => {
+      const carDoc = doc(carCollectionRef, id)
       if(updatedCar.sold === 'Yes') {
         updatedCar.dateSold = serverTimestamp();
-        const carDoc = doc(carCollectionRef, id)
         return updateDoc(carDoc, updatedCar)
+      } else if(updatedCar.sold === 'No' && updatedCar?.dateSold != '') {
+        // Listing has been marked as sold previously, but then made active again
+        await updateDoc(carDoc, { 
+            dateSold: deleteField()
+        });
+        return updateDoc(carDoc, updatedCar,)
       } else {
         const carDoc = doc(carCollectionRef, id)
         return updateDoc(carDoc, updatedCar)
@@ -120,6 +127,18 @@ class CarDataService {
           console.log("Error getting static props in cars.js: ", err);
         }
         return cars;
+    }
+
+    removeDateSoldField = (id) => {
+      try {
+        const docRef = doc(carCollectionRef, id);
+        updateDoc(docRef, { 
+            dateSold: deleteField()
+        });
+
+      } catch(err) {
+          console.error("Error deleting dateSold field ", err);
+      }
     }
 }
 

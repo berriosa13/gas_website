@@ -7,6 +7,7 @@ import CarsList from "../components/backend/CarList";
 import ImageModal from "../components/backend/ImageModal";
 import DeleteModal from "../components/backend/DeleteModal";
 import DescriptionModal from "../components/backend/DescriptionModal";
+import { NextSeo  } from "next-seo"; 
 
 function CarDashboard() {
 
@@ -56,6 +57,26 @@ function CarDashboard() {
 
   return (
     <>
+      <NextSeo
+          title="Guardian Automobile Sales | Admin Dashboard"
+          description="Create, Edit, and Delete car listings"
+          canonical="https://www.gasautomobilesales.com/"
+          openGraph={{
+            url: "https://www.gasautomobilesales.com/",
+            title: "Guardian Automobile Sales | Admin Dashboard",
+            description: "Create, Edit, and Delete car listing",
+            images: [
+              {
+                url: "/imgs/GAS-Text-Only-2-Color.png",
+                width: 800,
+                height: 600,
+                alt: "Og GAS Text Logo",
+                type: "image/png",
+              },
+            ],
+            site_name: "gasautomobilesales",
+          }}
+        />
         <Navbar expand="md" bg="dark" variant="dark" className="header d-flex justify-content-center">
             <Navbar.Brand href="/carDashboard">
               <Image

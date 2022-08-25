@@ -1,19 +1,12 @@
 import React from "react";
 import { useForm } from "@formspree/react";
 import { FiSend } from "react-icons/fi";
-import { HiBadgeCheck } from "react-icons/hi";
 import { Button, Col, Row, FloatingLabel } from "react-bootstrap";
 import PhoneNumberInput from '../PhoneNumberInput'
 
 function TestDriveForm({ setCar }) {
   const [state, handleSubmit] = useForm("testDriveForm");
-  const defaultMessageText =
-    "Hello, I am scheduling a test drive for the " +
-    setCar.year +
-    " " +
-    setCar.make +
-    " " +
-    setCar.model;
+  const defaultMessageText = "Hello, I am scheduling a test drive for the " + setCar.year + " " + setCar.make + " " + setCar.model + " " + setCar.trim;
 
   if (state.succeeded) {
     return (

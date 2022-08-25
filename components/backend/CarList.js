@@ -14,8 +14,7 @@ import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BsArrowRightShort } from "react-icons/bs";
 import { TbFileDescription } from "react-icons/tb";
-import CarDataService from "../../services/cars.services";
-import { collection, onSnapshot, where, orderBy, query } from "firebase/firestore";
+import { collection, onSnapshot, where, query } from "firebase/firestore";
 
 import { db } from "../../firebaseConfig";
 
@@ -29,33 +28,6 @@ const CarsList = ({
 }) => {
   const [activeListings, setActiveListings] = useState([]);
   const [inactiveListings, setInactiveListings] = useState([]);
-  
-
-  // useEffect(() => {
-  //   // Realtime listening of db changes. Updates table as change are made
-  //   const carUnsub = onSnapshot(
-  //     collection(db, "Cars"),
-  //     where('sold', '==', 'No'),
-  //     orderBy("createdAt"),
-  //     (snapShot) => {
-  //       let list = [];
-  //       snapShot.docs.forEach((doc) => {
-  //         list.push({
-  //           ...doc.data(),
-  //           id: doc.id,
-  //         });
-  //       });
-  //       setCars(list);
-  //     },
-  //     (error) => {
-  //       console.log("Error getting snapshot data for Car collection ", error);
-  //     }
-  //   );
-
-  //   return () => {
-  //     carUnsub();
-  //   };
-  // }, []);
 
   useEffect(() => {
     // Realtime listening of all active listings. Returns list of all listings that have not been sold yet.

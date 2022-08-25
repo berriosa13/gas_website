@@ -1,4 +1,5 @@
-import Head from "next/head";
+import React from "react";
+import { NextSeo  } from "next-seo"; 
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/Layout";
@@ -10,25 +11,49 @@ import { GiCog } from "react-icons/gi";
 import { TbSteeringWheel } from "react-icons/tb";
 import { Row, Col, Button } from "react-bootstrap";
 import CarDataService from "../services/cars.services";
+// import LogoDataService from "../services/logos.services";
 import { AiOutlineFrown } from "react-icons/ai";
-import React from "react";
 
 export async function getStaticProps(context) {
   const featuredListings = await CarDataService.getAllFeaturedListings();
+  // const makeLogoImages = LogoDataService.getAllMakeLogoImages();
   return {
     props: {
       featuredListings,
+      // makeLogoImages,
     },
   };
 }
 
 export default function Home({ featuredListings }) {
+  // console.log("Logo Images: ",makeLogoImages);
   return (
     <>
-      <Head>
-        <title>GAS Automobile Sales | Home</title>
-        <meta name="keywords" content="cars" />
-      </Head>
+      {/* <Head>
+        <title>Guardian Automobile Sales | Home</title>
+        <meta name="description" content="Find the best used cars in Scranton, Wilkes-Barre and Dunmore, PA. We have a large selection of used vehicles at affordable prices." />
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+      </Head> */}
+      <NextSeo
+        title="Guardian Automobile Sales | Home"
+        description="Find the best used cars in Scranton, Wilkes-Barre and Dunmore, PA. We have a large selection of used vehicles at affordable prices."
+        canonical="https://www.gasautomobilesales.com/"
+        openGraph={{
+          url: "https://www.gasautomobilesales.com/",
+          title: "Guardian Automobile Sales | Home",
+          description: "Find the best used cars in Scranton, Wilkes-Barre and Dunmore, PA. We have a large selection of used vehicles at affordable prices.",
+          images: [
+            {
+              url: "/imgs/GAS-Text-Only-2-Color.png",
+              width: 800,
+              height: 600,
+              alt: "Og GAS Text Logo",
+              type: "image/png",
+            },
+          ],
+          site_name: "gasautomobilesales",
+        }}
+      />
 
       <section>
         <Row className="mx-3">
@@ -72,15 +97,12 @@ export default function Home({ featuredListings }) {
 
       <div className="my-5 pt-5">
         <section className={styles.clients}>
-        
-        <div className="d-flex justify-content-center mb-3 mt-3"> 
-          <h1>
-            Some of the brands we sell ...
-            <GradBar/>
-          </h1>
-        </div>
-
-         
+          <div className="d-flex justify-content-center mb-3 mt-3">
+            <h1>
+              Some of the brands we sell ...
+              <GradBar />
+            </h1>
+          </div>
           <div className="row">
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
               <img

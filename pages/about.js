@@ -1,18 +1,32 @@
-import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
+
+import { NextSeo } from "next-seo";
 import Layout from "../components/Layout";
-import { Breadcrumb, Row, Col, Button, Figure } from "react-bootstrap";
+import { Row, Col, Figure } from "react-bootstrap";
 import GradBar from "../components/GradBar";
 
 export default function About() {
   return (
     <>
-      <Head>
-        <title>GAS Automobile Sales | About</title>
-        <meta name="keywords" content="cars" />
-      </Head>
-
+     <NextSeo
+        title="Guardian Automobile Sales | About"
+        description="Learn more about Guradian Automobile Sales, located in the Scranton/Wilkes-Barre area."
+        canonical="https://www.gasautomobilesales.com/"
+        openGraph={{
+          url: "https://www.gasautomobilesales.com/",
+          title: "Guardian Automobile Sales | About",
+          description: "Learn more about Guradian Automobile Sales, located in the Scranton/Wilkes-Barre area.",
+          images: [
+            {
+              url: "/imgs/GAS-Text-Only-2-Color.png",
+              width: 800,
+              height: 600,
+              alt: "Og GAS Text Logo",
+              type: "image/png",
+            },
+          ],
+          site_name: "gasautomobilesales",
+        }}
+      />
       <div className="d-flex justify-content-between my-5">
         <h1>
           About Us
