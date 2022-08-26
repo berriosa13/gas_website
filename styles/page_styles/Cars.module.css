@@ -221,8 +221,6 @@ section.banner {
   border: 1px solid #ddd;
 }
 
-.accordion li:last-child .accordion-trigger {}
-
 .accordion-content {
   display: none;
 }
@@ -290,17 +288,6 @@ section#video-container {
 
 .list-group-no-border .list-group-item:first-child {
   border-top: 0;
-}
-
-/* .listing_image {
-  border-radius:12px;
-  -webkit-box-shadow: 0px 8px 24px -1px rgba(0,0,0,0.47);
-  -moz-box-shadow: 0px 8px 24px -1px rgba(0,0,0,0.47);
-  box-shadow: 0px 8px 24px -1px rgba(0,0,0,0.47);
-} */
-.carousel-inner>.item>img {
-  /* width:400px;
-  height:400px; */
 }
 
 .carousel {

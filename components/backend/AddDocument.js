@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
   Form,
-  InputGroup,
   Button,
   Row,
   Col,
@@ -14,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CarDataService from "../../services/cars.services";
 import ImageDataService from "../../services/images.services";
 import SelectOptionsService from "../../services/options.services";
-import { v4 } from "uuid";
+import GradBar from "../GradBar";
 
 import {
   getStorage,
@@ -38,6 +37,7 @@ const AddDocument = ({ carId, setCarId }) => {
   const [exteriorColor, setExteriorColor] = useState("");
   const [year, setYear] = useState("");
   const [description, setDescription] = useState("");
+  const [sold, setSold] = useState("");
   const [images, setImages] = useState("");
   const [imageUrl, setImageUrls] = useState("");
   const imageInputRef = React.useRef();
@@ -47,13 +47,6 @@ const AddDocument = ({ carId, setCarId }) => {
   const [featuredListing, setFeaturedListing] = useState("");
   const [uploading, setUploading] = useState(false);
   const storage = getStorage();
-
-  const styles = {
-    select: {
-      width: "100%",
-      maxWidth: 400,
-    },
-  };
 
   const [carMakeOptions, setCarMakeOptions] = useState(
     SelectOptionsService.getCarMakeOptions
@@ -67,6 +60,8 @@ const AddDocument = ({ carId, setCarId }) => {
   const carColorsOptions = SelectOptionsService.getCarColorOptions();
   const featuredListingOptions =
     SelectOptionsService.getFeaturedListingOptions();
+
+  const soldListingOptions = SelectOptionsService.getSoldListingOptions();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,7 +81,8 @@ const AddDocument = ({ carId, setCarId }) => {
       interiorColor === "" ||
       exteriorColor === "" ||
       description === "" ||
-      featuredListing === ""
+      featuredListing === "" ||
+      sold === ""
     ) {
       toast.error("All fields must be filled out!");
       return;
@@ -104,6 +100,7 @@ const AddDocument = ({ carId, setCarId }) => {
       transmission,
       engine,
       doors,
+      sold,
       interiorColor,
       exteriorColor,
       description,
@@ -153,6 +150,7 @@ const AddDocument = ({ carId, setCarId }) => {
     setDescription("");
     setImages("");
     setImageUrls("");
+    setSold("");
     setImages("");
     setImageForeignId("");
     setImageStorageName("");
@@ -246,6 +244,7 @@ const AddDocument = ({ carId, setCarId }) => {
       setExteriorColor(carDocSnap.data().exteriorColor);
       setDescription(carDocSnap.data().description);
       setFeaturedListing(carDocSnap.data().featuredListing);
+      setSold(carDocSnap.data().sold);
       descriptionInputRef.current.value = carDocSnap.data().description;
       toast.info(
         "To edit listing, change any of the fields and click 'Add/Update'"
@@ -272,7 +271,12 @@ const AddDocument = ({ carId, setCarId }) => {
             autoClose={3000}
           />
         </>
-        <h1 className="text-center mt-3">GAS Admin Dashboard</h1>
+        <div className="d-flex justify-content-center">
+          <h1 className="text-center mt-3">
+            GAS Admin Dashboard
+            <GradBar/>
+          </h1>
+        </div>
         <Form onSubmit={handleSubmit} className="mt-5">
           <Row>
             <Col md={3}>
@@ -376,7 +380,7 @@ const AddDocument = ({ carId, setCarId }) => {
             </Col>
           </Row>
           <Row className="">
-            <Col md={4}>
+            <Col md={3}>
               <Form.Group className="mb-3" controlId="formCarDrivetrain">
                 <Form.Label>
                   <strong>Drivetrain:</strong>
@@ -391,7 +395,7 @@ const AddDocument = ({ carId, setCarId }) => {
                 ></Select>
               </Form.Group>
             </Col>
-            <Col md={4}>
+            <Col md={3}>
               <Form.Group className="mb-3" controlId="formCarTransmission">
                 <Form.Label>
                   <strong>Transmission:</strong>
@@ -406,7 +410,7 @@ const AddDocument = ({ carId, setCarId }) => {
                 ></Select>
               </Form.Group>
             </Col>
-            <Col md={4}>
+            <Col md={3}>
               <Form.Group className="mb-3" controlId="formCarEngine">
                 <Form.Label>
                   <strong>Engine:</strong>
@@ -421,8 +425,6 @@ const AddDocument = ({ carId, setCarId }) => {
                 ></Select>
               </Form.Group>
             </Col>
-          </Row>
-          <Row>
             <Col md={3}>
               <Form.Group className="mb-3" controlId="formCarDoors">
                 <Form.Label>
@@ -438,6 +440,8 @@ const AddDocument = ({ carId, setCarId }) => {
                 ></Select>
               </Form.Group>
             </Col>
+          </Row>
+          <Row>
             <Col md={3}>
               <Form.Group className="mb-3" controlId="formCarInteriorColor">
                 <Form.Label>
@@ -481,6 +485,21 @@ const AddDocument = ({ carId, setCarId }) => {
                     options={featuredListingOptions}
                     onChange={(e) => {
                       setFeaturedListing(e.value);
+                    }}
+                  ></Select>
+                </Form.Group>
+            </Col>
+            <Col md={3}>
+              <Form.Group className="mb-3">
+                  <Form.Label>
+                    <strong>Sold?</strong>
+                  </Form.Label>
+                  <Select
+                    className="w-100"
+                    value={{ value: sold, label: sold }}
+                    options={soldListingOptions}
+                    onChange={(e) => {
+                      setSold(e.value);
                     }}
                   ></Select>
                 </Form.Group>

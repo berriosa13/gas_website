@@ -6,11 +6,10 @@
   text-align: center;
 }
 .clients img {
-  max-width: 45%;
+  max-width: 60%;
   transition: all 0.4s ease-in-out;
   display: inline-block;
   padding: 15px 0;
-  filter: grayscale(100);
 }
 .clients img:hover {
   filter: none;

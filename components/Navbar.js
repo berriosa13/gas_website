@@ -60,7 +60,7 @@ const NavBar = () => {
 
               <Link href="/apply" passhref>
                 <ReactBootStrap.Nav.Link as="a" href="/apply">
-                  Apply Now
+                  Apply Online
                 </ReactBootStrap.Nav.Link>
               </Link>
             </ReactBootStrap.Nav>

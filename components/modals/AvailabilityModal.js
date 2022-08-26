@@ -25,7 +25,7 @@ const AvailabilityModal = ({ handleClose, show, setCar }) => {
             <Col>
               <Card>
                   <Card.Title><h5 className="text-center my-2">Interested Vehicle</h5></Card.Title>
-                <Card.Img variant="top" src={setCar.thumbnailImage} />
+                <Card.Img variant="top" src={setCar.thumbnailImage} className="w-100" />
               </Card>
             </Col>
             <Col>
@@ -41,9 +41,6 @@ const AvailabilityModal = ({ handleClose, show, setCar }) => {
                   <strong>
                     {setCar.year} {setCar.make} {setCar.model}   {setCar.trim}
                   </strong>
-                </ListGroup.Item>
-                <ListGroup.Item>
-                  Vin# <strong>{setCar.vin}</strong>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   Mileage:{" "}

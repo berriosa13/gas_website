@@ -1,4 +1,5 @@
-import Head from "next/head";
+import React from "react";
+import { NextSeo  } from "next-seo"; 
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/Layout";
@@ -10,26 +11,49 @@ import { GiCog } from "react-icons/gi";
 import { TbSteeringWheel } from "react-icons/tb";
 import { Row, Col, Button } from "react-bootstrap";
 import CarDataService from "../services/cars.services";
+// import LogoDataService from "../services/logos.services";
 import { AiOutlineFrown } from "react-icons/ai";
-import React from "react";
 
 export async function getStaticProps(context) {
   const featuredListings = await CarDataService.getAllFeaturedListings();
+  // const makeLogoImages = LogoDataService.getAllMakeLogoImages();
   return {
     props: {
       featuredListings,
+      // makeLogoImages,
     },
   };
 }
 
 export default function Home({ featuredListings }) {
-  // console.log(featuredListings);
+  // console.log("Logo Images: ",makeLogoImages);
   return (
     <>
-      <Head>
-        <title>GAS Automobile Sales | Home</title>
-        <meta name="keywords" content="cars" />
-      </Head>
+      {/* <Head>
+        <title>Guardian Automobile Sales | Home</title>
+        <meta name="description" content="Find the best used cars in Scranton, Wilkes-Barre and Dunmore, PA. We have a large selection of used vehicles at affordable prices." />
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+      </Head> */}
+      <NextSeo
+        title="Guardian Automobile Sales | Home"
+        description="Find the best used cars in Scranton, Wilkes-Barre and Dunmore, PA. We have a large selection of used vehicles at affordable prices."
+        canonical="https://www.gasautomobilesales.com/"
+        openGraph={{
+          url: "https://www.gasautomobilesales.com/",
+          title: "Guardian Automobile Sales | Home",
+          description: "Find the best used cars in Scranton, Wilkes-Barre and Dunmore, PA. We have a large selection of used vehicles at affordable prices.",
+          images: [
+            {
+              url: "/imgs/GAS-Text-Only-2-Color.png",
+              width: 800,
+              height: 600,
+              alt: "Og GAS Text Logo",
+              type: "image/png",
+            },
+          ],
+          site_name: "gasautomobilesales",
+        }}
+      />
 
       <section>
         <Row className="mx-3">
@@ -73,10 +97,14 @@ export default function Home({ featuredListings }) {
 
       <div className="my-5 pt-5">
         <section className={styles.clients}>
-          <h2>Some of the brands we sell ...</h2>
+          <div className="d-flex justify-content-center mb-3 mt-3">
+            <h1>
+              Some of the brands we sell ...
+              <GradBar />
+            </h1>
+          </div>
           <div className="row">
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              {/* <Image layout='fixed' className="img-fluid" src="/imgs/carLogos/ford_logo.png" alt="carBrandLogo" width="120" height="60"  /> */}
               <img
                 src="/imgs/carLogos/ford_logo.png"
                 className="img-fluid"
@@ -208,8 +236,7 @@ export default function Home({ featuredListings }) {
                               />
                               <div className={carStyles.overlay_content}>
                                 <strong>
-                                  <GoDashboard />{" "}
-                                  {car.mileage}
+                                  <GoDashboard /> {car.mileage}
                                 </strong>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <strong>
@@ -223,13 +250,13 @@ export default function Home({ featuredListings }) {
                             </>
                           ) : (
                             <Image
-                                priority="true"
-                                src="https://via.placeholder.com/450x300.png?text=Image+Coming+Soon..."
-                                layout="responsive"
-                                alt="thumbnail image"
-                                width={450}
-                                height={300}
-                              />
+                              priority="true"
+                              src="https://via.placeholder.com/450x300.png?text=Image+Coming+Soon..."
+                              layout="responsive"
+                              alt="thumbnail image"
+                              width={450}
+                              height={300}
+                            />
                           )}
                         </div>
                       </div>
@@ -242,9 +269,7 @@ export default function Home({ featuredListings }) {
 
                         <p>
                           <span>
-                            <strong>
-                              {car.price}
-                            </strong>
+                            <strong>{car.price}</strong>
                           </span>
                         </p>
 

@@ -1,19 +1,18 @@
 import { useState } from "react";
-import Head from "next/head";
-import Image from "next/image";
+import { NextSeo  } from "next-seo"; 
 import Link from "next/link";
+import Image from "next/image";
 import Layout from "../components/Layout";
-import { Row, Col, Button, Breadcrumb, Container, Form } from "react-bootstrap";
+import { Row, Col, Button  } from "react-bootstrap";
 import styles from "../styles/page_styles/Cars.module.css";
 import GradBar from "../components/GradBar";
 import { GoDashboard } from "react-icons/go";
 import { GiCog } from "react-icons/gi";
 import { TbSteeringWheel } from "react-icons/tb";
 import CarDataService from "../services/cars.services";
-import { AiOutlineFrown } from "react-icons/ai";
 
 export async function getStaticProps(context) {
-  const cars = await CarDataService.getAllListings();
+  const cars = await CarDataService.getAllActiveListings();
 
   return {
     props: {
@@ -23,8 +22,9 @@ export async function getStaticProps(context) {
 }
 
 export default function Cars({ cars }) {
-  const initialNumberOfCars = 6;
-  const [carIndex, setCarIndex] = useState(initialNumberOfCars);
+  const NUMBER_OF_CARS_ON_PAGE_LOAD = 6;
+  const NUMBER_OF_CARS_PER_CLICK = 3;
+  const [carIndex, setCarIndex] = useState(NUMBER_OF_CARS_ON_PAGE_LOAD);
   let carsToRender = null;
 
   if (cars != null) {
@@ -32,21 +32,38 @@ export default function Cars({ cars }) {
   }
 
   async function loadMoreCars() {
+    // Hide button if all cars have already been displayed
     if (carsToRender.length === cars.length) {
-      // all cars have been rendered out, hide load button
       const loadBtn = document.getElementById("loadBtn");
       loadBtn.style.display = "none";
       return;
     }
-    setCarIndex(carIndex + 3);
+    // Load more cars onto the page
+    setCarIndex(carIndex + NUMBER_OF_CARS_PER_CLICK);
   }
 
   return (
     <>
-      <Head>
-        <title>GAS Automobile Sales | Cars Inventory</title>
-        <meta name="keywords" content="cars" />
-      </Head>
+      <NextSeo
+          title="Guardian Automobile Sales | Inventory"
+          description="View our vast selection of pre-owned vehicles at affordable prices"
+          canonical="https://www.gasautomobilesales.com/"
+          openGraph={{
+            url: "https://www.gasautomobilesales.com/",
+            title: "Guardian Automobile Sales | Inventory",
+            description: "View our vast selection of pre-owned vehicles at affordable prices",
+            images: [
+              {
+                url: "/imgs/GAS-Text-Only-2-Color.png",
+                width: 800,
+                height: 600,
+                alt: "Og GAS Text Logo",
+                type: "image/png",
+              },
+            ],
+            site_name: "gasautomobilesales",
+          }}
+        />
 
       <div className="d-flex justify-content-between my-5">
         <h1>

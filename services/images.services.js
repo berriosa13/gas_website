@@ -73,6 +73,31 @@ deleteImage = (id) => {
     console.log("updated imageDoc", imageDoc);
   };
 
+  getAllListingImages = async (carId) => {
+      const images = [];
+      const matchingImages = query(
+        imageCollectionRef,
+        where("imageForeignId", "==", carId)
+      );
+      const querySnapshot = await getDocs(matchingImages);
+      querySnapshot.forEach(
+        (doc) => {
+          images.push({
+            ...doc.data(),
+            id: doc.id,
+            url: doc.imageUrl,
+          });
+        },
+        (error) => {
+          console.log(
+            "Error getting images for listings with id of: ", carId,
+            error
+          );
+        }
+      );
+      return images;
+  }
+
 }
 
 export default new ImageDataService();

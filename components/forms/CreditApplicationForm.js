@@ -1,51 +1,22 @@
-import React, { useState, useRef } from "react";
+import React from "react";
 import { useForm, ValidationError } from "@formspree/react";
 import { FiSend } from "react-icons/fi";
-import { HiBadgeCheck } from "react-icons/hi";
 import GradBar from "../GradBar";
-import SignatureCanvas from "react-signature-canvas";
 import PhoneNumberInput from "../PhoneNumberInput";
 import SocialSecurityInput from "../SocialSecurityInput";
 import NumberFormat from 'react-number-format';
 import {
-  Table,
   Button,
-  Card,
-  Modal,
   Row,
   Col,
-  Form,
   FloatingLabel,
   Container,
   Tab,
   Tabs,
 } from "react-bootstrap";
-import { useRouter } from "next/router";
 
-function CreditApplicationForm({ setCar }) {
+function CreditApplicationForm() {
   const [state, handleSubmit] = useForm("creditApplicationForm");
-  const [firstName, setFirstName] = useState("");
-  const [socialInput, setSocialInput] = useState("");
-  const [trimmedDataUrl, setTrimmedDataUrl] = useState("");
-  const applicantSigRef = useRef();
-  const coApplicantSigRef = useRef();
-  const router = useRouter();
-
-  // state = {trimmedDataURL: null}
-  let applicantSigPad = {};
-  let coApplicantSigPad = {};
-
-  const clearApplicantSigPad = () => {
-    applicantSigPad.clear();
-  };
-  const clearCoApplicantSigPad = () => {
-    coApplicantSigPad.clear();
-  };
-  const trimApplicantSigPad = () => {
-    this.setState({
-      trimmedDataURL: this.sigPad.getTrimmedCanvas().toDataURL("image/png"),
-    });
-  };
 
   if (state.succeeded) {
     return (
@@ -1103,15 +1074,6 @@ function CreditApplicationForm({ setCar }) {
           border-color: var(--main-color);
           outline: 0;
           box-shadow: 0 0 0 0.25rem rgb(13 110 253 / 25%);
-        }
-        .sigCanvasProps {
-          width: 100%;
-          height: 100%;
-          margin: 0 auto;
-        }
-        .sigPad {
-          width: 100%;
-          height: 75%;
         }
         .nav-tabs .nav-link:hover,
         .nav-tabs .nav-link:focus {

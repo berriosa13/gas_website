@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import Head from "next/head";
+import { NextSeo  } from "next-seo"; 
 import Image from "next/image";
-import Link from "next/link";
 import Layout from '../components/Layout'
 import { useRouter } from "next/router";
 import styles from "../styles/page_styles/Cars.module.css";
-import utilMethods from "../services/utils";
+import ImageDataService from "../services/images.services";
 import ImageModal from "../components/modals/ImageModal";
 import QuoteModal from "../components/modals/QuoteModal";
 import AvailabilityModal from "../components/modals/AvailabilityModal";
@@ -14,13 +13,11 @@ import { BsDashLg } from "react-icons/bs";
 import GradBar from '../components/GradBar'
 
 import {
-  Container,
   Row,
   Col,
   Accordion,
   ListGroup,
   Button,
-  Breadcrumb,
 } from "react-bootstrap";
 
 export async function getStaticProps(context) {
@@ -35,17 +32,18 @@ export default function CarDetails() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [availabilityModalOpen, setAvailabilityModalOpen] = useState(false);
   const [testDriveModalOpen, setTestDriveModalOpen] = useState(false);
+  const DISPLAY_IMAGES_TOTAL = 4; 
   const router = useRouter();
   const car = router.query;
-  const displayImages = images.slice(0, 4);
+  const displayImages = images.slice(0, DISPLAY_IMAGES_TOTAL);
 
   console.log("Car passed in from useRouter: ", car);
 
   useEffect(() => {
     const retrieveImages = async () => {
-      const result = await utilMethods.getAllImages(car.id);
-      console.log("result from utilMethod.getAllImages call: ", result);
-      setImages(result);
+      const listingImages = await ImageDataService.getAllListingImages(car.id);
+      console.log("result from utilMethod.getAllImages call: ", listingImages);
+      setImages(listingImages);
     };
     retrieveImages();
   }, [car.id]);
@@ -106,14 +104,30 @@ export default function CarDetails() {
         setCar={car}
       />
 
-      <Head>
-        <title>GAS Automobile Sales | Car Details</title>
-        <meta name="keywords" content="cars" />
-      </Head>
+      <NextSeo
+        title="Guardian Automobile Sales | Car Details"
+        description="Details for the vehicle"
+        canonical="https://www.gasautomobilesales.com/"
+        openGraph={{
+          url: "https://www.gasautomobilesales.com/",
+          title: "Guardian Automobile Sales | Car Details",
+          description: "Details for the vehicle",
+          images: [
+            {
+              url: "/imgs/GAS-Text-Only-2-Color.png",
+              width: 800,
+              height: 600,
+              alt: "Og GAS Text Logo",
+              type: "image/png",
+            },
+          ],
+          site_name: "gasautomobilesales",
+        }}
+      />
 
-      <div className="d-flex my-5 justify-content-between">
+      <div className="d-flex mx-4 mt-5 justify-content-start">
         <h1>
-          {car.year} {car.make} {car.model}
+          {car.year} {car.make} {car.model} 
           <GradBar/>
         </h1>
       </div>
@@ -265,9 +279,7 @@ export default function CarDetails() {
               <div className="row my-3 d-flex justify-content-center text-center">
                 <div className="col-md-6 mt-3">
                   <Button
-                    onClick={(e) => {
-                      setImageModalOpen(true);
-                    }}
+                    onClick={showImageModal}
                     variant="primary"
                   >
                     View All Images
@@ -278,9 +290,7 @@ export default function CarDetails() {
               <div className="col">
                 <h2>
                   {car.price ? (
-                    <strong className="text-primary">
-                      {car.price}
-                    </strong>
+                    <strong className="text-primary">{car.price}</strong>
                   ) : (
                     <strong className="text-primary">Unavailable</strong>
                   )}
@@ -309,13 +319,7 @@ export default function CarDetails() {
                     Trim
                   </ListGroup.Item>
                   <ListGroup.Item className="w-50 d-flex justify-content-end">
-                    {car.trim ? (
-                          <>
-                            {car.trim}
-                          </> 
-                    ) : (
-                      <>Unavailable</>
-                    )}
+                    {car.trim ? <>{car.trim}</> : <>Unavailable</>}
                   </ListGroup.Item>
                 </ListGroup>
                 <ListGroup horizontal>
@@ -341,9 +345,7 @@ export default function CarDetails() {
 
                   <ListGroup.Item className="w-50 d-flex justify-content-end">
                     {car.mileage ? (
-                      <strong>
-                        {car.mileage}
-                      </strong>
+                      <strong>{car.mileage}</strong>
                     ) : (
                       <strong>Unavailable</strong>
                     )}

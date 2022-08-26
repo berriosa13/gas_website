@@ -1,16 +1,13 @@
 import React from 'react';
-import { useForm, ValidationError } from '@formspree/react';
+import { useForm } from '@formspree/react';
 import { FiSend } from "react-icons/fi";
-import { HiBadgeCheck } from "react-icons/hi";
-import { Table, Button, Card, Modal, Row, Col, Form, FloatingLabel } from "react-bootstrap";
-import { useRouter } from "next/router"
+import { Button, Row, Col, FloatingLabel } from "react-bootstrap";
 import PhoneNumberInput from '../PhoneNumberInput'
 
 
 function QuoteForm( { setCar }) {
   const [state, handleSubmit] = useForm("quoteForm");
-  const router = useRouter();
-  const defaultMessageText = "Hello, I am requesting a quote for the " + setCar.year + " " + setCar.make + " " + setCar.model;
+  const defaultMessageText = "Hello, I am requesting a quote for the " + setCar.year + " " + setCar.make + " " + setCar.model + " " + setCar.trim;
 
   if (state.succeeded) {
       return (
