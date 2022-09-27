@@ -41,7 +41,7 @@ export default function About() {
             width={800}
             height={60}
             alt="GAS Building Image"
-            src="/imgs/gas_building.jpeg"
+            src="/imgs/gas_lot.jpg"
           />
           <Figure.Caption>
             Guardian Automobile Sales Dealership
