@@ -28,17 +28,21 @@ const CarsList = ({
 }) => {
   const [activeListings, setActiveListings] = useState([]);
   const [inactiveListings, setInactiveListings] = useState([]);
+  const [featuredListings, setFeaturedListings] = useState([]);
+  const activeListingsQuery = query(collection(db, "Cars"), where("sold", "==", "No"));
+  const inactiveListingsQuery = query(collection(db, "Cars"), where("sold", "==", "Yes"));
+  const featuredListingsQuery = query(collection(db, "Cars"),where("featuredListing", "==", "Yes"));
 
   useEffect(() => {
     // Realtime listening of all active listings. Returns list of all listings that have not been sold yet.
-    const activeListingsQuery = query(collection(db, "Cars"), where("sold", "==", "No"));
     const unsubscribe = onSnapshot(activeListingsQuery, (querySnapshot) => {
       const listings = [];
       querySnapshot.forEach((doc) => {
-        listings.push({...doc.data(), id: doc.id,});
+        listings.push({ ...doc.data(), id: doc.id });
       });
-     console.log("activeListings:",listings);
-     setActiveListings(listings);
+
+      console.log("activeListings:", listings);
+      setActiveListings(listings);
     });
 
     return () => {
@@ -48,7 +52,6 @@ const CarsList = ({
 
   useEffect(() => {
     // Realtime listening of all inactive listings. Returns list of all listings that HAVE sold.
-    const inactiveListingsQuery = query(collection(db, "Cars"), where("sold", "==", "Yes"));
     const unsubscribe = onSnapshot(inactiveListingsQuery, (querySnapshot) => {
       const listings = [];
       querySnapshot.forEach((doc) => {
@@ -65,6 +68,25 @@ const CarsList = ({
       unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    // Realtime listening of all featured listings. Returns list of all featured listings.
+    const unsubscribe = onSnapshot(featuredListingsQuery, (querySnapshot) => {
+      const listings = [];
+      querySnapshot.forEach((doc) => {
+        listings.push({ ...doc.data(), id: doc.id });
+      });
+
+      console.log("featuredListings:", listings);
+      setFeaturedListings(listings);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+
 
   // create new instance for active listing with createdAt field modified for viewing
   const allActiveListings = activeListings.map((activeListing) => ({
@@ -89,6 +111,18 @@ const CarsList = ({
     sold: activeListing?.sold,
   }));
   console.log("allActiveListings: ", allActiveListings);
+
+  //  Loop through activeListings and set featuredListingsTotal
+  // allActiveListings.forEach((activeListing) => {
+  //     console.log("listing.featuredListing: ", activeListing.featuredListing);
+  //     if (activeListing.featuredListing === "Yes") {
+  //       featuredListingCount++;
+  //     }
+  //   console.log("total: ", featuredListingCount);
+  //   setFeaturedListingsTotal(featuredListingCount);
+  //   console.log("featuredListingsTotal: ", featuredListingsTotal);
+  // });
+
 
   const allInactiveListings = inactiveListings.map((inactiveListing) => ({
     id: inactiveListing?.id,
