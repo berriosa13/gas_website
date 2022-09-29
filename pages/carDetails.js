@@ -28,6 +28,7 @@ export async function getStaticProps(context) {
 
 export default function CarDetails() {
   const [images, setImages] = useState([]);
+  const [displayImages, setDisplayImages] = useState([]);
   const [imageModalOpen, setImageModalOpen] = useState(false);
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [availabilityModalOpen, setAvailabilityModalOpen] = useState(false);
@@ -35,18 +36,33 @@ export default function CarDetails() {
   const DISPLAY_IMAGES_TOTAL = 4; 
   const router = useRouter();
   const car = router.query;
-  const displayImages = images.slice(0, DISPLAY_IMAGES_TOTAL);
+  const thumbnailImage = car.thumbnailImage; 
+  // console.log("thumbnailImage: ", thumbnailImage);
+  // console.log("displayImages: ", displayImages);
 
-  console.log("Car passed in from useRouter: ", car);
+  // console.log("Car passed in from useRouter: ", car);
 
   useEffect(() => {
     const retrieveImages = async () => {
       const listingImages = await ImageDataService.getAllListingImages(car.id);
-      console.log("result from utilMethod.getAllImages call: ", listingImages);
+      // console.log("result from ImageDataService.getAllListingImages(): ", listingImages);
       setImages(listingImages);
+      filterDisplayImages(listingImages);
     };
     retrieveImages();
   }, [car.id]);
+
+  const filterDisplayImages = (listingImages) => {
+    let filteredDisplayImages = null;
+    // console.log("listingImages in filterDisplayImages(): ",listingImages);
+    listingImages.forEach((image) => {
+      if(thumbnailImage === image.imageUrl) {
+        filteredDisplayImages = listingImages.filter(x => x !== image);
+        // console.log("newly filtered images: ", filteredDisplayImages);
+      }
+    })
+    setDisplayImages(filteredDisplayImages.slice(0, DISPLAY_IMAGES_TOTAL));
+  }
 
   const showImageModal = () => {
     setImageModalOpen(true);
@@ -136,7 +152,7 @@ export default function CarDetails() {
           <div className="container mt-5">
             <div className="row">
               <section id="photoArray">
-                {car.thumbnailImage != null && displayImages != null ? (
+                {thumbnailImage != null && displayImages != null ? (
                   <>
                     <div>
                       <Image
@@ -144,7 +160,7 @@ export default function CarDetails() {
                         width={600}
                         height={500}
                         alt="thumbnailImage"
-                        src={car.thumbnailImage}
+                        src={thumbnailImage}
                       />
                     </div>
                     {displayImages.map((displayImage) => {
