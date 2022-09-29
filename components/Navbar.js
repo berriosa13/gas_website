@@ -66,6 +66,8 @@ const NavBar = () => {
           </ReactBootStrap.Navbar.Collapse>
         </Container>
         <style jsx global>{`
+
+        @media only screen and (min-width: 990px) {
           /* Effect 4: same word slide in */
           .cl-effect-4 a {
             overflow: hidden;
@@ -91,6 +93,8 @@ const NavBar = () => {
             -moz-transform: translateY(-100%);
             transform: translateY(-100%);
           }        
+        }
+
         `}</style>
       </ReactBootStrap.Navbar>
     </>
