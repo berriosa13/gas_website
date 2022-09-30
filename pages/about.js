@@ -46,6 +46,7 @@ export default function About() {
             play={true}
             cancelOnInteraction={false} // should stop playing on user interaction
             interval={3000}
+            mobileTouch={true}
             >
               <div data-src="/imgs/gas_building_shrunk.jpeg"/>
               <div data-src="/imgs/gas_lot.jpg"/>
@@ -55,7 +56,7 @@ export default function About() {
           </div>
         </Col>
         <Col md={6}>
-          <h5>
+          <h5 className="m-5">
             Shopping for your next vehicle should not be a hassle. You do not
             need to drive for hours or make deals over the phone to get a good
             deal on a great used vehicle. Located right here in Dunmore PA,
@@ -64,7 +65,7 @@ export default function About() {
             area. We invite you to stop by and look over our inventory of
             vehicles.
           </h5>
-          <h5 className="fst-italic"> - Guardian Automobile Sales</h5>
+          <h5 className="fst-italic m-5"> - Guardian Automobile Sales</h5>
         </Col>
         <style jsx global>{`
           .figure-img {
