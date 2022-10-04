@@ -29,11 +29,6 @@ export default function Home({ featuredListings }) {
   // console.log("Logo Images: ",makeLogoImages);
   return (
     <>
-      {/* <Head>
-        <title>Guardian Automobile Sales | Home</title>
-        <meta name="description" content="Find the best used cars in Scranton, Wilkes-Barre and Dunmore, PA. We have a large selection of used vehicles at affordable prices." />
-        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
-      </Head> */}
       <NextSeo
         title="Guardian Automobile Sales | Home"
         description="Find the best used cars in Scranton, Wilkes-Barre and Dunmore, PA. We have a large selection of used vehicles at affordable prices."
@@ -60,7 +55,7 @@ export default function Home({ featuredListings }) {
           <Col md={6}>
             <div className="text-center homeWelcome">
               <h2 className="text-left mt-5 mb-3 fw-bold ">
-                Find your next used car with
+                Find your next vehicle with
               </h2>
               <Image
                 src="/imgs/GAS-Text-Only-2-Color.png"
@@ -69,7 +64,7 @@ export default function Home({ featuredListings }) {
                 height="96"
               />
               <h3 className="text-left mt-3">
-                The <strong>#1 place</strong> for used cars in NEPA.
+                The <strong>#1 place</strong> for pre-owned vehicles in NEPA.
               </h3>
               <Button className="mt-3" href="/cars" variant="primary">
                 Find your next vehicle
@@ -99,7 +94,7 @@ export default function Home({ featuredListings }) {
         <section className={styles.clients}>
           <div className="d-flex justify-content-center mb-3 mt-3">
             <h1>
-              Some of the brands we sell ...
+              Some of the brands we sell...
               <GradBar />
             </h1>
           </div>
