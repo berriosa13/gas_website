@@ -32,7 +32,6 @@ function QuoteForm( { setCar }) {
                 name="firstName"
                 placeholder="First Name"
                 id="firstName"
-                autoFocus
                 required
               />
             </FloatingLabel>

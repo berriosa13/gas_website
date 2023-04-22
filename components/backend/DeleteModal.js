@@ -97,7 +97,7 @@ import GradBar from "../GradBar"
           <Modal.Footer className="d-flex justify-content-center">
             <Image
               className=""
-              src="/imgs/GAS-Text-Only-2-Color.png"
+              src="/imgs/GAS-Logo-text.png"
               alt="GasLogoTextOnly"
               width={216}
               height={56}

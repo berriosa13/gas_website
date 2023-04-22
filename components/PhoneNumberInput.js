@@ -6,7 +6,7 @@ export default function PhoneNumberInput( { name, isRequired } ) {
         const formattedPhoneNumber = formatPhoneNumber(e.target.value);
         setInputValue(formattedPhoneNumber);
     };
-    return <input className="form-control" onChange={e => handleInput(e)} value={inputValue} name={name} placeholder="cellphone" required={isRequired} />
+    return <input className="form-control" onChange={e => handleInput(e)} value={inputValue} name={name} placeholder="phone" required={isRequired} />
 }
 
 function formatPhoneNumber(value) {

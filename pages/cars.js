@@ -54,7 +54,7 @@ export default function Cars({ cars }) {
             description: "View our vast selection of pre-owned vehicles at affordable prices",
             images: [
               {
-                url: "/imgs/GAS-Text-Only-2-Color.png",
+                url: "/imgs/GAS-Logo-text.png",
                 width: 800,
                 height: 600,
                 alt: "Og GAS Text Logo",

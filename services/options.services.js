@@ -290,6 +290,13 @@ class SelectOptionsService {
       { value: "No", label: "No"},
     ];
   };
+  // getApplicantHousingOptions = () => {
+  //   return [
+  //     { value: "Rent", label: "Rent"},
+  //     { value: "Own", label: "Own"},
+  //     { value: "Other", label: "Other"},
+  //   ];
+  // };
 
 }
 

@@ -14,6 +14,7 @@ import CarDataService from "../../services/cars.services";
 import ImageDataService from "../../services/images.services";
 import SelectOptionsService from "../../services/options.services";
 import GradBar from "../GradBar";
+// import ImageUpload from './ImageUpload';
 
 import {
   getStorage,
@@ -525,6 +526,7 @@ const AddDocument = ({ carId, setCarId }) => {
           </Row>
           <Row className="d-flex justify-content-center">
             <Col md={5}>
+              {/* <ImageUpload onImageChange={images}/> */}
               <Form.Group controlId="formFileMultiple" className="mb-3">
                 <Form.Label>
                   <strong>Upload Image(s)</strong>

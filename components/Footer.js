@@ -31,7 +31,7 @@ const Footer = () => {
               <div className="">
                 <div className={styles.logo}>
                   <Image
-                    src="/imgs/GAS-Full-Logo-2-Color.png"
+                    src="/imgs/GAS-Logo.png"
                     alt="full logo"
                     width={421}
                     height={93}

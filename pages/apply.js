@@ -17,7 +17,7 @@ export default function Apply() {
           description: "Apply Online for a creit check to streamline your car buying experience when you visit us.",
           images: [
             {
-              url: "/imgs/GAS-Text-Only-2-Color.png",
+              url: "/imgs/GAS-Logo-text.png",
               width: 800,
               height: 600,
               alt: "Og GAS Text Logo",

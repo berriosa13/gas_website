@@ -39,7 +39,7 @@ export default function Home({ featuredListings }) {
           description: "Find the best used cars in Scranton, Wilkes-Barre and Dunmore, PA. We have a large selection of used vehicles at affordable prices.",
           images: [
             {
-              url: "/imgs/GAS-Text-Only-2-Color.png",
+              url: "/imgs/GAS-Logo-text.png",
               width: 800,
               height: 600,
               alt: "Og GAS Text Logo",
@@ -58,7 +58,7 @@ export default function Home({ featuredListings }) {
                 Find your next vehicle with
               </h2>
               <Image
-                src="/imgs/GAS-Text-Only-2-Color.png"
+                src="/imgs/GAS-Logo-text.png"
                 alt=""
                 width="420"
                 height="96"

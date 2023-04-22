@@ -1,8 +1,10 @@
 import Head from "next/head";
+import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
-import { AiOutlineFrown } from "react-icons/ai";
 import styles from "../styles/page_styles/404.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons'
 
 /*  User is prompted with 404 page and 
 redirected back to the homepage using { useRouter }
@@ -22,12 +24,22 @@ const NotFound = () => {
         <title>GAS Automobile Sales | Page Not Found</title>
         <meta name="keywords" content="cars" />
       </Head>
-      <div className={styles.not_found}>
-        <h1>404</h1>
-        <h2>
-          We could not find the page you are looking for. <AiOutlineFrown />
-        </h2>
-        <p>We will redirect you back to the hompage shortly.</p>
+      <div className={styles.center}>
+        <div className={styles.not_found}>
+          <Image
+            src="/imgs/GAS-Logo.png"
+            alt="full logo"
+            width={842}
+            height={186}
+          />
+          <h1>404</h1>
+          <h2>
+            <FontAwesomeIcon className="mx-2" icon={faCircleExclamation} />
+            We could not find the page you are looking for 
+            <FontAwesomeIcon className="mx-2" icon={faCircleExclamation} />
+          </h2>
+          <p>We will redirect you back to the hompage shortly.</p>
+        </div>
       </div>
     </>
   );

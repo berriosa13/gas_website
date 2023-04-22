@@ -5,6 +5,9 @@ import { FormspreeProvider } from "@formspree/react";
 import PrivateRoute from "../components/PrivateRoute";
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.css";
+import "@fortawesome/fontawesome-svg-core/styles.css"; 
+import { config } from "@fortawesome/fontawesome-svg-core";
+config.autoAddCss = false; 
 
 const noAuthRequired = [
   "/",
@@ -15,6 +18,7 @@ const noAuthRequired = [
   "/carDetails",
   "/apply",
   "/404",
+  "/services",
 ];
 
 function MyApp({ Component, pageProps }) {

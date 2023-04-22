@@ -67,7 +67,7 @@ function CarDashboard() {
             description: "Create, Edit, and Delete car listing",
             images: [
               {
-                url: "/imgs/GAS-Text-Only-2-Color.png",
+                url: "/imgs/GAS-Logo-text.png",
                 width: 800,
                 height: 600,
                 alt: "Og GAS Text Logo",
@@ -81,7 +81,7 @@ function CarDashboard() {
             <Navbar.Brand href="/carDashboard">
               <Image
                 className="mr-3"
-                src="/imgs/GAS-Full-Logo-2-Color.png"
+                src="/imgs/GAS-Logo.png"
                 alt="Gas-Logo" 
                 width={421} 
                 height={93}
@@ -97,7 +97,7 @@ function CarDashboard() {
           </Button>
         </Navbar>
     
-
+            {/* TODO: pass in field for total number of featured listings */}
         {imageModalOpen && <ImageModal setOpenImageModal={setImageModalOpen} setIdForImages={setCarIdForImages} carData={carIdForImages}/>}
         {deleteModalOpen && <DeleteModal setOpenDeleteModal={setDeleteModalOpen} getDeleteId={deleteId} />}
         {descriptionModalOpen && <DescriptionModal setOpenDescriptionModal={setDescriptionModalOpen} setCarData={carIdForImages} />}{deleteModalOpen && <DeleteModal setOpenDeleteModal={setDeleteModalOpen} getDeleteId={deleteId} />}

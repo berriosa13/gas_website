@@ -22,7 +22,7 @@ export default function About() {
             "Learn more about Guradian Automobile Sales, located in the Scranton/Wilkes-Barre area.",
           images: [
             {
-              url: "/imgs/GAS-Text-Only-2-Color.png",
+              url: "/imgs/GAS-Logo-text.png",
               width: 800,
               height: 600,
               alt: "Og GAS Text Logo",

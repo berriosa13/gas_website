@@ -27,7 +27,7 @@ const ImageModal = ({ handleClose, show, setImages, setCar }) => {
             })}
           </Modal.Body>
           <GradBar/>
-          <Modal.Footer className="d-flex justify-content-center"><Image className="" src="/imgs/GAS-Text-Only-2-Color.png" height={56} width={216} alt="GasLogoTextOnly"/></Modal.Footer>
+          <Modal.Footer className="d-flex justify-content-center"><Image className="" src="/imgs/GAS-Logo-text.png" height={56} width={216} alt="GasLogoTextOnly"/></Modal.Footer>
         </Modal>
         <style jsx global>{`
             .modal-body img {

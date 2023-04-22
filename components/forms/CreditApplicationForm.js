@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 import { FiSend } from "react-icons/fi";
 import GradBar from "../GradBar";
 import PhoneNumberInput from "../PhoneNumberInput";
 import SocialSecurityInput from "../SocialSecurityInput";
 import NumberFormat from 'react-number-format';
+import Select from "react-select";
+import SelectOptionsService from "../../services/options.services";
 import {
   Button,
   Row,
@@ -17,6 +19,9 @@ import {
 
 function CreditApplicationForm() {
   const [state, handleSubmit] = useForm("creditApplicationForm");
+  const [applicantHousingType, setApplicantHousingType] = useState("");
+  const applicantHousingOptions =
+  SelectOptionsService.getApplicantHousingOptions();
 
   if (state.succeeded) {
     return (
@@ -99,7 +104,7 @@ function CreditApplicationForm() {
                     className="mb-3"
                   >
                     <SocialSecurityInput
-                      name={'applicantSocialSecurityNumber'}
+                      name={"applicantSocialSecurityNumber"}
                       isRequired={true}
                     />
                     <ValidationError
@@ -161,7 +166,7 @@ function CreditApplicationForm() {
                       className="mb-3"
                     >
                       <PhoneNumberInput
-                        name={'applicantCellphone'}
+                        name={"applicantCellphone"}
                         isRequired={true}
                       />
                     </FloatingLabel>
@@ -320,6 +325,12 @@ function CreditApplicationForm() {
                         <option value="Own">Own</option>
                         <option value="Other">Other</option>
                       </select>
+                      {/* <Select
+                        className=""
+                        name="applicantHousingType"
+                        placeholder='Housing Type'
+                        options={applicantHousingOptions}
+                      ></Select> */}
                       <ValidationError
                         field="applicantHousingType"
                         prefix="applicantHousingType"
@@ -454,7 +465,7 @@ function CreditApplicationForm() {
                       className="mb-3"
                     >
                       <PhoneNumberInput
-                        name={'applicantWorkphone'}
+                        name={"applicantWorkphone"}
                         isRequired={false}
                       />
                       <ValidationError
@@ -597,7 +608,7 @@ function CreditApplicationForm() {
                     className="mb-3"
                   >
                     <SocialSecurityInput
-                      name={'coApplicantSocialSecurityNumber'}
+                      name={"coApplicantSocialSecurityNumber"}
                       isRequired={false}
                     />
                     <ValidationError
@@ -657,7 +668,7 @@ function CreditApplicationForm() {
                       className="mb-3"
                     >
                       <PhoneNumberInput
-                        name={'coApplicantCellphone'}
+                        name={"coApplicantCellphone"}
                         isRequired={false}
                       />
                     </FloatingLabel>
@@ -942,7 +953,7 @@ function CreditApplicationForm() {
                       className="mb-3"
                     >
                       <PhoneNumberInput
-                        name={'coApplicantWorkphone'}
+                        name={"coApplicantWorkphone"}
                         isRequired={false}
                       />
                       <ValidationError

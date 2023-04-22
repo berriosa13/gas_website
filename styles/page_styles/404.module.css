@@ -5,7 +5,7 @@
     text-align: center;
     align-items: center;
     font-family: var(--main-font);
-    margin: 2rem;
+    margin: 0 auto;
 }
 
 .not_found h1 {
@@ -19,4 +19,12 @@
 
 .not_found p {
     font-style: italic;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
 }
