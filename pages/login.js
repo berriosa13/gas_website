@@ -14,6 +14,8 @@ import GradBar from "../components/GradBar";
 import { toast, ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SubFooter from "../components/SubFooter";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 export default function Login() {
   const router = useRouter();
@@ -22,6 +24,7 @@ export default function Login() {
     email: "",
     password: "",
   });
+  const MySwal = withReactContent(Swal);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -29,7 +32,13 @@ export default function Login() {
     console.log(user);
     try {
       await login(data.email, data.password);
-      toast.success("Login successful, loading dashboard");
+      MySwal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Login successful, loading dashboard',
+        showConfirmButton: false,
+        timer: 2000
+      });
       setTimeout(() => {
         router.push("/carDashboard");
       }, 3000);
@@ -37,7 +46,13 @@ export default function Login() {
       const errorMessage = err.message;
       const errorCode = err.code;
       console.log("Error during login: ", errorMessage, errorCode);
-      toast.error("Login Error -> " + errorCode);
+      MySwal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: 'Invalid username or password.',
+        showConfirmButton: false,
+        timer: 2000
+      });
     }
   };
 
@@ -64,7 +79,7 @@ export default function Login() {
             <Form onSubmit={handleLogin}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <FloatingLabel
-                  controlId="floatingInput"
+                  controlId="emailFloatingInput"
                   label="Email address"
                   className="mb-3"
                 >
@@ -78,6 +93,7 @@ export default function Login() {
                     value={data.email}
                     required
                     type="email"
+                    autoComplete="current-email"
                     placeholder="Enter email"
                   />
                 </FloatingLabel>
@@ -85,11 +101,12 @@ export default function Login() {
 
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <FloatingLabel
-                  controlId="floatingInput"
+                  controlId="passwordFloatingInput"
                   label="Password"
                   className="mb-3"
                 >
                   <Form.Control
+                    name="password"
                     onChange={(e) => {
                       setData({
                         ...data,
@@ -99,6 +116,7 @@ export default function Login() {
                     value={data.password}
                     required
                     type="password"
+                    autoComplete="current-password"
                     placeholder="Password"
                   />
                 </FloatingLabel>
