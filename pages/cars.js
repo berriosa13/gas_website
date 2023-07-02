@@ -9,25 +9,16 @@ import GradBar from "../components/GradBar";
 import { GoDashboard } from "react-icons/go";
 import { GiCog } from "react-icons/gi";
 import { TbSteeringWheel } from "react-icons/tb";
-import CarDataService from "../services/cars.services";
+import useActiveListings from "../hooks/useActiveListings";
 
-export async function getStaticProps(context) {
-  const cars = await CarDataService.getAllActiveListings();
-
-  return {
-    props: {
-      cars,
-    },
-  };
-}
-
-export default function Cars({ cars }) {
+export default function Cars() {
+  const cars = useActiveListings();
   const NUMBER_OF_CARS_ON_PAGE_LOAD = 6;
   const NUMBER_OF_CARS_PER_CLICK = 3;
   const [carIndex, setCarIndex] = useState(NUMBER_OF_CARS_ON_PAGE_LOAD);
-  let carsToRender = null;
+  let carsToRender = 0;
 
-  if (cars != null) {
+  if (cars != undefined && cars.length > 0) {
     carsToRender = cars.slice(0, carIndex);
   }
 

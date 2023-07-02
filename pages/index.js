@@ -10,23 +10,11 @@ import { GoDashboard } from "react-icons/go";
 import { GiCog } from "react-icons/gi";
 import { TbSteeringWheel } from "react-icons/tb";
 import { Row, Col, Button } from "react-bootstrap";
-import CarDataService from "../services/cars.services";
-// import LogoDataService from "../services/logos.services";
 import { AiOutlineFrown } from "react-icons/ai";
+import useFeaturedListings from '../hooks/useFeaturedListings';
 
-export async function getStaticProps(context) {
-  const featuredListings = await CarDataService.getAllFeaturedListings();
-  // const makeLogoImages = LogoDataService.getAllMakeLogoImages();
-  return {
-    props: {
-      featuredListings,
-      // makeLogoImages,
-    },
-  };
-}
-
-export default function Home({ featuredListings }) {
-  // console.log("Logo Images: ",makeLogoImages);
+export default function Home() {
+  const featuredListings = useFeaturedListings();
   return (
     <>
       <NextSeo
