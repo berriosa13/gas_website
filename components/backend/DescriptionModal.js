@@ -35,7 +35,6 @@ import Image from 'next/image';
           <GradBar/>
           <Modal.Body>
             <div className="d-flex justify-content-center align-items-center flex-column">
-                <h3 className="my-3 fst-italic">View Only</h3>
             <Form.Group className="mb-3" controlId="formCarDescription">
                 <Form.Control
                   as="textarea"
