@@ -14,9 +14,9 @@ import { ToastContainer, Zoom } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { BsArrowRightShort } from "react-icons/bs";
 import { TbFileDescription } from "react-icons/tb";
-import { collection, onSnapshot, where, query } from "firebase/firestore";
-
-import { db } from "../../firebaseConfig";
+import useActiveListings from '../../hooks/useActiveListings';
+import useInactiveListings from '../../hooks/useInactiveListings';
+import useFeaturedListings from '../../hooks/useFeaturedListings';
 
 const CarsList = ({
   getCarId,
@@ -26,67 +26,9 @@ const CarsList = ({
   getIdForDeletion,
   getIsDescriptionModalOpen,
 }) => {
-  const [activeListings, setActiveListings] = useState([]);
-  const [inactiveListings, setInactiveListings] = useState([]);
-  const [featuredListings, setFeaturedListings] = useState([]);
-  const activeListingsQuery = query(collection(db, "Cars"), where("sold", "==", "No"));
-  const inactiveListingsQuery = query(collection(db, "Cars"), where("sold", "==", "Yes"));
-  const featuredListingsQuery = query(collection(db, "Cars"),where("featuredListing", "==", "Yes"));
-
-  useEffect(() => {
-    // Realtime listening of all active listings. Returns list of all listings that have not been sold yet.
-    const unsubscribe = onSnapshot(activeListingsQuery, (querySnapshot) => {
-      const listings = [];
-      querySnapshot.forEach((doc) => {
-        listings.push({ ...doc.data(), id: doc.id });
-      });
-
-      console.log("activeListings:", listings);
-      setActiveListings(listings);
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
-    // Realtime listening of all inactive listings. Returns list of all listings that HAVE sold.
-    const unsubscribe = onSnapshot(inactiveListingsQuery, (querySnapshot) => {
-      const listings = [];
-      querySnapshot.forEach((doc) => {
-        listings.push({
-          ...doc.data(),
-           id: doc.id,
-          });
-      });
-     console.log("inactiveListings:",listings);
-     setInactiveListings(listings);
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-  useEffect(() => {
-    // Realtime listening of all featured listings. Returns list of all featured listings.
-    const unsubscribe = onSnapshot(featuredListingsQuery, (querySnapshot) => {
-      const listings = [];
-      querySnapshot.forEach((doc) => {
-        listings.push({ ...doc.data(), id: doc.id });
-      });
-
-      console.log("featuredListings:", listings);
-      setFeaturedListings(listings);
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
-
-
+  const activeListings = useActiveListings();
+  const inactiveListings = useInactiveListings();
+  const featuredListings = useFeaturedListings();
 
   // create new instance for active listing with createdAt field modified for viewing
   const allActiveListings = activeListings.map((activeListing) => ({
@@ -110,19 +52,6 @@ const CarsList = ({
     featuredListing: activeListing?.featuredListing,
     sold: activeListing?.sold,
   }));
-  console.log("allActiveListings: ", allActiveListings);
-
-  //  Loop through activeListings and set featuredListingsTotal
-  // allActiveListings.forEach((activeListing) => {
-  //     console.log("listing.featuredListing: ", activeListing.featuredListing);
-  //     if (activeListing.featuredListing === "Yes") {
-  //       featuredListingCount++;
-  //     }
-  //   console.log("total: ", featuredListingCount);
-  //   setFeaturedListingsTotal(featuredListingCount);
-  //   console.log("featuredListingsTotal: ", featuredListingsTotal);
-  // });
-
 
   const allInactiveListings = inactiveListings.map((inactiveListing) => ({
     id: inactiveListing?.id,
@@ -146,14 +75,13 @@ const CarsList = ({
     sold: inactiveListing?.sold,
     dateSold: inactiveListing?.dateSold?.toDate()
   }));
-  console.log("allInactiveListings: ", allInactiveListings);
 
   return (
     <>
       <>
         <ToastContainer draggable={false} transition={Zoom} autoClose={3000} />
       </>
-      <Tabs defaultActiveKey="active" className="mb-3">
+      <Tabs defaultActiveKey="active" className="">
         <Tab eventKey="active" title="Active Listings">
           <Table
             variant="dark"
@@ -178,7 +106,6 @@ const CarsList = ({
                 <th>Featured Listing?</th>
                 <th>Description</th>
                 <th>Thumbnail</th>
-                <th>Sold?</th>
                 <th>View/Edit/Delete</th>
               </tr>
             </thead>
@@ -245,16 +172,15 @@ const CarsList = ({
                       <td>
                         <Image
                           src={doc.thumbnailImage}
-                          className="mb-3"
+                          className=""
                           width="100"
                           height="100"
                           alt="thumbnailImage"
                         />
                       </td>
                     ) : (
-                      <td>Thumbnail not set 😔</td>
+                      <td>Not set</td>
                     )}
-                    <td>{doc?.sold}</td>
               
                     <td>
                       {["Display"].map((placement) => (
@@ -317,7 +243,7 @@ const CarsList = ({
                             size="lg"
                             className="m-1"
                             onClick={() => {
-                              getIsDeleteModalOpen(true);
+                              // getIsDeleteModalOpen(true);
                               getIdForDeletion(doc.id);
                             }}
                           >
@@ -356,7 +282,6 @@ const CarsList = ({
                 <th>Featured Listing?</th>
                 <th>Description</th>
                 <th>Thumbnail</th>
-                <th>Sold?</th>
                 <th>Date Sold</th>
                 <th>View/Edit/Delete</th>
               </tr>
@@ -431,9 +356,8 @@ const CarsList = ({
                         />
                       </td>
                     ) : (
-                      <td>Thumbnail not set 😔</td>
+                      <td>Not set</td>
                     )}
-                    <td>{doc?.sold}</td>
                     <td>
                       {doc.dateSold &&
                         doc.dateSold.toLocaleDateString() +
@@ -477,6 +401,7 @@ const CarsList = ({
                           }
                         >
                           <Button
+                            name="Edit Button"
                             size="lg"
                             className="m-1"
                             variant="primary"
