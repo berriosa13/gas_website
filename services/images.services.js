@@ -11,7 +11,7 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { getStorage, ref, deleteObject  } from "firebase/storage";
+import { getStorage, ref, deleteObject } from "firebase/storage";
 
 const imageCollectionRef = collection(db, "Image");
 const storage = getStorage();
@@ -34,23 +34,27 @@ class ImageDataService {
     );
     const querySnapshot = await getDocs(matchingImagesQuery);
     querySnapshot.forEach(async (doc) => {
-        this.deleteImage(doc.id);
+      this.deleteImage(doc.id);
     });
   };
 
   deleteImageStorageById = async (carId) => {
-    const matchingImagesQuery = query(imageCollectionRef, where('imageForeignId', '==', carId));
+    const matchingImagesQuery = query(
+      imageCollectionRef,
+      where("imageForeignId", "==", carId)
+    );
     const querySnapshot = await getDocs(matchingImagesQuery);
     querySnapshot.forEach(async (doc) => {
-        const storageRef = ref(storage, `images/${doc.data().imageStorageName}`);
-        deleteObject(storageRef).then(() => {
-        }).catch((error) => {
+      const storageRef = ref(storage, `images/${doc.data().imageStorageName}`);
+      deleteObject(storageRef)
+        .then(() => {})
+        .catch((error) => {
           console.log("Error deleting image in deleteImage method ", error);
         });
-    })
-};
+    });
+  };
 
-deleteImage = (id) => {
+  deleteImage = (id) => {
     const imagedoc = doc(db, "Image", id);
     return deleteDoc(imagedoc);
   };
@@ -63,7 +67,7 @@ deleteImage = (id) => {
     const imageDoc = doc(db, "Image", id);
     return getDoc(imageDoc);
   };
-  
+
   updateImageForeignId = (carDocId, imageDocRef) => {
     console.log("Setting carDocId ", carDocId, " to imageForeignId");
     const imageDoc = doc(db, "Image", imageDocRef.id);
@@ -74,30 +78,30 @@ deleteImage = (id) => {
   };
 
   getAllListingImages = async (carId) => {
-      const images = [];
-      const matchingImages = query(
-        imageCollectionRef,
-        where("imageForeignId", "==", carId)
-      );
-      const querySnapshot = await getDocs(matchingImages);
-      querySnapshot.forEach(
-        (doc) => {
-          images.push({
-            ...doc.data(),
-            id: doc.id,
-            url: doc.imageUrl,
-          });
-        },
-        (error) => {
-          console.log(
-            "Error getting images for listings with id of: ", carId,
-            error
-          );
-        }
-      );
-      return images;
-  }
-
+    const images = [];
+    const matchingImages = query(
+      imageCollectionRef,
+      where("imageForeignId", "==", carId)
+    );
+    const querySnapshot = await getDocs(matchingImages);
+    querySnapshot.forEach(
+      (doc) => {
+        images.push({
+          ...doc.data(),
+          id: doc.id,
+          url: doc.imageUrl,
+        });
+      },
+      (error) => {
+        console.log(
+          "Error getting images for listings with id of: ",
+          carId,
+          error
+        );
+      }
+    );
+    return images;
+  };
 }
 
 export default new ImageDataService();
