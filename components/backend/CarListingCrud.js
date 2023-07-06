@@ -47,8 +47,6 @@ const CarListingCrud = ({ carId, setCarId, deleteId, setDeleteId }) => {
     useState(false);
   const [showImageUploader, setShowImageUploader] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-  const [allFieldsFilledOut, setAllFieldsFilledOut] = useState(false);
-
   const [carMakeOptions, setCarMakeOptions] = useState(
     SelectOptionsService.getCarMakeOptions
   );
@@ -246,7 +244,7 @@ const CarListingCrud = ({ carId, setCarId, deleteId, setDeleteId }) => {
         timer: 3000,
       });
     }
-    clearAllFields();
+    clearAllFields(false);
   };
 
   const clearAllBtnValidation = () => {
@@ -261,12 +259,12 @@ const CarListingCrud = ({ carId, setCarId, deleteId, setDeleteId }) => {
       confirmButtonText: "Yes, clear them!",
     }).then((result) => {
       if (result.isConfirmed) {
-        clearAllFields();
+        clearAllFields(true);
       }
     });
   };
 
-  const clearAllFields = () => {
+  const clearAllFields = (showAlert) => {
     // Inform user that no fields are filled in to clear
     if(hasNoFieldsBeenFilled()) {
       Swal.fire({
@@ -303,12 +301,14 @@ const CarListingCrud = ({ carId, setCarId, deleteId, setDeleteId }) => {
       setFormSubmitted(false);
       setImagesSubmittedForUpload(false);
       descriptionInputRef.current.value = "";
-      Swal.fire({
-        title: "Cleared!",
-        text: "All fields have been cleared.",
-        icon: "success",
-        timer: 2000,
-      });
+      if(showAlert) {
+        Swal.fire({
+          title: "Cleared!",
+          text: "All fields have been cleared.",
+          icon: "success",
+          timer: 2000,
+        });
+      }
     }
   };
 
