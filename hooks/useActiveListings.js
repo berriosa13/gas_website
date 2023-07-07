@@ -20,7 +20,6 @@ function useActiveListings() {
       unsubscribe();
     };
   }, [activeListingsQuery]);
-
   return activeListings;
 }
 
