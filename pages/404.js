@@ -3,8 +3,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "../styles/page_styles/404.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons'
+import { BsExclamationCircle } from "react-icons/bs";
 
 /*  User is prompted with 404 page and 
 redirected back to the homepage using { useRouter }
@@ -34,9 +33,9 @@ const NotFound = () => {
           />
           <h1>404</h1>
           <h2>
-            <FontAwesomeIcon className="mx-2" icon={faCircleExclamation} />
+            <BsExclamationCircle className="mx-2"/>
             We could not find the page you are looking for 
-            <FontAwesomeIcon className="mx-2" icon={faCircleExclamation} />
+            <BsExclamationCircle className="mx-2"/>
           </h2>
           <p>We will redirect you back to the hompage shortly.</p>
         </div>

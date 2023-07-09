@@ -1,10 +1,5 @@
-import React, { useState } from "react";
-import { Button, Modal, Form, FloatingLabel, Row } from "react-bootstrap";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import ImageDataService from "../../services/images.services";
-import CarDataService from "../../services/cars.services";
-import { FiTrash2 } from "react-icons/fi"; 
+import React from "react";
+import { Modal, Form } from "react-bootstrap";
 import GradBar from "../GradBar"
 import Image from 'next/image';
 

@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Form, Button, Row, Col, FloatingLabel } from "react-bootstrap";
 import Select from "react-select";
 import NumberFormat from "react-number-format";
-import { ToastContainer, toast, Zoom } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import CarDataService from "../../services/cars.services";
 import ImageDataService from "../../services/images.services";
 import SelectOptionsService from "../../services/options.services";
@@ -400,7 +398,7 @@ const CarListingCrud = ({ carId, setCarId, deleteId, setDeleteId }) => {
     }
   };
 
-  const editHandler = async () => {
+  const editHandler = useCallback(async () => {
     try {
       const carDocSnap = await CarDataService.getCar(carId);
       MySwal.fire({
@@ -412,11 +410,6 @@ const CarListingCrud = ({ carId, setCarId, deleteId, setDeleteId }) => {
         timerProgressBar: true,
       });
       console.log("the record requested to edit: ", carDocSnap.data());
-      // const selectedMakeValue = carDocSnap.data().make;
-      // const selectedMakeOption = {
-      //   value: selectedMakeValue,
-      //   label: selectedMakeValue,
-      // };
 
       setMake(carDocSnap.data().make);
       setModel(carDocSnap.data().model);
@@ -438,16 +431,15 @@ const CarListingCrud = ({ carId, setCarId, deleteId, setDeleteId }) => {
     } catch (err) {
       console.log("Error attempting to load listing from database: " + err);
     }
-  };
+  }, [carId]);
 
   useEffect(() => {
     if (carId !== undefined && carId !== "") {
       editHandler();
-      // setCarId("");
     }
-  }, [carId]);
+  }, [carId, editHandler]);
 
-  const deleteHandler = async () => {
+  const deleteHandler = useCallback(async () => {
     console.log("id passed into deleteHandler: ", deleteId);
 
     const result = await MySwal.fire({
@@ -512,25 +504,18 @@ const CarListingCrud = ({ carId, setCarId, deleteId, setDeleteId }) => {
         });
       }
     };
-  };
+  }, [deleteId]);
 
   useEffect(() => {
     if (deleteId !== undefined && deleteId !== "") {
       deleteHandler();
       setDeleteId("");
     }
-  }, [deleteId]);
+  }, [deleteId, setDeleteId, deleteHandler]);
 
   return (
     <>
       <div className="p-4 box">
-        <>
-          <ToastContainer
-            draggable={false}
-            transition={Zoom}
-            autoClose={3000}
-          />
-        </>
         <div className="d-flex flex-column justify-content-center">
           <h1 className="text-center mt-3">
             Admin Dashboard

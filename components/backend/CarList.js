@@ -10,8 +10,6 @@ import {
 import Image from "next/image";
 import { AiOutlineEdit, AiOutlineDelete, AiOutlineSortAscending, AiOutlineSortDescending } from "react-icons/ai";
 import { FaRegImages } from "react-icons/fa";
-import { ToastContainer, Zoom } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { BsArrowRightShort } from "react-icons/bs";
 import { TbFileDescription } from "react-icons/tb";
 import useActiveListings from "../../hooks/useActiveListings";
@@ -22,7 +20,6 @@ const CarsList = ({
   getCarId,
   getIsImageModalOpen,
   getIndividualCarData,
-  getIsDeleteModalOpen,
   getIdForDeletion,
   getIsDescriptionModalOpen,
 }) => {

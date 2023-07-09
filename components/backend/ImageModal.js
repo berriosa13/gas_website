@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button, Card, Modal, Row, Container } from "react-bootstrap";
-import { ToastContainer, toast, Zoom } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import {
   AiOutlineDelete,
   AiOutlineStar,
@@ -126,8 +124,6 @@ const ImageModal = ({ setOpenImageModal, setIdForImages, carData }) => {
 
   return (
     <>
-      <ToastContainer draggable={false} transition={Zoom} autoClose={3000} />
-
       <Modal
         centered
         scrollable
