@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useRef  } from "react";
 import {
   Button,
   Form,
@@ -11,25 +11,25 @@ import {
 } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import GradBar from "../components/GradBar";
-import { toast, ToastContainer, Zoom } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import SubFooter from "../components/SubFooter";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 
 export default function Login() {
+  const emailRef = useRef();
+  const pwdRef = useRef();
   const router = useRouter();
-  const { user, login } = useAuth();
+  const { user, login, forgotPassword } = useAuth();
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+  const [sentForgotPwdEmail, setSentForgotPwdEmail] = useState(false);
   const MySwal = withReactContent(Swal);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    console.log(user);
     try {
       await login(data.email, data.password);
       MySwal.fire({
@@ -43,9 +43,7 @@ export default function Login() {
         router.push("/carDashboard");
       }, 3000);
     } catch (err) {
-      const errorMessage = err.message;
-      const errorCode = err.code;
-      console.log("Error during login: ", errorMessage, errorCode);
+      console.log("Error during login: ", err.message, err.code);
       MySwal.fire({
         position: 'top-end',
         icon: 'error',
@@ -56,13 +54,27 @@ export default function Login() {
     }
   };
 
+  const forgotPasswordHandler = () => {
+    const email = emailRef.current.value;
+    if (email)
+      forgotPassword(email).then(() => {
+        emailRef.current.value = "";
+        pwdRef.current.value = "";
+        setData({
+          email: "",
+          password: ""
+        });
+        setSentForgotPwdEmail(true);
+      }).catch((err) => {
+        console.log("Error during login: ", err.message, err.code);
+        setSentForgotPwdEmail(true);
+      });
+    
+  };
+
   return (
     <>
-      <>
-        <ToastContainer draggable={false} transition={Zoom} autoClose={3000} />
-      </>
-
-      <Container className="mt-5 p-5">
+      <Container className="mt-5 pt-5">
         <Row>
           <Col>
             <h1 className="text-center my-3 ">
@@ -73,7 +85,7 @@ export default function Login() {
             </h1>
             <div className="text-center mb-3">
               <Link href="/">
-                <a>Back to Home</a>
+                <a className="underline-link">Back to Home</a>
               </Link>
             </div>
             <Form onSubmit={handleLogin}>
@@ -95,6 +107,7 @@ export default function Login() {
                     type="email"
                     autoComplete="current-email"
                     placeholder="Enter email"
+                    ref={emailRef}
                   />
                 </FloatingLabel>
               </Form.Group>
@@ -118,6 +131,8 @@ export default function Login() {
                     type="password"
                     autoComplete="current-password"
                     placeholder="Password"
+                    ref={pwdRef}
+                    
                   />
                 </FloatingLabel>
               </Form.Group>
@@ -125,6 +140,13 @@ export default function Login() {
                 <Button className="mt-3" variant="primary" type="submit">
                   Login
                 </Button>
+              </div>
+              <div className="d-flex justify-content-center m-5">
+              {sentForgotPwdEmail ? (
+                <p>If an account exists under the email provided, a password reset email has been sent.</p>
+                ) : (
+                  <p className="underline-link" onClick={forgotPasswordHandler}>Forgot Password?</p>
+              )}
               </div>
             </Form>
           </Col>

@@ -8,13 +8,13 @@ Built with the following technologies:
 - Formspree (HTML form handling)
 
 Just some of the various packages & libraries were also used:
--  @formspree/react
+- @formspree/react
 - react-bootstrap
 - firebase
-- firebase-functions
+- firebase-auth
 - react-icons
 - react-select
-- react-toastify
+- sweetAlert2
 - next-pwa
 
 See the website live at https://www.gasautomobilesales.com/
