@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/router";
 import styles from "../styles/page_styles/404.module.css";
 import { BsExclamationCircle } from "react-icons/bs";
+import config from "../config"
 
 /*  User is prompted with 404 page and 
 redirected back to the homepage using { useRouter }
@@ -20,7 +21,7 @@ const NotFound = () => {
   return (
     <>
       <Head>
-        <title>GAS Automobile Sales | Page Not Found</title>
+        <title>{config.dealership.name} | Page Not Found</title>
         <meta name="keywords" content="cars" />
       </Head>
       <div className={styles.center}>
@@ -37,7 +38,7 @@ const NotFound = () => {
             We could not find the page you are looking for 
             <BsExclamationCircle className="mx-2"/>
           </h2>
-          <p>We will redirect you back to the hompage shortly.</p>
+          <p>You will now be redirected back to the home page.</p>
         </div>
       </div>
     </>
