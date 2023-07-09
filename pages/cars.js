@@ -10,6 +10,7 @@ import { GoDashboard } from "react-icons/go";
 import { GiCog } from "react-icons/gi";
 import { TbSteeringWheel } from "react-icons/tb";
 import useActiveListings from "../hooks/useActiveListings";
+import config from "../config";
 
 export default function Cars() {
   const cars = useActiveListings();
@@ -36,12 +37,12 @@ export default function Cars() {
   return (
     <>
       <NextSeo
-        title="Guardian Automobile Sales | Inventory"
+        title={`${config.dealership.name} | Inventory`}
         description="View our vast selection of pre-owned vehicles at affordable prices"
-        canonical="https://www.gasautomobilesales.com/"
+        canonical={`https://www.${config.dealership.domain}.com/`}
         openGraph={{
-          url: "https://www.gasautomobilesales.com/",
-          title: "Guardian Automobile Sales | Inventory",
+          url: `https://www.${config.dealership.domain}.com/`,
+          title: `${config.dealership.name} | Inventory`,
           description:
             "View our vast selection of pre-owned vehicles at affordable prices",
           images: [
@@ -53,7 +54,7 @@ export default function Cars() {
               type: "image/png",
             },
           ],
-          site_name: "gasautomobilesales",
+          site_name: config.dealership.domain,
         }}
       />
 

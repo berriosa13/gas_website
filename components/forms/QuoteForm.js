@@ -3,6 +3,7 @@ import { useForm } from '@formspree/react';
 import { FiSend } from "react-icons/fi";
 import { Button, Row, Col, FloatingLabel } from "react-bootstrap";
 import PhoneNumberInput from '../PhoneNumberInput'
+import config from "../../config"
 
 
 function QuoteForm( { setCar }) {
@@ -114,7 +115,7 @@ function QuoteForm( { setCar }) {
         </Row>
         <Row className="m-3">
           <Col>
-            <p className="">By clicking SEND, I consent to be contacted by <em>Guardian Automobile Sales</em> at any phone number or email I provide, including, without limitation, communications sent via text message to my cell phone or communications sent using an autodialer or prerecorded message. This acknowledgment constitutes my written consent to receive such communications. I have read and agree to the Privacy Policy of <em>Guardian Automobile Sales</em>.</p>
+            <p className="">By clicking SEND, I consent to be contacted by <em>{config.dealership.name}</em> at any phone number or email I provide, including, without limitation, communications sent via text message to my cell phone or communications sent using an autodialer or prerecorded message. This acknowledgment constitutes my written consent to receive such communications. I have read and agree to the Privacy Policy of <em>{config.dealership.name}</em>.</p>
           </Col>
         </Row>
         <Row className="text-center m-3">

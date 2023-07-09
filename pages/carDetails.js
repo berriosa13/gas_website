@@ -1,7 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
-import { NextSeo  } from "next-seo"; 
+import { NextSeo } from "next-seo";
 import Image from "next/image";
-import Layout from '../components/Layout'
+import Layout from "../components/Layout";
 import { useRouter } from "next/router";
 import styles from "../styles/page_styles/Cars.module.css";
 import ImageDataService from "../services/images.services";
@@ -10,15 +10,10 @@ import QuoteModal from "../components/modals/QuoteModal";
 import AvailabilityModal from "../components/modals/AvailabilityModal";
 import TestDriveModal from "../components/modals/TestDriveModal";
 import { BsDashLg } from "react-icons/bs";
-import GradBar from '../components/GradBar'
+import GradBar from "../components/GradBar";
+import config from "../config";
 
-import {
-  Row,
-  Col,
-  Accordion,
-  ListGroup,
-  Button,
-} from "react-bootstrap";
+import { Row, Col, Accordion, ListGroup, Button } from "react-bootstrap";
 
 export async function getStaticProps(context) {
   return {
@@ -33,10 +28,10 @@ export default function CarDetails() {
   const [quoteModalOpen, setQuoteModalOpen] = useState(false);
   const [availabilityModalOpen, setAvailabilityModalOpen] = useState(false);
   const [testDriveModalOpen, setTestDriveModalOpen] = useState(false);
-  const DISPLAY_IMAGES_TOTAL = 4; 
+  const DISPLAY_IMAGES_TOTAL = 4;
   const router = useRouter();
   const car = router.query;
-  const thumbnailImage = car?.thumbnailImage; 
+  const thumbnailImage = car?.thumbnailImage;
 
   useEffect(() => {
     const retrieveImages = async () => {
@@ -48,18 +43,20 @@ export default function CarDetails() {
     retrieveImages();
   }, [car.id, filterDisplayImages]);
 
-  const filterDisplayImages = useCallback((listingImages) => {
-    let filteredDisplayImages = null;
-    // console.log("listingImages in filterDisplayImages(): ",listingImages);
-    listingImages.forEach((image) => {
-      if(thumbnailImage === image.imageUrl) {
-        filteredDisplayImages = listingImages.filter(x => x !== image);
-        // console.log("newly filtered images: ", filteredDisplayImages);
-      }
-    })
-    setDisplayImages(filteredDisplayImages.slice(0, DISPLAY_IMAGES_TOTAL));
-  }, [thumbnailImage])
-  
+  const filterDisplayImages = useCallback(
+    (listingImages) => {
+      let filteredDisplayImages = null;
+      // console.log("listingImages in filterDisplayImages(): ",listingImages);
+      listingImages.forEach((image) => {
+        if (thumbnailImage === image.imageUrl) {
+          filteredDisplayImages = listingImages.filter((x) => x !== image);
+          // console.log("newly filtered images: ", filteredDisplayImages);
+        }
+      });
+      setDisplayImages(filteredDisplayImages.slice(0, DISPLAY_IMAGES_TOTAL));
+    },
+    [thumbnailImage]
+  );
 
   const showImageModal = () => {
     setImageModalOpen(true);
@@ -118,12 +115,12 @@ export default function CarDetails() {
       />
 
       <NextSeo
-        title="Guardian Automobile Sales | Car Details"
+        title={`${config.dealership.name} | Car Details`}
         description="Details for the vehicle"
-        canonical="https://www.gasautomobilesales.com/"
+        canonical={`https://www.${config.dealership.domain}.com/`}
         openGraph={{
-          url: "https://www.gasautomobilesales.com/",
-          title: "Guardian Automobile Sales | Car Details",
+          url: `https://www.${config.dealership.domain}.com/`,
+          title: `${config.dealership.name} | Car Details`,
           description: "Details for the vehicle",
           images: [
             {
@@ -134,14 +131,14 @@ export default function CarDetails() {
               type: "image/png",
             },
           ],
-          site_name: "gasautomobilesales",
+          site_name: config.dealership.domain,
         }}
       />
 
       <div className="d-flex mx-4 mt-5 justify-content-start">
         <h1>
-          {car.year} {car.make} {car.model} 
-          <GradBar/>
+          {car.year} {car.make} {car.model}
+          <GradBar />
         </h1>
       </div>
       <main>
@@ -291,10 +288,7 @@ export default function CarDetails() {
               </section>
               <div className="row my-3 d-flex justify-content-center text-center">
                 <div className="col-md-6 mt-3">
-                  <Button
-                    onClick={showImageModal}
-                    variant="primary"
-                  >
+                  <Button onClick={showImageModal} variant="primary">
                     View All Images
                   </Button>
                 </div>
@@ -437,7 +431,7 @@ export default function CarDetails() {
                           <br />
 
                           <strong>
-                            <a href="tel:570-800-1208">(570)-800-1208</a>
+                            <a href={`tel:${config.dealership.phone}`}>{config.dealership.phone}</a>
                           </strong>
                         </p>
 
@@ -447,8 +441,8 @@ export default function CarDetails() {
                           <br />
 
                           <strong>
-                            <a href="mailto:info@gasautomobilesales.com">
-                              info@gasautomobilesales.com
+                            <a href={`${config.dealership.email}`}>
+                              {config.dealership.email}
                             </a>
                           </strong>
                         </p>

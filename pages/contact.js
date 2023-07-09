@@ -1,33 +1,31 @@
-import React, { useState } from "react";
-import { NextSeo  } from "next-seo"; 
-import Layout from '../components/Layout'
-import Link from 'next/link';
-import { Breadcrumb, Row, Button, Col } from "react-bootstrap";
-import styles from "../styles/page_styles/Contact.module.css";
+import React, { useState } from "react"
+import { NextSeo } from "next-seo"
+import Layout from "../components/Layout"
+import Link from "next/link"
+import { Breadcrumb, Row, Button, Col } from "react-bootstrap"
+import styles from "../styles/page_styles/Contact.module.css"
 import GradBar from "../components/GradBar"
-import { BsAlarm, BsCalendar2Check, BsCalendarX  } from "react-icons/bs";
-import ContactForm from "../components/forms/ContactForm";
-import { TailSpin } from  'react-loader-spinner';
-
-
+import { BsAlarm, BsCalendar2Check, BsCalendarX } from "react-icons/bs"
+import ContactForm from "../components/forms/ContactForm"
+import { TailSpin } from "react-loader-spinner"
+import config from "../config"
 
 export default function Contact() {
-  
   const [loading, setLoading] = useState(true);
 
   const hideSpinner = () => {
     setLoading(false);
-  }
+  };
 
   return (
     <>
       <NextSeo
-        title="Guardian Automobile Sales | Contact"
+        title={`${config.dealership.name} | Contact`}
         description="Send us a message for any questions or concerns"
-        canonical="https://www.gasautomobilesales.com/"
+        canonical={`https://www.${config.dealership.domain}.com/`}
         openGraph={{
-          url: "https://www.gasautomobilesales.com/",
-          title: "Guardian Automobile Sales | Contact",
+          url: `https://www.${config.dealership.domain}.com/`,
+          title: `${config.dealership.name} | Contact`,
           description: "Send us a message for any questions or concerns.",
           images: [
             {
@@ -38,9 +36,10 @@ export default function Contact() {
               type: "image/png",
             },
           ],
-          site_name: "gasautomobilesales",
+          site_name: config.dealership.domain,
         }}
       />
+
       <div className="d-flex justify-content-between my-5">
         <h1>
           Contact
@@ -62,14 +61,14 @@ export default function Contact() {
           }
         `}</style>
         <Col md={4}>
-          <h2>Guardian Automobile Sales</h2>
+          <h2>{config.dealership.name}</h2>
           <p className="text-left">
-            1033 Reeves St, Dunmore Pa, 18512
+          {config.dealership.address}
             <br />
-            <a href="tel:570-800-1208">(570)-800-1208</a>
+            <a href={`tel:${config.dealership.phone}`}>{config.dealership.phone}</a>
             <br />
-            <a href="mailto:info@gasautomobilesales.com">
-              info@gasautomobilesales.com
+            <a href={`mailto:${config.dealership.email}`}>
+            {config.dealership.email}
             </a>
             <br />
           </p>
@@ -124,19 +123,18 @@ export default function Contact() {
           </Row>
         </Col>
         <Col md={8}>
-            {loading === true ? (
-              <div className="d-flex justify-content-center align-items-center w-100 h-100">
-                <TailSpin color="#BEBBBB" width="30%"height="30%" />
-              </div>
-            ) : null}
-            <iframe
-              src="https://maps.google.com/maps?q=1033%20reeves%20street%20dunmore&t=&z=15&ie=UTF8&iwloc=&output=embed"
-              width="100%"
-              height="100%"
-              frameBorder="0"
-              onLoad={hideSpinner}
-              allowFullScreen
-            ></iframe>
+          {loading === true ? (
+            <div className="d-flex justify-content-center align-items-center w-100 h-100">
+              <TailSpin color="#BEBBBB" width="30%" height="30%" />
+            </div>
+          ) : null}
+          <iframe
+            src={`${config.dealership.maps}`}
+            width="100%"
+            height="100%"
+            onLoad={hideSpinner}
+            allowFullScreen
+          ></iframe>
         </Col>
       </Row>
       <Row className="mt-5">
@@ -150,9 +148,5 @@ export default function Contact() {
 }
 
 Contact.getLayout = function getLayout(page) {
-  return (
-    <Layout>
-      {page}
-    </Layout>
-  )
-}
+  return <Layout>{page}</Layout>;
+};

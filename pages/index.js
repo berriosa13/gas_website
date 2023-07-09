@@ -12,18 +12,19 @@ import { TbSteeringWheel } from "react-icons/tb";
 import { Row, Col, Button } from "react-bootstrap";
 import { AiOutlineFrown } from "react-icons/ai";
 import useFeaturedListings from "../hooks/useFeaturedListings";
+import config from "../config";
 
 export default function Home() {
   const featuredListings = useFeaturedListings();
   return (
     <>
       <NextSeo
-        title="Guardian Automobile Sales | Home"
+        title={`${config.dealership.name} | Home`}
         description="Find the best used cars in Scranton, Wilkes-Barre and Dunmore, PA. We have a large selection of used vehicles at affordable prices."
-        canonical="https://www.gasautomobilesales.com/"
+        canonical={`https://www.${config.dealership.domain}.com/`}
         openGraph={{
-          url: "https://www.gasautomobilesales.com/",
-          title: "Guardian Automobile Sales | Home",
+          url: `https://www.${config.dealership.domain}.com/`,
+          title: `${config.dealership.name} | Home`,
           description:
             "Find the best used cars in Scranton, Wilkes-Barre and Dunmore, PA. We have a large selection of used vehicles at affordable prices.",
           images: [
@@ -35,7 +36,7 @@ export default function Home() {
               type: "image/png",
             },
           ],
-          site_name: "gasautomobilesales",
+          site_name: config.dealership.domain,
         }}
       />
 

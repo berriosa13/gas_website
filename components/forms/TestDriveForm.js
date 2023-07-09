@@ -3,6 +3,7 @@ import { useForm } from "@formspree/react";
 import { FiSend } from "react-icons/fi";
 import { Button, Col, Row, FloatingLabel } from "react-bootstrap";
 import PhoneNumberInput from '../PhoneNumberInput'
+import config from "../../config"
 
 function TestDriveForm({ setCar }) {
   const [state, handleSubmit] = useForm("testDriveForm");
@@ -144,12 +145,12 @@ function TestDriveForm({ setCar }) {
           <Col>
             <p className="">
               By clicking SEND, I consent to be contacted by{" "}
-              <em>Guardian Automobile Sales</em> at any phone number or email I
+              <em>{config.dealership.name}</em> at any phone number or email I
               provide, including, without limitation, communications sent via
               text message to my cell phone or communications sent using an
               autodialer or prerecorded message. This acknowledgment constitutes
               my written consent to receive such communications. I have read and
-              agree to the Privacy Policy of <em>Guardian Automobile Sales</em>.
+              agree to the Privacy Policy of <em>{config.dealership.name}</em>.
             </p>
           </Col>
         </Row>

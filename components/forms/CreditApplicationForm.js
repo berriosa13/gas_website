@@ -5,7 +5,6 @@ import GradBar from "../GradBar";
 import PhoneNumberInput from "../PhoneNumberInput";
 import SocialSecurityInput from "../SocialSecurityInput";
 import NumberFormat from 'react-number-format';
-import Select from "react-select";
 import SelectOptionsService from "../../services/options.services";
 import {
   Button,
@@ -16,13 +15,10 @@ import {
   Tab,
   Tabs,
 } from "react-bootstrap";
+import config from "../../config"
 
 function CreditApplicationForm() {
   const [state, handleSubmit] = useForm("creditApplicationForm");
-  const [applicantHousingType, setApplicantHousingType] = useState("");
-  const applicantHousingOptions =
-  SelectOptionsService.getApplicantHousingOptions();
-
   if (state.succeeded) {
     return (
       <>
@@ -325,12 +321,6 @@ function CreditApplicationForm() {
                         <option value="Own">Own</option>
                         <option value="Other">Other</option>
                       </select>
-                      {/* <Select
-                        className=""
-                        name="applicantHousingType"
-                        placeholder='Housing Type'
-                        options={applicantHousingOptions}
-                      ></Select> */}
                       <ValidationError
                         field="applicantHousingType"
                         prefix="applicantHousingType"
@@ -1037,7 +1027,7 @@ function CreditApplicationForm() {
             <Col>
               <p className="">
                 By Signing Above, You Authorize{" "}
-                <em>Guardian Automobile Sales </em>
+                <em>{config.dealership.name} </em>
                 To Make A Credit Inquiry For The Purpose of Obtaining Auto
                 Financing. You agree that if an account is created for you, all
                 of the following also apply: [a] we may monitor and record

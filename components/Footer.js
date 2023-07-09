@@ -16,6 +16,7 @@ import { ImLink } from "react-icons/im";
 import { Container, Row, Col } from "react-bootstrap";
 import GradBar from "./GradBar";
 import SubFooter from "./SubFooter";
+import config from "../config"
 
 const Footer = () => {
   const current = new Date();
@@ -157,14 +158,6 @@ const Footer = () => {
                       </a>
                     </Link>
                   </h5>
-                  {/* <h5 className="mb-3">
-                    Check us out on  {"  "}
-                    <Link href="https://www.instagram.com/gasautomobilesales/">
-                      <a target="_blank" rel="noopener noreferrer">
-                        <FaInstagram />
-                      </a>
-                    </Link>
-                  </h5> */}
                 </div>
               </div>
             </Col>
@@ -175,7 +168,7 @@ const Footer = () => {
         <p>
           &copy; Copyright{" "}
           <strong>
-            Guardian Automobile Sales <span>{date}</span>
+            {config.dealership.name} <span>{date}</span>
           </strong>
           . All Rights Reserved
         </p>
