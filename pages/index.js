@@ -1,5 +1,5 @@
 import React from "react";
-import { NextSeo  } from "next-seo"; 
+import { NextSeo } from "next-seo";
 import Image from "next/image";
 import Link from "next/link";
 import Layout from "../components/Layout";
@@ -11,7 +11,7 @@ import { GiCog } from "react-icons/gi";
 import { TbSteeringWheel } from "react-icons/tb";
 import { Row, Col, Button } from "react-bootstrap";
 import { AiOutlineFrown } from "react-icons/ai";
-import useFeaturedListings from '../hooks/useFeaturedListings';
+import useFeaturedListings from "../hooks/useFeaturedListings";
 
 export default function Home() {
   const featuredListings = useFeaturedListings();
@@ -24,7 +24,8 @@ export default function Home() {
         openGraph={{
           url: "https://www.gasautomobilesales.com/",
           title: "Guardian Automobile Sales | Home",
-          description: "Find the best used cars in Scranton, Wilkes-Barre and Dunmore, PA. We have a large selection of used vehicles at affordable prices.",
+          description:
+            "Find the best used cars in Scranton, Wilkes-Barre and Dunmore, PA. We have a large selection of used vehicles at affordable prices.",
           images: [
             {
               url: "/imgs/GAS-Logo-text.png",
@@ -88,99 +89,123 @@ export default function Home() {
           </div>
           <div className="row">
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img
+              <Image
+                className="p-3"
                 src="/imgs/carLogos/ford_logo.png"
-                className="img-fluid"
                 alt=""
+                width={117}
+                height={75}
               />
             </div>
 
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img
+              <Image
+                className="p-3"
                 src="/imgs/carLogos/gmc_logo.png"
-                className="img-fluid"
                 alt=""
+                width={117}
+                height={60}
               />
             </div>
 
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img
+              <Image
+                className="p-3"
                 src="/imgs/carLogos/honda_logo.png"
-                className="img-fluid"
                 alt=""
+                width={117}
+                height={108}
               />
             </div>
 
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img
+              <Image
+                className="p-3"
                 src="/imgs/carLogos/hyundai_logo.png"
-                className="img-fluid"
                 alt=""
+                width={117}
+                height={93}
               />
             </div>
 
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img
+              <Image
+                className="p-3"
                 src="/imgs/carLogos/jeep_logo.png"
-                className="img-fluid"
                 alt=""
+                width={117}
+                height={108}
               />
             </div>
 
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img
+              <Image
+                className="p-3"
                 src="/imgs/carLogos/lexus_logo.png"
-                className="img-fluid"
                 alt=""
+                width={117}
+                height={78}
               />
             </div>
           </div>
           <div className="row">
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img
+              <Image
+                className="p-3"
                 src="/imgs/carLogos/cadillac_logo.png"
-                className="img-fluid"
                 alt=""
+                width={117}
+                height={108}
               />
             </div>
 
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img
+              <Image
+                className="p-3"
                 src="/imgs/carLogos/toyota_logo.png"
-                className="img-fluid"
                 alt=""
+                width={117}
+                height={68}
               />
             </div>
 
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img
+              <Image
+                className="p-3"
                 src="/imgs/carLogos/subaru_logo.png"
-                className="img-fluid"
                 alt=""
+                width={117}
+                height={108}
               />
             </div>
 
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img
+              <Image
+                className="p-3"
                 src="/imgs/carLogos/bmw_logo.png"
-                className="img-fluid"
                 alt=""
+                width={117}
+                height={147}
               />
             </div>
 
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img
+              <Image
+                className="p-3"
                 src="/imgs/carLogos/mazda_logo.png"
-                className="img-fluid"
                 alt=""
+                width={117}
+                height={96}
               />
             </div>
 
             <div className="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-              <img
+              <Image
+                className="p-3"
                 src="/imgs/carLogos/audi_logo.png"
-                className="img-fluid"
                 alt=""
+                width={117}
+                height={108}
               />
             </div>
           </div>
@@ -290,7 +315,6 @@ export default function Home() {
                 </div>
               </>
             )}
-
             <style jsx>{`
               strong sup {
                 color: var(--main-color);

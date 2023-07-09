@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { NextSeo  } from "next-seo"; 
+import { NextSeo } from "next-seo";
 import Link from "next/link";
 import Image from "next/image";
 import Layout from "../components/Layout";
-import { Row, Col, Button  } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import styles from "../styles/page_styles/Cars.module.css";
 import GradBar from "../components/GradBar";
 import { GoDashboard } from "react-icons/go";
@@ -36,25 +36,26 @@ export default function Cars() {
   return (
     <>
       <NextSeo
-          title="Guardian Automobile Sales | Inventory"
-          description="View our vast selection of pre-owned vehicles at affordable prices"
-          canonical="https://www.gasautomobilesales.com/"
-          openGraph={{
-            url: "https://www.gasautomobilesales.com/",
-            title: "Guardian Automobile Sales | Inventory",
-            description: "View our vast selection of pre-owned vehicles at affordable prices",
-            images: [
-              {
-                url: "/imgs/GAS-Logo-text.png",
-                width: 800,
-                height: 600,
-                alt: "Og GAS Text Logo",
-                type: "image/png",
-              },
-            ],
-            site_name: "gasautomobilesales",
-          }}
-        />
+        title="Guardian Automobile Sales | Inventory"
+        description="View our vast selection of pre-owned vehicles at affordable prices"
+        canonical="https://www.gasautomobilesales.com/"
+        openGraph={{
+          url: "https://www.gasautomobilesales.com/",
+          title: "Guardian Automobile Sales | Inventory",
+          description:
+            "View our vast selection of pre-owned vehicles at affordable prices",
+          images: [
+            {
+              url: "/imgs/GAS-Logo-text.png",
+              width: 800,
+              height: 600,
+              alt: "Og GAS Text Logo",
+              type: "image/png",
+            },
+          ],
+          site_name: "gasautomobilesales",
+        }}
+      />
 
       <div className="d-flex justify-content-between my-5">
         <h1>
@@ -174,8 +175,7 @@ export default function Cars() {
 
                             <div className={styles.overlay_content}>
                               <strong>
-                                <GoDashboard />{" "}
-                                {car.mileage}
+                                <GoDashboard /> {car.mileage}
                               </strong>
                               &nbsp;&nbsp;&nbsp;&nbsp;
                               <strong>
@@ -189,13 +189,13 @@ export default function Cars() {
                           </>
                         ) : (
                           <Image
-                          priority="true"
-                          src="https://via.placeholder.com/450x300.png?text=Image+Coming+Soon..."
-                          layout="responsive"
-                          alt="thumbnail image"
-                          width={450}
-                          height={300}
-                        />
+                            priority="true"
+                            src="https://via.placeholder.com/450x300.png?text=Image+Coming+Soon..."
+                            layout="responsive"
+                            alt="thumbnail image"
+                            width={450}
+                            height={300}
+                          />
                         )}
                       </div>
                     </div>
@@ -208,9 +208,7 @@ export default function Cars() {
 
                       <p>
                         <span>
-                          <strong>
-                            {car.price}
-                          </strong>
+                          <strong>{car.price}</strong>
                         </span>
                       </p>
 
@@ -234,14 +232,6 @@ export default function Cars() {
               <h4>Listings Coming Soon!</h4>
             </strong>
           )}
-          <style jsx>{`
-            strong sup {
-              color: var(--main-color);
-            }
-            span strong {
-              color: var(--main-color);
-            }
-          `}</style>
         </Row>
         <Button
           id="loadBtn"
@@ -253,6 +243,14 @@ export default function Cars() {
           Load More
         </Button>
       </section>
+      <style jsx>{`
+        strong sup {
+          color: var(--main-color);
+        }
+        span strong {
+          color: var(--main-color);
+        }
+      `}</style>
     </>
   );
 }

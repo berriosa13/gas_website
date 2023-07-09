@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { NextSeo  } from "next-seo"; 
 import Image from "next/image";
 import Layout from '../components/Layout'
@@ -36,23 +36,19 @@ export default function CarDetails() {
   const DISPLAY_IMAGES_TOTAL = 4; 
   const router = useRouter();
   const car = router.query;
-  const thumbnailImage = car.thumbnailImage; 
-  // console.log("thumbnailImage: ", thumbnailImage);
-  // console.log("displayImages: ", displayImages);
-
-  // console.log("Car passed in from useRouter: ", car);
+  const thumbnailImage = car?.thumbnailImage; 
 
   useEffect(() => {
     const retrieveImages = async () => {
-      const listingImages = await ImageDataService.getAllListingImages(car.id);
+      const listingImages = await ImageDataService.getAllListingImages(car?.id);
       // console.log("result from ImageDataService.getAllListingImages(): ", listingImages);
       setImages(listingImages);
       filterDisplayImages(listingImages);
     };
     retrieveImages();
-  }, [car.id]);
+  }, [car.id, filterDisplayImages]);
 
-  const filterDisplayImages = (listingImages) => {
+  const filterDisplayImages = useCallback((listingImages) => {
     let filteredDisplayImages = null;
     // console.log("listingImages in filterDisplayImages(): ",listingImages);
     listingImages.forEach((image) => {
@@ -62,7 +58,8 @@ export default function CarDetails() {
       }
     })
     setDisplayImages(filteredDisplayImages.slice(0, DISPLAY_IMAGES_TOTAL));
-  }
+  }, [thumbnailImage])
+  
 
   const showImageModal = () => {
     setImageModalOpen(true);

@@ -4,10 +4,7 @@ import { useEffect } from "react";
 import { FormspreeProvider } from "@formspree/react";
 import PrivateRoute from "../components/PrivateRoute";
 import "../styles/globals.css";
-import "bootstrap/dist/css/bootstrap.css";
-import "@fortawesome/fontawesome-svg-core/styles.css"; 
-import { config } from "@fortawesome/fontawesome-svg-core";
-config.autoAddCss = false; 
+import "bootstrap/dist/css/bootstrap.css"; 
 
 const noAuthRequired = [
   "/",
